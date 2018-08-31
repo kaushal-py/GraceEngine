@@ -1,4 +1,3 @@
 theme: jekyll-theme-cayman
-
-title: [Programming Engine]
-description: [An AI based talking agent, which interacts with programmers to convert logic spoken in English to Python code.]
+title: Programming Engine
+description: An AI based talking agent, which interacts with programmers to convert logic spoken in English to Python code.
