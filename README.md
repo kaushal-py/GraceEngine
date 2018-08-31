@@ -1,4 +1,5 @@
 # Programming Engine
+[Go to documentation homepage](https://kb-studios.github.io/programming-engine/)
 
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
