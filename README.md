@@ -33,3 +33,4 @@ This project is seen as an automation tool that helps making programming easier 
 ### Project outcomes
 A single statement that a user speaks can be as simple as a print command like “Print hello world” or a statement which performs a complex function like “Define a function to reverse a string”.These two cases will be handled differently. To handle the first statement, we plan to create intents and map them to all major programming constructs like assignments, arithmetic operations, loops, functions and so on. The second case will depend heavily on large datasets of code. Large repositories of code like Github may have many snippets which can be used to directly to get results. An optimal data structure can be created which will make loading of these snippets faster and more accurate.
 
+> This project was named after [Grace Hopper](https://en.wikipedia.org/wiki/Grace_Hopper)
