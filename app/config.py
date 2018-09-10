@@ -1,1 +1,1 @@
-CODE_FILE = 'cache/generated_code.py'
+CODE_FILE = 'app/cache/generated_code.py'
