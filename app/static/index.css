@@ -1,0 +1,26 @@
+pre{
+    padding: 0px;
+}
+
+#bg {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+
+    /* Preserve aspet ratio */
+    min-width: 100%;
+    min-height: 100%;
+}
+
+audio{
+    display: none;
+}
+
+#code_column{
+    background-color: #fdf6e3;
+    overflow-y: scroll;
+    height: 55vh;
+    border: 2px solid #ddd;
+    margin: 20px 0px 20px 0px;
+    border-radius: 20px;
+}

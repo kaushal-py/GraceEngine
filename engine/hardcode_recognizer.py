@@ -26,6 +26,8 @@ class HardCodeRecognizer:
         data_string = data_string.lower()
         # Split the string into words.
         datalist = list(data_string.split())
+
+        output_string = ''
         
         ## Logic to handle print statements
         if datalist[0] == "print":
