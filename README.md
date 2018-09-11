@@ -1,6 +1,6 @@
 # GraceEngine - A Programming Engine 
 
-[GraceEngine Live Demo](grace-nlp.herokuapp.com) | [Go to documentation homepage](https://kb-studios.github.io/programming-engine/)
+[GraceEngine Live Demo](http://grace-nlp.herokuapp.com) | [Go to documentation homepage](https://kb-studios.github.io/programming-engine/)
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![GitHub license](https://img.shields.io/github/license/kb-studios/programming-engine.svg)](https://github.com/kb-studios/programming-engine/blob/master/LICENSE)
