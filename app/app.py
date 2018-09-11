@@ -1,6 +1,7 @@
 # Python libraries
 import subprocess
 import sys
+import os
 
 # External libraries
 from flask import Flask
@@ -16,6 +17,7 @@ import config
 # Initialise app 
 app = Flask(__name__)
 socketio = SocketIO(app)
+app.secret_key = "thisisforsessionsonly"
 nl = HardCodeRecognizer()
 
 
@@ -33,6 +35,9 @@ def handle_message(data):
 @socketio.on('generate_output')
 def compile(data):
     
+    if not os.path.exists(config.CACHE_PATH):
+        os.makedirs(config.CACHE_PATH)
+
     with open( config.CODE_FILE ,"w+") as f:
         f.write(data['data'])
 
@@ -41,7 +46,3 @@ def compile(data):
     op = op.communicate()[0].decode("utf-8")
     
     emit('compile','\n'+op)
-
-
-if __name__ == "__main__":
-    socketio.run(app, debug=True)
