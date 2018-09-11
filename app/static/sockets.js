@@ -1,5 +1,5 @@
 // Connect to Socket
-var socket = io.connect('http://' + document.domain + ':' + location.port);
+var socket = io.connect('https://' + document.domain + ':' + location.port);
 
 
 // Send input data to server
