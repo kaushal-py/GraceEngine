@@ -24,6 +24,8 @@ class HardCodeRecognizer:
 
         # Intents
         PRINT = ["print", "display", "show"]
+        ASSIGN = ["equals", "equal", "set", "=", "assign"]
+
 
         # Convert the string to lowercase.
         data_string = data_string.lower()
@@ -32,8 +34,10 @@ class HardCodeRecognizer:
 
         output_string = ''
         
-        ## Logic to handle print statements
-        if datalist[0] in PRINT:
+
+        ########## Logic to handle print statements #############
+        if self._has(datalist, PRINT):
+            
             del datalist[0]
 
             # if user explicitly specifies to print string
@@ -67,29 +71,32 @@ class HardCodeRecognizer:
                         output_string = "print(\""+output_string+"\")"
         ## end print logic
         
-        # Logic to handle assignment operations
-        elif datalist[0] in ["assign", "set"] or "=" in datalist:
 
+
+        ############## Logic to handle assignment operations ###############
+        elif self._has(datalist, ASSIGN):
+            
             if datalist[0] in ["assign", "set"]:
+                
+                temp_command = datalist[0]
+                del datalist[0]
+
+                in_string = ' '.join(datalist)
+                [variable, expression] = list(in_string.split(" to "))
+                
+                if temp_command == "assign":
+                    variable, expression = expression, variable
+                            
+            else:
+                variable = datalist[0]
                 del datalist[0]
                 del datalist[1]
-            else:
-                del datalist[1]
-            
-            output_string = datalist[0]+" = "
 
-            # check if it is a number
-            if self._isnumber(datalist[1]):
-                output_string += datalist[1]
-            # check if it is an identifier
-            elif datalist[1] in self.identifiers:
-                output_string += datalist[1]
-            # it is a string
-            else:
-                output_string += '\"'+datalist[1]+'\"' 
-            
-            self.identifiers.append(datalist[0])
+                expression = ' '.join(datalist)
+
+            output_string = variable + " = " + self._eval_expression(expression)
         ## end assignment logic
+
            
         return output_string
     
@@ -107,3 +114,20 @@ class HardCodeRecognizer:
             return False
 
         return True
+    
+
+    def _has(self, listA, listB):
+        
+        for element in listA:
+            if element in listB:
+                return True
+        return False
+    
+    def _eval_expression(self, expression):
+        
+        if self._isnumber(expression):
+            return expression
+        elif expression in self.identifiers:
+            return expression
+        else:
+            return '\"' + expression + '\"'
