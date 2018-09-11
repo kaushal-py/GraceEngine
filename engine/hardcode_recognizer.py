@@ -22,6 +22,9 @@ class HardCodeRecognizer:
     '''
     def recognize(self, data_string):
 
+        # Intents
+        PRINT = ["print", "display", "show"]
+
         # Convert the string to lowercase.
         data_string = data_string.lower()
         # Split the string into words.
@@ -30,15 +33,38 @@ class HardCodeRecognizer:
         output_string = ''
         
         ## Logic to handle print statements
-        if datalist[0] == "print":
+        if datalist[0] in PRINT:
             del datalist[0]
-            output_string = ' '.join(datalist)
-            
-            # Identify if it is an identifier or a string
-            if datalist[0] in self.identifiers:
-                output_string = "print("+output_string+")"
-            else:
+
+            # if user explicitly specifies to print string
+            if datalist[0] == "string":    
+                del datalist[0]
+                output_string = ' '.join(datalist)
                 output_string = "print(\""+output_string+"\")"
+            
+            # Else Identify what to print
+            else:
+                # check if user has used conjunctions
+                if "and" in datalist:
+                    in_string = ' '.join(datalist)
+                    individual_tokens = list(in_string.split(" and "))
+
+                    for token in individual_tokens:
+                        
+                        # Identify if it is an identifier or a string
+                        if token in self.identifiers:
+                            output_string += token+", "
+                        else:
+                            output_string += '\"'+token+"\", "
+                    
+                    output_string = "print("+output_string+")"
+                
+                else:
+                    output_string = ' '.join(datalist)
+                    if datalist[0] in self.identifiers:
+                        output_string = "print("+output_string+")"
+                    else:
+                        output_string = "print(\""+output_string+"\")"
         ## end print logic
         
         # Logic to handle assignment operations
