@@ -1,7 +1,6 @@
-# GraceEngine - A Programming Engine
-[Go to documentation homepage](https://kb-studios.github.io/programming-engine/)
+# GraceEngine - A Programming Engine 
 
-[![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
+[GraceEngine Live Demo](grace-nlp.herokuapp.com) | [Go to documentation homepage](https://kb-studios.github.io/programming-engine/)
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![GitHub license](https://img.shields.io/github/license/kb-studios/programming-engine.svg)](https://github.com/kb-studios/programming-engine/blob/master/LICENSE)
@@ -34,3 +33,6 @@ This project is seen as an automation tool that helps making programming easier 
 A single statement that a user speaks can be as simple as a print command like “Print hello world” or a statement which performs a complex function like “Define a function to reverse a string”.These two cases will be handled differently. To handle the first statement, we plan to create intents and map them to all major programming constructs like assignments, arithmetic operations, loops, functions and so on. The second case will depend heavily on large datasets of code. Large repositories of code like Github may have many snippets which can be used to directly to get results. An optimal data structure can be created which will make loading of these snippets faster and more accurate.
 
 > This project was named after [Grace Hopper](https://en.wikipedia.org/wiki/Grace_Hopper)
+
+[![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
+
