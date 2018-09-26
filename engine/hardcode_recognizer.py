@@ -26,7 +26,6 @@ class HardCodeRecognizer:
         PRINT = ["print", "display", "show"]
         ASSIGN = ["equals", "equal", "set", "=", "assign"]
 
-
         # Convert the string to lowercase.
         data_string = data_string.lower()
         # Split the string into words.
@@ -90,10 +89,11 @@ class HardCodeRecognizer:
             else:
                 variable = datalist[0]
                 del datalist[0]
-                del datalist[1]
+                del datalist[0]
 
                 expression = ' '.join(datalist)
 
+            self.identifiers.append(variable)
             output_string = variable + " = " + self._eval_expression(expression)
         ## end assignment logic
 
@@ -124,10 +124,27 @@ class HardCodeRecognizer:
         return False
     
     def _eval_expression(self, expression):
+
+        OPERATORS = ["+", "plus",
+                     "-", "minus",
+                     "*", "multiply",
+                     "/", "divide",
+                     "%", "mod",
+                    ]
+
         
-        if self._isnumber(expression):
-            return expression
-        elif expression in self.identifiers:
-            return expression
-        else:
-            return '\"' + expression + '\"'
+        exp_list = expression.split(" ")
+
+        expression = ""
+        exp_string = ""
+        for token in exp_list:
+            if self._isnumber(token):
+                expression += token
+            elif token in self.identifiers:
+                expression += token
+            elif token in OPERATORS:
+                expression += token
+            else:
+                expression += '\"' + token + '\"'
+
+        return expression
