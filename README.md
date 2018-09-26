@@ -1,6 +1,6 @@
 # GraceEngine - A Programming Engine 
 
-[GraceEngine Live Demo](grace-nlp.herokuapp.com) | [Go to documentation homepage](https://kb-studios.github.io/programming-engine/)
+[GraceEngine Live Demo](http://grace-nlp.herokuapp.com) | [Go to documentation homepage](https://kb-studios.github.io/programming-engine/)
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![GitHub license](https://img.shields.io/github/license/kb-studios/programming-engine.svg)](https://github.com/kb-studios/programming-engine/blob/master/LICENSE)
@@ -29,10 +29,33 @@ Why convert the spoken sentences to a particular programming language? Natural l
 ### The aim (Social Relevance)
 This project is seen as an automation tool that helps making programming easier and faster. (Why faster? - An average person can speak at about 140-150 wpm, where as a typist has an efficiency of 40-50 wpm.) It can also be seen as a great assistant for people with disabilities in arms, people suffering from diseases like RSI, etc. But at a greater level, this is seen as a future era of programming where programming will be more natural, and it will not just be a tool that a group of software developers will be using to automate stuff, but students, academicians, business people and also a general public who will be using programming every day to perform some task or the other. Programming will be as natural as making coffee, and everyone will be able to do it.
 
+
 ### Project outcomes
 A single statement that a user speaks can be as simple as a print command like “Print hello world” or a statement which performs a complex function like “Define a function to reverse a string”.These two cases will be handled differently. To handle the first statement, we plan to create intents and map them to all major programming constructs like assignments, arithmetic operations, loops, functions and so on. The second case will depend heavily on large datasets of code. Large repositories of code like Github may have many snippets which can be used to directly to get results. An optimal data structure can be created which will make loading of these snippets faster and more accurate.
 
-> This project was named after [Grace Hopper](https://en.wikipedia.org/wiki/Grace_Hopper)
+## Insturctions for Collaborators
+
+> **Note:** This project is well tested on Ubuntu 18.04 OS. If you face compatibility issues on other OS, try fixing the error by yourself first, if not possible, make it as a issue.
+
+To setup the development environment, follow these steps.
+
+1. Setup a virtual environment for python using [Anaconda](https://www.anaconda.com/download/#linux) or similar tools. Make sure the python version is 3.6+.
+
+`conda create -n grace python=3.6`
+
+2. Install the dependencies using the [requirements.txt](requirements.txt) file.
+
+`pip install -r requirements.txt`
+
+3. To test the engine on a web server, run the following command after the dependencies are installed.
+
+`gunicorn --pythonpath app app:app --worker-class eventlet -w 1`
+
+This will open a local server at [127.0.0.1:8000].
+
+#### Footnotes
+
+This project was named after [Grace Hopper](https://en.wikipedia.org/wiki/Grace_Hopper)
 
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
