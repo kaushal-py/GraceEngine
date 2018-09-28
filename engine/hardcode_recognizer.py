@@ -9,11 +9,12 @@ class HardCodeRecognizer:
     Initialise all data structures.
     identifiers - A list to store the history of variables that the program has seen.
     '''
-    def __init__(self):
+    def __init__(self, comments):
 
         # a list for storing the list of variables that have already been defined
         # in the program.
         self.identifiers = [""]
+        self.comments = comments
     
     
     '''
@@ -74,6 +75,9 @@ class HardCodeRecognizer:
 
         ############## Logic to handle assignment operations ###############
         elif self._has(datalist, ASSIGN):
+
+            user_query = " ".join(datalist)
+            user_query = "# "+user_query+"\n"
             
             if datalist[0] in ["assign", "set"]:
                 
@@ -95,9 +99,11 @@ class HardCodeRecognizer:
 
             self.identifiers.append(variable)
             output_string = variable + " = " + self._eval_expression(expression)
-        ## end assignment logic
 
-           
+            if self.comments:
+                output_string = user_query + output_string
+        ## end assignment logic
+ 
         return output_string
     
 
