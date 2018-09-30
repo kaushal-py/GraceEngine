@@ -11,10 +11,11 @@ class NlpRecognizer:
 
     def __init__(self):
 
-        self.myText = "Create an array of 10 numbers. Initialize the elements to 0"
+        self.myText = "Create an array of 10 numbers. Initialize the elements to zero"
 
         #self.nltkTest()
         self.spacyTest()
+
 
     def nltkTest(self):    
         myText = self.myText.lower()
@@ -49,24 +50,21 @@ class NlpRecognizer:
             # namedEnt.draw() 
 
             print("++++++++++")
-    
+            
 
     def spacyTest(self):
         
         nlp = spacy.load('en')
         #nlp = spacy.load('custom_ner_model')
-        # nlp = spacy.load('en_core_web_sm')
-        doc  = nlp(u'apple')
+        #nlp = spacy.load('en_core_web_sm')
+        doc  = nlp(self.myText)
 
         for token in doc:
             print(token.text, token.lemma_, token.pos_, token.tag_, token.dep_,
                 token.shape_, token.is_alpha, token.is_stop)
     
         
-        spacy.displacy.render(doc, style='dep', page=True)
-
-
-
+        spacy.displacy.serve(doc, style='dep')
 
 
 def main():
