@@ -27,7 +27,56 @@ audio{
     /* border: 5px solid #0ae; */
     margin: 20px 0px 20px 0px;
     /* border-radius: 20px; */
-    box-shadow: 5px 10px 8px #0ae;
+    box-shadow: 5px 10px 30px #333;
+}
+
+#hopper{
+    position: fixed;
+    bottom: 10px;
+    right: 40px;
+}
+
+.dialogue-box {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.25);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.25);
+    box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.25);
+    position: fixed;
+
+    bottom: 270px;
+    right: 40px;
+    max-width: 250px;
+
+    z-index: 1000;
+}
+
+.triangle-with-shadow {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 16px 10px -17px rgba(0, 0, 0, 0.25);
+    transform: rotate(45deg);
+    position: absolute;
+    right: 30px;
+    bottom: -39px;
+}
+
+.triangle-with-shadow:after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    transform: rotate(45deg);
+    top: 75px;
+    left: 25px;
+    -webkit-box-shadow: 10px 1px 10px 0px rgba(50, 50, 50, 0.25);
+    -moz-box-shadow: 10px 1px 10px 0px rgba(50, 50, 50, 0.25);
+    box-shadow: 10px 1px 10px 0px rgba(50, 50, 50, 0.25);
 }
 
 /*

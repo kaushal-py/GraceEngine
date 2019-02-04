@@ -25,33 +25,29 @@
   </head>
 
 
-  <body style="background-color:#0033cb">
-	<!-- <img src="{{ url_for('static', filename='back.jpg') }}" id="bg" alt=""> -->
+  <body style="background-color:#3358c5">
 
+		<img id="hopper" src="{{ url_for('static', filename='hopper.png') }}" width="100px" alt="Grace Engine">
+		
+		<div class="dialogue-box">
+				<div class="tdialogue-box-text">
+					Hey! Grace here. I am here to help you to use the Programming Engine. Start by speaking "Print hello world". 
+				</div>
+				<div class="triangle-with-shadow"></div>
+		</div>
 	
 	<section class="section">
 		<div class="container">
 
 
 	  <h1 class="title has-text-centered has-text-white-ter">
-				<span style="padding-right: 30px">Programming Engine V0.1alpha</span> 
-				<!-- Place this tag where you want the button to render. -->
-				<a class="github-button" href="https://github.com/kb-studios/ai-algos-implemented" data-size="large" aria-label="Star kb-studios/ai-algos-implemented on GitHub">Star</a>
-				<a href="https://bulma.io">
-					<img src="https://bulma.io/images/made-with-bulma--white.png" alt="Made with Bulma" width="128" height="24">
-				</a>
-		</h1>
-		
-<!------------------- Main Code area----------------->
+			<img src="{{ url_for('static', filename='Logo.png') }}" width="150px" alt="Grace Engine">
+			<br>
+			<span>Programming Engine</span> 
+			<!-- Place this tag where you want the button to render. -->
+			<!-- <a class="github-button" href="https://github.com/kb-studios/ai-algos-implemented" data-size="large" aria-label="Star kb-studios/ai-algos-implemented on GitHub">Star</a> -->
 
-	  <div class="columns is-centered">
-		<div class="column is-three-fifths code_column" id="style-5">
-		  <pre id="raw_code"><code language="python" id="outcode">
-# The code will be inserted here.
-		  </code></pre>
-		  <span class="blinking-cursor">|</span>
-		</div>
-		</div>
+		</h1>
 		
 
 <!------------------- Input Fields area----------------->
@@ -88,6 +84,16 @@
 		</div>
 	</div>
 
+<!------------------- Main Code area----------------->
+
+<div class="columns is-centered">
+	<div class="column is-three-fifths code_column" id="style-5">
+		<pre id="raw_code"><code language="python" id="outcode">
+# The code will be inserted here.
+		</code></pre>
+		<span class="blinking-cursor">|</span>
+	</div>
+	</div>
 
 <!---------------------- Output area----------------->
 
