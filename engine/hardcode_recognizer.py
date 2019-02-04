@@ -9,11 +9,12 @@ class HardCodeRecognizer:
     Initialise all data structures.
     identifiers - A list to store the history of variables that the program has seen.
     '''
-    def __init__(self):
+    def __init__(self, comments):
 
         # a list for storing the list of variables that have already been defined
         # in the program.
         self.identifiers = [""]
+        self.comments = comments
     
     
     '''
@@ -25,7 +26,6 @@ class HardCodeRecognizer:
         # Intents
         PRINT = ["print", "display", "show"]
         ASSIGN = ["equals", "equal", "set", "=", "assign"]
-
 
         # Convert the string to lowercase.
         data_string = data_string.lower()
@@ -75,6 +75,9 @@ class HardCodeRecognizer:
 
         ############## Logic to handle assignment operations ###############
         elif self._has(datalist, ASSIGN):
+
+            user_query = " ".join(datalist)
+            user_query = "# "+user_query+"\n"
             
             if datalist[0] in ["assign", "set"]:
                 
@@ -90,14 +93,17 @@ class HardCodeRecognizer:
             else:
                 variable = datalist[0]
                 del datalist[0]
-                del datalist[1]
+                del datalist[0]
 
                 expression = ' '.join(datalist)
 
+            self.identifiers.append(variable)
             output_string = variable + " = " + self._eval_expression(expression)
-        ## end assignment logic
 
-           
+            if self.comments:
+                output_string = user_query + output_string
+        ## end assignment logic
+ 
         return output_string
     
 
@@ -124,10 +130,27 @@ class HardCodeRecognizer:
         return False
     
     def _eval_expression(self, expression):
+
+        OPERATORS = ["+", "plus",
+                     "-", "minus",
+                     "*", "multiply",
+                     "/", "divide",
+                     "%", "mod",
+                    ]
+
         
-        if self._isnumber(expression):
-            return expression
-        elif expression in self.identifiers:
-            return expression
-        else:
-            return '\"' + expression + '\"'
+        exp_list = expression.split(" ")
+
+        expression = ""
+        exp_string = ""
+        for token in exp_list:
+            if self._isnumber(token):
+                expression += token
+            elif token in self.identifiers:
+                expression += token
+            elif token in OPERATORS:
+                expression += token
+            else:
+                expression += '\"' + token + '\"'
+
+        return expression

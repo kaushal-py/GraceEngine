@@ -18,7 +18,7 @@ import config
 app = Flask(__name__)
 socketio = SocketIO(app)
 app.secret_key = "thisisforsessionsonly"
-nl = HardCodeRecognizer()
+nl = HardCodeRecognizer(comments=True)
 
 
 @app.route('/')

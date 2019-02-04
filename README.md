@@ -1,4 +1,6 @@
-# GraceEngine - A Programming Engine 
+# GraceEngine - A Programming Engine
+
+![Grace Engine](Logo.png)
 
 [GraceEngine Live Demo](http://grace-nlp.herokuapp.com) | [Go to documentation homepage](https://kb-studios.github.io/programming-engine/)
 

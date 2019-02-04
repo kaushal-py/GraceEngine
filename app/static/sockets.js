@@ -1,5 +1,5 @@
 // Connect to Socket
-var socket = io.connect('https://' + document.domain + ':' + location.port);
+var socket = io.connect('http://' + document.domain + ':' + location.port);
 
 
 // Send input data to server
@@ -47,6 +47,6 @@ socket.on('compile', function(data) {
 
     var outputBox = document.getElementById("output_area");
     datacode = hljs.highlight('python', data);
-    outputBox.insertAdjacentHTML( 'beforeend', datacode.value);
+    outputBox.innerHTML = datacode.value
 
 });
