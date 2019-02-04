@@ -5,8 +5,9 @@
 [GraceEngine Live Demo](http://grace-nlp.herokuapp.com) | [Go to documentation homepage](https://kb-studios.github.io/programming-engine/)
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![GitHub license](https://img.shields.io/github/license/kb-studios/programming-engine.svg)](https://github.com/kb-studios/programming-engine/blob/master/LICENSE)
-[![GitHub issues-closed](https://img.shields.io/github/issues-closed/kb-studios/programming-engine.svg)](https://github.com/kb-studios/programming-engine/issues?q=is%3Aissue+is%3Aclosed)
+[![GitHub license](https://img.shields.io/github/license/kb-studios/GraceEngine.svg)](https://github.com/kb-studios/GraceEngine/blob/master/LICENSE)
+[![GitHub issues-closed](https://img.shields.io/github/issues-closed/kb-studios/GraceEngine.svg)](https://github.com/kb-studios/GraceEngine/issues?q=is%3Aissue+is%3Aclosed)
+![Languages](https://img.shields.io/github/languages/count/kb-studios/GraceEngine.svg?style=flat)
 
 > *I love computer languages. In fact, I’ve spent roughly half my life nurturing one particular very rich computer language: Mathematica. But do we really need computer languages to tell our computers what to do? Why can’t we just use natural human languages, like English, instead?*
 > -- Stephen Wolfram, creator of Mathematica.
