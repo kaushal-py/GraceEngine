@@ -7,12 +7,12 @@
     <title>Document</title>
     <!-- development version, includes helpful console warnings -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <link rel="stylesheet" href="bulma/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
 </head>
-<body>
-    hello
+<body class="container is-centered">
+    <div class="is-one-third">
     <div id="app">
 
         <input v-model="temp_input" placeholder="edit me">
@@ -34,6 +34,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 </body>
