@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- development version, includes helpful console warnings -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+</head>
+<body>
+    hello
+    <div id="app">
+
+        <input v-model="temp_input" placeholder="edit me">
+        <button v-on:click="processInput">Submit</button>
+
+        <div v-for="block in blocks">
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">
+                    {{block.name}}
+                    </p>
+                    <a href="#" class="card-header-icon" aria-label="more options">
+                    </a>
+                </header>
+                <div class="card-content">
+                    <div class="content">
+                    {{block.value}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="block_demo.js"></script>
+</html>
