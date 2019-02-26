@@ -63,13 +63,13 @@ class Parser:
         
         synonyms = set()
 
-        print("\n++", node.text, "++")
+        # print("\n++", node.text, "++")
 
         for word in syns:
             for l in word.lemmas():
                 synonyms.add(l.name())
         
-        print(synonyms)
+        # print(synonyms)
             
     def remove_stopwords(self, tokens):
         stop_words = set(stopwords.words('english'))
