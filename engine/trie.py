@@ -5,8 +5,8 @@ import json
 
 class Trie:
 
-    def showTree(self, node):
-        print(RenderTree(node, style=AsciiStyle()).by_attr())
+    def showTree(self, root):
+        print(RenderTree(root, style=AsciiStyle()).by_attr())
         
     
     def traverseTree(self, node, cmd:list, length:int, cnt:int):
