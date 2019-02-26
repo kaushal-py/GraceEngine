@@ -1,5 +1,6 @@
 import spacy
 from nltk.corpus import wordnet
+from nltk.corpus import stopwords
 
 class Parser:
 
@@ -36,20 +37,25 @@ class Parser:
         return noun_chunks
 
 
-    def preorder_util(self, root):
+    def preorder_util(self, root, tokens):
 
         if root is not None:
             #print(root.text)
+            tokens.append(root.text)
             self.process_node(root)
             for left in root.lefts:
-                self.preorder_util(left)
+                self.preorder_util(left, tokens)
             for right in root.rights:
-                self.preorder_util(right)
+                self.preorder_util(right, tokens)
+        
+        return tokens
 
     
     def preorder_traverse(self, pos=0):
+        tokens = []
         root = self.get_sent_root(pos)
-        self.preorder_util(root)
+        self.preorder_util(root,tokens)
+        return tokens
 
 
     def process_node(self, node):
@@ -65,12 +71,24 @@ class Parser:
         
         print(synonyms)
             
+    def remove_stopwords(self, tokens):
+        stop_words = set(stopwords.words('english'))
+        filtered_sentence = [w for w in tokens if not w in stop_words]
+        return filtered_sentence
 
 if __name__ == "__main__":
 
+
     p=Parser()
-    p.parse("Display the value of apple")
+    p.parse("Create a list of 10 integers")
+    stop_words = set(stopwords.words('english'))
+    print(stop_words)
 
     print(p.return_tokens())
     print(p.return_noun_chunks())
-    p.preorder_traverse()
+
+    tokens = p.preorder_traverse()    
+    print(tokens)
+
+    filtered_sentence = p.remove_stopwords(tokens)
+    print(filtered_sentence)
