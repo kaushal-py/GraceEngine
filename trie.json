@@ -1,0 +1,27 @@
+{
+    "children": [
+        {
+            "children": [
+                {
+                    "children": [
+                        {
+                            "children": [
+                                {
+                                    "isLeaf": true,
+                                    "name": "10"
+                                }
+                            ],
+                            "isLeaf": true,
+                            "name": "integers"
+                        }
+                    ],
+                    "isLeaf": true,
+                    "name": "list"
+                }
+            ],
+            "isLeaf": true,
+            "name": "Create"
+        }
+    ],
+    "name": "*"
+}
