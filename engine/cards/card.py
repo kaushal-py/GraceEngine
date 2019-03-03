@@ -13,7 +13,7 @@ class Card:
         2. Bottom Tape - BT
         3. Right Punch - RP
         4. Left Punch - LP
-        5. Left Inner Punch (along with count) - xLIP
+        5. Left Inner Punch (along with count) - nLIP
         6. Nested Tape - NT
 
         A card can be any combination of these types.
