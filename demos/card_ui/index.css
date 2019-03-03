@@ -5,17 +5,23 @@ body{
 .ge-card{
     background-color: darkorange;
     display: inline-block;
-    padding: 20px;
-    border-radius: 5px;
+    padding: 15px 20px;
+    border-radius: 5px 5px 5px 0px;
     position: relative;
 }
 
 .tt{
-    border-top: 5px solid #222;
+  border-top: 5px outset #555;
+}
+.bt{
+  border-bottom: 5px outset #555;
 }
 
-.bt{
-    border-bottom: 5px solid #222;
+.indented{
+  /* display: inline-block; */
+  padding-left: 10px;
+  border-left: 40px solid darkorange;
+  /* border-bottom: 5px outset #555; */
 }
 
 .rp:after{
@@ -34,7 +40,7 @@ body{
   }
 
   .rh:after{
-    left: 86.66%;
+    right: 0%;
     top: 50%;
     border: solid transparent;
     content: " ";
@@ -42,7 +48,7 @@ body{
     width: 0;
     position: absolute;
     pointer-events: none;
-    border-color: rgba(136, 183, 213, 0);
+    border-color: hsla(203, 48%, 68%, 0);
     border-right-color: white;
     border-width: 10px;
     margin-top: -10px;
@@ -64,7 +70,7 @@ body{
   }
 
   .lh:before {
-    right: 86.66%;
+    left: 0%;
 	top: 50%;
 	border: solid transparent;
 	content: " ";
