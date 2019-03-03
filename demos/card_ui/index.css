@@ -1,0 +1,79 @@
+body{
+    padding: 10%;
+}
+
+.ge-card{
+    background-color: darkorange;
+    display: inline-block;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.tt{
+    border-top: 5px solid #222;
+}
+
+.bt{
+    border-bottom: 5px solid #222;
+}
+
+.rp:after{
+    left: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(136, 183, 213, 0);
+    border-left-color: darkorange;
+    border-width: 10px;
+    margin-top: -10px;
+  }
+
+  .rh:after{
+    left: 86.66%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(136, 183, 213, 0);
+    border-right-color: white;
+    border-width: 10px;
+    margin-top: -10px;
+  }
+  
+  .lp:before {
+    right: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(136, 183, 213, 0);
+	border-right-color: darkorange;
+	border-width: 10px;
+	margin-top: -10px;
+  }
+
+  .lh:before {
+    right: 86.66%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(136, 183, 213, 0);
+	border-left-color: white;
+	border-width: 10px;
+	margin-top: -10px;
+  }
