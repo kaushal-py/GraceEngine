@@ -42,8 +42,10 @@ class Trie:
                     print("Node already exists")
                     return
         if flag == 0:
+            isLeaf = False
+            if init == cnt-1:
+                isLeaf = True
             newNode = Node(key, parent=node, isLeaf=True)
-            # TODO: find a way to assign True to isLeaf for correct nodes
             if init != cnt-1:
                 self.addNode(newNode,cmd,cnt,init+1)
 
