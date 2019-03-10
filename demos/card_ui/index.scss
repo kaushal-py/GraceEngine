@@ -1,0 +1,118 @@
+$color1 : #7E7F9A;
+$color2 : #EB9486;
+$color3 : #F3DE8A;
+$color4 : #272838;
+$color5 : #F9F8F8;
+
+.ge-card{
+    background-color: $color1;
+    display: inline-block;
+    color: $color5;
+    padding: 10px 10px;
+    border-radius: 5px 5px 5px 0px;
+    position: relative;
+}
+
+.tt{
+  border-top: 5px outset #555;
+}
+.bt{
+  border-bottom: 5px outset #555;
+}
+
+.indented{
+  /* display: inline-block; */
+  padding-left: 10px;
+  border-left: 70px solid $color1;
+  /* border-bottom: 5px outset #555; */
+}
+
+.rp:after{
+  left: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(136, 183, 213, 0);
+  border-left-color: $color1;
+  border-width: 10px;
+  margin-top: -10px;
+}
+
+.rh:after{
+  right: 0%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: hsla(203, 48%, 68%, 0);
+  border-right-color: white;
+  border-width: 10px;
+  margin-top: -10px;
+}
+
+.lp:before {
+  right: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(136, 183, 213, 0);
+  border-right-color: $color1;
+  border-width: 10px;
+  margin-top: -10px;
+}
+
+.lh:before {
+  left: 0%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(136, 183, 213, 0);
+  border-left-color: white;
+  border-width: 10px;
+  margin-top: -10px;
+}
+
+.sticker{
+  display: inline-block;  
+  background-color: $color3;
+  color: $color4;
+  padding: 5px;
+  margin: 2px;
+  border-radius: 5px;
+}
+
+.end{
+  position: relative;
+  right:-5px;
+}
+
+.sticker-val{
+  background-color: $color2;
+  color: $color4;
+  padding: 5px;
+  margin: 2px;
+  border-radius: 5px;
+}
+
+.card-number{
+  background-color: $color5;
+  color: $color4;
+  border-radius: 50%;
+  padding: 7px;
+  margin: 10px;
+}
