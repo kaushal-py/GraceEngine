@@ -1,0 +1,25 @@
+{
+    "children": [
+        {
+            "children": [
+                {
+                    "isLeaf": true,
+                    "name": "variable"
+                }
+            ],
+            "isLeaf": true,
+            "name": "create"
+        },
+        {
+            "children": [
+                {
+                    "isLeaf": true,
+                    "name": "variable"
+                }
+            ],
+            "isLeaf": true,
+            "name": "set"
+        }
+    ],
+    "name": "*"
+}
