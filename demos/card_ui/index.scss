@@ -23,7 +23,7 @@ $color5 : #F9F8F8;
 .indented{
   /* display: inline-block; */
   padding-left: 10px;
-  border-left: 40px solid $color1;
+  border-left: 70px solid $color1;
   /* border-bottom: 5px outset #555; */
 }
 
@@ -91,8 +91,8 @@ $color5 : #F9F8F8;
   display: inline-block;  
   background-color: $color3;
   color: $color4;
-  padding: 10px;
-  margin: 5px;
+  padding: 5px;
+  margin: 2px;
   border-radius: 5px;
 }
 
@@ -113,6 +113,6 @@ $color5 : #F9F8F8;
   background-color: $color5;
   color: $color4;
   border-radius: 50%;
-  padding: 10px;
+  padding: 7px;
   margin: 10px;
 }
