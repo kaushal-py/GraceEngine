@@ -1,5 +1,5 @@
 from trie import Trie
-from spacy_parser import Parser
+from parser import Parser
 from anytree import Node
 from anytree.importer import JsonImporter
 from anytree.exporter import JsonExporter
@@ -26,14 +26,14 @@ class Driver:
         '''
 
         p = Parser()
-        p.parse(natural_sentence)
-
-        tokens = p.preorder_traverse()
-        filtered_sentence = p.remove_stopwords(tokens)
+        
 
         t=Trie()
-        t.addNode(self.root,filtered_sentence,len(filtered_sentence),0)
-        t.showTree(self.root)
+        d = dict()        
+        command_type,command,d = p.parse(natural_sentence)
+        if command_type != "expression":
+            t.traverseTree(self.root,command,len(command),0)
+            t.showTree(self.root)
 
         exporter = JsonExporter(indent=4, sort_keys=True)
         file_data = exporter.export(self.root)
@@ -53,4 +53,8 @@ class Driver:
 
 if __name__ == "__main__":
     trie = Driver()
-    trie.drive("Create a list of 10 integers")
+    trie.drive("Create variable temperature")
+    trie.drive("Set the variable temperature to")
+    trie.drive("the number 20")
+    trie.drive("Set the variable temperature to")
+    trie.drive("the expression temperature plus 10")
