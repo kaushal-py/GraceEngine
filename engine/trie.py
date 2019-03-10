@@ -24,30 +24,37 @@ class Trie:
             if child.name == key:
                 if cnt == length-1:
                     if child.isLeaf == True:
-                        # TODO : function call or assign an id to execute the code
-                        print("Execute the corresponding code")
-                        return
-                self.traverseTree(child, cmd, length, cnt+1)
+                        card_id = child.code
+                        return card_id
+                code = self.traverseTree(child, cmd, length, cnt+1)
+                return code
 
 
-    def addNode(self, node, cmd:str, cnt:int, init:int):
-        key = cmd[init]
+    def addNode(self, node, cmd:str, code:str, cnt:int, init:int):
+        key = cmd.split(' ',init+1)[init]
         flag = 0
+        corresponding_code = None
         for child in node.children:
             if child.name == key:
                 flag = 1
                 if init != cnt-1:
-                    self.addNode(child,cmd,cnt,init+1)
+                    self.addNode(child,cmd,code,cnt,init+1)
                 else:
-                    print("Node already exists")
+                    if child.isLeaf == False:
+                        child.isLeaf = True
+                        print("isLeaf value of ",child," has changed")
+                    else:
+                        print("Node already exists")
                     return
         if flag == 0:
             isLeaf = False
             if init == cnt-1:
                 isLeaf = True
-            newNode = Node(key, parent=node, isLeaf=True)
+                corresponding_code = code
+            newNode = Node(key, parent=node, isLeaf=isLeaf, code=corresponding_code)
+            # TODO: find a way to assign True to isLeaf for correct nodes
             if init != cnt-1:
-                self.addNode(newNode,cmd,cnt,init+1)
+                self.addNode(newNode,cmd,code,cnt,init+1)
 
 
     '''Convert the given tree into json'''
@@ -57,6 +64,16 @@ class Trie:
 
         with open('trie.json','w') as f:
             exporter.write(root,f)
+
+    
+    def get_tree(self, file_name):
+
+        ''' This function is used to import json file and return anytree Node '''
+        importer = JsonImporter()
+        tree_file = open(file_name, "r")
+        data = tree_file.read()
+        tree_file.close()
+        return importer.import_(data)
 
 if __name__ == '__main__':
     t = Trie()

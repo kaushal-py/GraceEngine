@@ -13,10 +13,13 @@ class Driver:
             or it is created newly
         '''
 
-        if tree_name == "":
-            self.root = Node("*")
-        else:
-            self.root = self.get_tree(tree_name)
+        # if tree_name == "":
+        #     self.root = Node("*")
+        # else:
+        #     self.root = self.get_tree(tree_name)
+        tree_name = 'trie.json'
+        self.root = self.get_tree(tree_name)
+        
 
     def drive(self, natural_sentence:str):
 
@@ -26,21 +29,27 @@ class Driver:
         '''
 
         p = Parser()
-        
-
         t=Trie()
+
         d = dict()        
         command_type,command,d = p.parse(natural_sentence)
         if command_type != "expression":
-            t.traverseTree(self.root,command,len(command),0)
-            t.showTree(self.root)
+            code = t.traverseTree(self.root,command,len(command),0)
+            print("Command Type: ",command_type)
+            print("Command: ",command)
+            print("Sticker Type, Variable: ",d)
+            print("Card ID: ",code)
+            print("----------------------------------------------------------------")
+            
 
-        exporter = JsonExporter(indent=4, sort_keys=True)
-        file_data = exporter.export(self.root)
+        # t.showTree(self.root)
 
-        tree_file = open("trie.json", "w")
-        tree_file.write(file_data)
-        tree_file.close()
+        # exporter = JsonExporter(indent=4, sort_keys=True)
+        # file_data = exporter.export(self.root)
+
+        # tree_file = open("trie.json", "w")
+        # tree_file.write(file_data)
+        # tree_file.close()
 
     def get_tree(self, file_name):
 
