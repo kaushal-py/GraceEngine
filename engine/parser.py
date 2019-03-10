@@ -37,13 +37,10 @@ class Parser:
 
         if tokens[0] in CREATE:
             command_type = "create"
-            print(command_type)
         elif tokens[0] in INSERT:
             command_type = "insert"
-            print(command_type)
         else:
             command_type = "expression"
-            print(command_type)
             return command_type,tokens,None
 
         '''Remove Stopwords'''
@@ -80,7 +77,6 @@ class Parser:
             '''
             # print(self.filtered_sentence)
             command = [w for w in self.filtered_sentence if not w in stop_words and w != current_variable]
-            print(command,"-",current_variable)
             return command_type,command,None
 
 
@@ -113,5 +109,5 @@ class Parser:
 
 
         else:
-            print("This must be the expression")
-            return "expression",
+            print("Unknown")
+            return None

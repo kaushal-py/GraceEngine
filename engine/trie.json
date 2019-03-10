@@ -1,25 +1,17 @@
 {
-    "children": [
+  "name": "*",
+  "children": [
+    {
+      "isLeaf": false,
+      "code": null,
+      "name": "set",
+      "children": [
         {
-            "children": [
-                {
-                    "isLeaf": true,
-                    "name": "variable"
-                }
-            ],
-            "isLeaf": true,
-            "name": "create"
-        },
-        {
-            "children": [
-                {
-                    "isLeaf": true,
-                    "name": "variable"
-                }
-            ],
-            "isLeaf": true,
-            "name": "set"
+          "isLeaf": true,
+          "code": "variable_setter",
+          "name": "variable"
         }
-    ],
-    "name": "*"
+      ]
+    }
+  ]
 }
