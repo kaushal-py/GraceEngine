@@ -31,7 +31,7 @@ class Driver:
         p = Parser()
         t=Trie()
 
-        d = dict()        
+        d = {}       
         command_type,command,d = p.parse(natural_sentence)
         if command_type != "expression":
             code = t.traverseTree(self.root,command,len(command),0)
@@ -40,7 +40,8 @@ class Driver:
             print("Sticker Type, Variable: ",d)
             print("Card ID: ",code)
             print("----------------------------------------------------------------")
-            
+        else:
+            print("Command:", command)
 
         # t.showTree(self.root)
 
@@ -61,9 +62,9 @@ class Driver:
         return importer.import_(data)
 
 if __name__ == "__main__":
-    trie = Driver()
-    trie.drive("Create variable temperature")
-    trie.drive("Set the variable temperature to")
-    trie.drive("the number 20")
-    trie.drive("Set the variable temperature to")
-    trie.drive("the expression temperature plus 10")
+    d = Driver()
+    d.drive("Create variable temperature")
+    d.drive("Set the variable temperature to")
+    d.drive("the number 20")
+    d.drive("Set the variable temperature to")
+    d.drive("the expression temperature plus 10")

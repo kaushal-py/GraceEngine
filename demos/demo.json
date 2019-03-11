@@ -1,0 +1,107 @@
+{
+    "program":[
+        {
+            "line":1,
+            "type": "normal",
+            "cards":[
+                {
+                    "card_type":[],
+                    "card_number":1,
+                    "values":[
+                        {
+                            "val_type": "text",
+                            "text":"Set"
+                        },
+                        {
+                            "val_type": "sticker",
+                            "sticker_name": "variable",
+                            "sticker_value": "count"
+                        },
+                        {
+                            "val_type": "text",
+                            "text": "to"
+                        }
+                    ]
+                },
+                {
+                    "card_type":[],
+                    "card_number":2,
+                    "values":[
+                        {
+                            "val_type": "sticker",
+                            "sticker_name": "number",
+                            "sticker_val": "1"
+                        }
+                    ]
+                }
+
+            ]
+        },
+        {
+            "line":2,
+            "type":"normal",
+            "cards":[
+                {
+                    "card_type": [],
+                    "card_number":3,
+                    "values":[
+                        {
+                            "val_type":"text",
+                            "text":"If"
+                        },
+                        {
+                            "val_type": "sticker_end",
+                            "sticker_name": "condition",
+                            "sticker_val": null
+                        }
+                    ]
+                },
+                {
+                    "card_type": [],
+                    "card_number":4,
+                    "values":[
+                        {
+                            "val_type": "sticker",
+                            "sticker_name": "variable",
+                            "sticker_val": "count"
+                        },
+                        {
+                            "val_type":"text",
+                            "text":"<="
+                        },
+                        {
+                            "val_type": "sticker",
+                            "sticker_name": "number",
+                            "sticker_val": "3"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "line":3,
+            "type":"indented",
+            "cards":[
+                {
+                    "card_type": [],
+                    "card_number":5,
+                    "values":[
+                        {
+                            "val_type":"text",
+                            "text":"Print"
+                        },
+                        {
+                            "val_type": "sticker",
+                            "sticker_name": "text",
+                            "sticker_val": "Hello world!"
+                        }
+                    ]    
+                }
+            ]
+        },
+        {
+            "line":4
+            // TODO: How to manage indented blocks.
+        }
+    ]
+}
