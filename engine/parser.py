@@ -15,12 +15,13 @@ import csv
 
 class Parser:
 
-    def __init__(self):
+    def __init__(self, model):
         
-        print("Loading model..")
-        self.nlp = spacy.load('en_core_web_sm')
-        self.doc= None
-        print("Model loaded")
+        ### Spacy models not required
+        # print("Loading model..")
+        # self.nlp = spacy.load('en_core_web_sm')
+        # self.doc= None
+        # print("Model loaded")
 
     def parse(self,sentence):
         
