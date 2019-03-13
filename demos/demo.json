@@ -1,107 +1,223 @@
 {
     "program":[
         {
-            "line":1,
-            "type": "normal",
-            "cards":[
+            "card_id":"variable_setter",
+            "card_number":1,
+            "card_type":[],
+            "card_color":"color_normal",
+            "display":[
                 {
-                    "card_type":[],
-                    "card_number":1,
-                    "values":[
-                        {
-                            "val_type": "text",
-                            "text":"Set"
-                        },
-                        {
-                            "val_type": "sticker",
-                            "sticker_name": "variable",
-                            "sticker_value": "count"
-                        },
-                        {
-                            "val_type": "text",
-                            "text": "to"
-                        }
-                    ]
+                    "val_type":"text",
+                    "text":"set"
                 },
                 {
-                    "card_type":[],
+                    "val_type":"sticker",
+                    "sticker_name":"variable",
+                    "sticker_value":"count"
+                },
+                {
+                    "val_type":"text",
+                    "text":"to"
+                }
+            ],
+            "internal_dependants":[
+
+            ],
+            "external_depetendants":[
+                {
+                    "card_id":"expression",
                     "card_number":2,
-                    "values":[
+                    "card_type":[],
+                    "card_color":"color_logic",
+                    "display":[
                         {
-                            "val_type": "sticker",
-                            "sticker_name": "number",
-                            "sticker_val": "1"
+                            "val_type":"sticker",
+                            "sticker_name":"number",
+                            "sticker_value":1
                         }
                     ]
                 }
+            ],
+            "children":[
 
             ]
         },
         {
-            "line":2,
-            "type":"normal",
-            "cards":[
+            "card_number":3,
+            "card_id":"test_condition",
+            "card_type":[],
+            "card_color":"color_logic",
+            "display":[
                 {
-                    "card_type": [],
-                    "card_number":3,
-                    "values":[
+                    "val_type":"text",
+                    "text":"if"
+                }
+            ],
+            "internal_dependants":[
+
+            ],
+            "external_depetendants":[
+                {
+                    "card_number":4,
+                    "card_id":"relational_condition",
+                    "card_type":[],
+                    "card_color":"color_logic",
+                    "display":[
                         {
-                            "val_type":"text",
-                            "text":"If"
+                            "val_type":"internal_dependant"
                         },
                         {
-                            "val_type": "sticker_end",
-                            "sticker_name": "condition",
-                            "sticker_val": null
+                            "val_type":"sticker",
+                            "sticker_name":"operator",
+                            "sticker_value":"<="
+                        },
+                        {
+                            "val_type":"internal_dependant"
                         }
+                    ],
+                    "internal_dependants":[
+                        {
+                            "card_number":5,
+                            "card_id":"expression",
+                            "card_type":[],
+                            "card_color":"color_logic",
+                            "display":[
+                                {
+                                    "val_type":"sticker",
+                                    "sticker_name":"variable",
+                                    "sticker_value":"count"
+                                }
+                            ],
+                            "internal_dependants":[
+
+                            ],
+                            "external_dependants":[
+
+                            ],
+                            "children":[
+
+                            ]
+                        },
+                        {
+                            "card_number":6,
+                            "card_id":"expression",
+                            "card_type":[],
+                            "card_color":"color_logic",
+                            "display":[
+                                {
+                                    "val_type":"sticker",
+                                    "sticker_name":"number",
+                                    "sticker_value":3
+                                }
+                            ],
+                            "internal_dependants":[
+
+                            ],
+                            "external_dependants":[
+
+                            ],
+                            "children":[
+
+                            ]
+                        }
+                    ],
+                    "external_depetendants":[
+                        
+                    ],
+                    "children":[
+                        
+                    ]
+                }
+            ],
+            "children":[
+                {
+                    "card_number":7,
+                    "card_id":"print",
+                    "card_type":[],
+                    "card_color":"color_normal",
+                    "display":[
+                        {
+                            "val_type":"text",
+                            "text":"print",
+                        },
+                        {
+                            "val_type":"sticker",
+                            "sticker_name":"text",
+                            "sticker_value":"Hello World"
+                        }
+                    ],
+                    "internal_dependants":[
+
+                    ],
+                    "external_dependants":[
+
+                    ],
+                    "children":[
+
                     ]
                 },
                 {
-                    "card_type": [],
-                    "card_number":4,
-                    "values":[
+                    "card_number":8,
+                    "card_id":"variable_setter",
+                    "card_type":[],
+                    "card_color":"color_normal",
+                    "display":[
                         {
-                            "val_type": "sticker",
-                            "sticker_name": "variable",
-                            "sticker_val": "count"
+                            "val_type":"text",
+                            "text":"set"
+                        },
+                        {
+                            "val_type":"sticker",
+                            "sticker_name":"variable",
+                            "sticker_value":"count"
                         },
                         {
                             "val_type":"text",
-                            "text":"<="
-                        },
-                        {
-                            "val_type": "sticker",
-                            "sticker_name": "number",
-                            "sticker_val": "3"
+                            "text":"to"
                         }
+                    ],
+                    "internal_dependants":[
+
+                    ],
+                    "external_dependants":[
+                        {
+                            "card_number":9,
+                            "card_id":"expression",
+                            "card_type":[],
+                            "card_color":"color_logic",
+                            "display":[
+                                {
+                                    "val_type":"sticker",
+                                    "sticker_name":"variable",
+                                    "sticker_value":"count"
+                                },
+                                {
+                                    "val_type":"sticker",
+                                    "sticker_name":"operator",
+                                    "sticker_value":"+"
+                                },
+                                {
+                                    "val_type":"sticker",
+                                    "sticker_name":"number",
+                                    "sticker_value":1
+                                }
+                            ],
+                            "internal_dependants":[
+                                
+                            ],
+                            "external_dependants":[
+                                
+                            ],
+                            "children":[
+
+                            ]
+                        }
+                    ],
+                    "children":[
+
                     ]
                 }
             ]
-        },
-        {
-            "line":3,
-            "type":"indented",
-            "cards":[
-                {
-                    "card_type": [],
-                    "card_number":5,
-                    "values":[
-                        {
-                            "val_type":"text",
-                            "text":"Print"
-                        },
-                        {
-                            "val_type": "sticker",
-                            "sticker_name": "text",
-                            "sticker_val": "Hello world!"
-                        }
-                    ]    
-                }
-            ]
-        },
-        {
-            "line":4
-            // TODO: How to manage indented blocks.
         }
     ]
 }
