@@ -17,7 +17,7 @@ class Driver:
         #     self.root = Node("*")
         # else:
         #     self.root = self.get_tree(tree_name)
-        tree_name = 'trie.json'
+        tree_name = 'trie_disk.json'
         self.root = self.get_tree(tree_name)
         
 
@@ -34,14 +34,21 @@ class Driver:
         d = {}       
         command_type,command,d = p.parse(natural_sentence)
         if command_type != "expression":
+            # print(len(command))
             code = t.traverseTree(self.root,command,len(command),0)
             print("Command Type: ",command_type)
             print("Command: ",command)
             print("Sticker Type, Variable: ",d)
-            print("Card ID: ",code)
+            if code[0] is not None:
+                #TODO: Code to create card
+                print("Card ID: ",code[0])
+            elif code[1] is not None:
+                print("Suggestions: ",code[1])
             print("----------------------------------------------------------------")
         else:
+            print("Command Type: ",command_type)
             print("Command:", command)
+            print("----------------------------------------------------------------")
 
         # t.showTree(self.root)
 
@@ -63,8 +70,14 @@ class Driver:
 
 if __name__ == "__main__":
     d = Driver()
-    d.drive("Create variable temperature")
+    # d.drive("Create variable temperature")
+    d.drive("Set")
+    d.drive("Set the")
+    d.drive("Set the variable")
     d.drive("Set the variable temperature to")
     d.drive("the number 20")
-    d.drive("Set the variable temperature to")
-    d.drive("the expression temperature plus 10")
+    # d.drive("Set the variable temperature to")
+    # d.drive("the expression temperature plus 10")
+    d.drive("if")
+    # d.drive("the variable temperature is less than the number 25")
+    # d.drive("else")

@@ -19,13 +19,18 @@ class Trie:
 
         '''Split the input commands and check each keyword hierarchically'''
         key = cmd[cnt]
-        
+
         for child in node.children:
             if child.name == key:
                 if cnt == length-1:
                     if child.isLeaf == True:
                         card_id = child.code
-                        return card_id
+                        return (card_id,None)
+                    else:
+                        suggestions = []
+                        for c in child.children:
+                            suggestions.append(c.name)
+                        return (None,suggestions)
                 code = self.traverseTree(child, cmd, length, cnt+1)
                 return code
 
@@ -62,7 +67,7 @@ class Trie:
         exporter = JsonExporter(indent=2, sort_keys=False)
         print(exporter.export(root))
 
-        with open('trie.json','w') as f:
+        with open('trie_disk.json','w') as f:
             exporter.write(root,f)
 
     

@@ -1,1 +1,3 @@
 "set variable","variable_setter"
+"if","test_condition"
+"else","else"

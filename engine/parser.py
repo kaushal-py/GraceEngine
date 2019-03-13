@@ -15,7 +15,7 @@ import csv
 
 class Parser:
 
-    def __init__(self, model):
+    def __init__(self):
         
         ### Spacy models not required
         # print("Loading model..")
@@ -35,8 +35,12 @@ class Parser:
         # TODO: Create the logic according to various speaking styles
         '''List of types of operations'''
         CREATE = ["create"]
-        INSERT = ["modify","set","test"]
+        INSERT = ["modify","set","test","if"]
 
+        '''List of keywords'''
+        KEYWORDS = ["variable","expression"]
+
+        
         if tokens[0] in CREATE:
             command_type = "create"
         elif tokens[0] in INSERT:
@@ -55,15 +59,8 @@ class Parser:
         self.filtered_sentence = [w for w in tokens if not w in stop_words]
         # print(self.filtered_sentence)
         
-
-        # TODO: Identify the position of 'variable' and find the variable for Multiple variables
-        if "variable" in self.filtered_sentence:
-            var_index = self.filtered_sentence.index("variable")+1
-            # print("var index = ",var_index)
         
-        current_variable = self.filtered_sentence[var_index]
         command = []
-
 
         if command_type == 'create':
             if self.filtered_sentence[1] == "variable":
@@ -84,23 +81,32 @@ class Parser:
 
         elif command_type == 'insert':
             
-            if self.filtered_sentence[0] == "set":
-                
-                '''Create the command list'''
-                for i,token in enumerate(self.filtered_sentence):
-                    if i < var_index:
-                        command.append(token)
-                
-                d = dict()
-                d["sticker_type"] = "variable"
-                d["sticker_value"] = current_variable
-                # print(command_type,command,d)
-                return command_type,command,d
+            '''Check if the query contains any keyword'''
+            if not any(w in self.filtered_sentence for w in KEYWORDS):
+                '''The given query has no keyword'''
+                return command_type, self.filtered_sentence, None
             
-            elif self.filtered_sentence[0] == "test":
-                #TODO: Find a way to return "test", then accept the expression(condition)
-                #  and then get back to the test card for ifTrue and ifFales value
-                pass
+            else:
+
+                # TODO: Identify the position of 'variable' and find the variable for Multiple variables
+                if "variable" in self.filtered_sentence:
+                    var_index = self.filtered_sentence.index("variable")+1
+                    
+                    if var_index >= len(self.filtered_sentence):
+                        return command_type, self.filtered_sentence, None
+                    
+                    current_variable = self.filtered_sentence[var_index]
+                    
+                    '''Create the command list'''
+                    for i,token in enumerate(self.filtered_sentence):
+                        if i < var_index:
+                            command.append(token)
+                    
+                    d = dict()
+                    d["sticker_type"] = "variable"
+                    d["sticker_value"] = current_variable
+                    # print(command_type,command,d)
+                    return command_type,command,d
 
         elif command_type == 'delete':
             pass

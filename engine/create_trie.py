@@ -11,13 +11,13 @@ import csv
 
 t = Trie()
 
-with open("trie.json","r") as f:
+with open("trie_disk.json","r") as f:
     importer = JsonImporter()
     csv_dict = [row for row in csv.DictReader(f)]
     if len(csv_dict) == 0:
         root = Node("*")
     else:
-        root = t.get_tree('trie.json')
+        root = t.get_tree('trie_disk.json')
 
 print(RenderTree(root))
 
