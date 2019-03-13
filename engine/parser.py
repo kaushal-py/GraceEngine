@@ -22,6 +22,7 @@ class Parser:
         # self.nlp = spacy.load('en_core_web_sm')
         # self.doc= None
         # print("Model loaded")
+        pass
 
     def parse(self,sentence):
         
