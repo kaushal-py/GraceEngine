@@ -3,7 +3,7 @@
         {
             "card_id":"variable_setter",
             "card_number":1,
-            "card_type":[],
+            "card_type":[true,true, false, false, false, true, 0],
             "card_color":"color_normal",
             "display":[
                 {
@@ -23,29 +23,27 @@
             "internal_dependants":[
 
             ],
-            "external_depetendants":[
-                {
-                    "card_id":"expression",
-                    "card_number":2,
-                    "card_type":[],
-                    "card_color":"color_logic",
-                    "display":[
-                        {
-                            "val_type":"sticker",
-                            "sticker_name":"number",
-                            "sticker_value":1
-                        }
-                    ]
-                }
-            ],
+            "external_dependant":{
+                "card_id":"expression",
+                "card_number":2,
+                "card_type":[false, false, true, false, false, false, 0],
+                "card_color":"color_logic",
+                "display":[
+                    {
+                        "val_type":"sticker",
+                        "sticker_name":"number",
+                        "sticker_value":1
+                    }
+                ]
+            },
             "children":[
 
             ]
         },
         {
             "card_number":3,
-            "card_id":"test_condition",
-            "card_type":[],
+            "card_id":"test_statement",
+            "card_type":[true, true, false, false, false, true, 0],
             "card_color":"color_logic",
             "display":[
                 {
@@ -56,11 +54,10 @@
             "internal_dependants":[
 
             ],
-            "external_depetendants":[
-                {
+            "external_dependant":{
                     "card_number":4,
                     "card_id":"relational_condition",
-                    "card_type":[],
+                    "card_type":[false, false, true, false, false, false, 2],
                     "card_color":"color_logic",
                     "display":[
                         {
@@ -79,7 +76,7 @@
                         {
                             "card_number":5,
                             "card_id":"expression",
-                            "card_type":[],
+                            "card_type":[false, false, true, false, false, false, 0],
                             "card_color":"color_logic",
                             "display":[
                                 {
@@ -91,9 +88,9 @@
                             "internal_dependants":[
 
                             ],
-                            "external_dependants":[
+                            "external_dependant":{
 
-                            ],
+                            },
                             "children":[
 
                             ]
@@ -101,7 +98,7 @@
                         {
                             "card_number":6,
                             "card_id":"expression",
-                            "card_type":[],
+                            "card_type":[false, false, true, false, false, false, 0],
                             "card_color":"color_logic",
                             "display":[
                                 {
@@ -113,32 +110,31 @@
                             "internal_dependants":[
 
                             ],
-                            "external_dependants":[
+                            "external_dependant":{
 
-                            ],
+                            },
                             "children":[
 
                             ]
                         }
                     ],
-                    "external_depetendants":[
-                        
-                    ],
+                    "external_dependant":{
+
+                    },
                     "children":[
                         
                     ]
-                }
-            ],
+                },
             "children":[
                 {
                     "card_number":7,
                     "card_id":"print",
-                    "card_type":[],
+                    "card_type":[true, true, false, false, false, false, 0],
                     "card_color":"color_normal",
                     "display":[
                         {
                             "val_type":"text",
-                            "text":"print",
+                            "text":"print"
                         },
                         {
                             "val_type":"sticker",
@@ -149,9 +145,9 @@
                     "internal_dependants":[
 
                     ],
-                    "external_dependants":[
+                    "external_dependant":{
 
-                    ],
+                    },
                     "children":[
 
                     ]
@@ -159,7 +155,7 @@
                 {
                     "card_number":8,
                     "card_id":"variable_setter",
-                    "card_type":[],
+                    "card_type":[true,true, false, false, false, true, 0],
                     "card_color":"color_normal",
                     "display":[
                         {
@@ -179,40 +175,38 @@
                     "internal_dependants":[
 
                     ],
-                    "external_dependants":[
-                        {
-                            "card_number":9,
-                            "card_id":"expression",
-                            "card_type":[],
-                            "card_color":"color_logic",
-                            "display":[
-                                {
-                                    "val_type":"sticker",
-                                    "sticker_name":"variable",
-                                    "sticker_value":"count"
-                                },
-                                {
-                                    "val_type":"sticker",
-                                    "sticker_name":"operator",
-                                    "sticker_value":"+"
-                                },
-                                {
-                                    "val_type":"sticker",
-                                    "sticker_name":"number",
-                                    "sticker_value":1
-                                }
-                            ],
-                            "internal_dependants":[
-                                
-                            ],
-                            "external_dependants":[
-                                
-                            ],
-                            "children":[
+                    "external_dependant":{
+                        "card_number":9,
+                        "card_id":"expression",
+                        "card_type":[false, false, true, false, false, false, 0],
+                        "card_color":"color_logic",
+                        "display":[
+                            {
+                                "val_type":"sticker",
+                                "sticker_name":"variable",
+                                "sticker_value":"count"
+                            },
+                            {
+                                "val_type":"sticker",
+                                "sticker_name":"operator",
+                                "sticker_value":"+"
+                            },
+                            {
+                                "val_type":"sticker",
+                                "sticker_name":"number",
+                                "sticker_value":1
+                            }
+                        ],
+                        "internal_dependants":[
+                            
+                        ],
+                        "external_dependant":{
+                            
+                        },
+                        "children":[
 
                             ]
-                        }
-                    ],
+                    },
                     "children":[
 
                     ]
