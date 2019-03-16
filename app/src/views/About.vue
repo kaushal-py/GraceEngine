@@ -14,13 +14,49 @@
     </div>
    </div>
    </div>
+
+   <div class="program">
+     <Card 
+      :card-number="cardNumber"
+      :card-type="cardType"
+      :display="display"></Card>
+   </div>
   </div>
 </template>
 
 <script>
+import Card from '@/components/Card.vue';
 
 export default {
-  
-}
+  name: 'about',
+  components:{
+    Card,
+  },
+
+  data: function(){
+
+    return{
+      cardId:"variable_setter",
+      cardNumber:1,
+      cardType:[true,true, false, false, false, true, 0],
+      cardColor:"color_normal",
+      display:[
+          {
+              val_type:"text",
+              text:"set"
+          },
+          {
+              val_type:"sticker",
+              sticker_name:"variable",
+              sticker_value:"count"
+          },
+          {
+              val_type:"text",
+              text:"to"
+          }
+      ]
+    }
+  },
+};
 </script>
 
