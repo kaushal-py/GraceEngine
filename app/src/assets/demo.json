@@ -52,7 +52,7 @@
                     "card_number":4,
                     "card_id":"relational_condition",
                     "card_type":[false, false, true, false, false, false, 2],
-                    "card_color":"color_logic",
+                    "card_color":"color_condition",
                     "display":[
                         {
                             "val_type":"internal_dependant",
@@ -60,7 +60,7 @@
                                 "card_number":5,
                                 "card_id":"expression",
                                 "card_type":[false, false, true, false, false, false, 0],
-                                "card_color":"color_logic",
+                                "card_color":"color_internal",
                                 "display":[
                                     {
                                         "val_type":"sticker",
@@ -87,7 +87,7 @@
                                 "card_number":6,
                                 "card_id":"expression",
                                 "card_type":[false, false, true, false, false, false, 0],
-                                "card_color":"color_logic",
+                                "card_color":"color_internal",
                                 "display":[
                                     {
                                         "val_type":"sticker",

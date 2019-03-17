@@ -7,13 +7,15 @@
             <CardView 
                 :card-number="card.card_number"
                 :card-type="card.card_type"
-                :display="card.display">
+                :display="card.display"
+                :color="card.card_color">
             </CardView>
 
             <CardView 
                 :card-number="card.external_dependant.card_number"
                 :card-type="card.external_dependant.card_type"
-                :display="card.external_dependant.display">
+                :display="card.external_dependant.display"
+                :color="card.external_dependant.card_color">
             </CardView>
         </div>
 

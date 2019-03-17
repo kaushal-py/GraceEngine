@@ -6,9 +6,9 @@
         {rp:cardType[3]},
         {lh:cardType[4]},
         {rh:cardType[5]},
+        color,
         ]">
             <span class="card-number">{{ cardNumber }}</span>
-
             <span v-for="element in display" :key="element">
                 <span v-if="element.val_type === 'text'">
                     {{ element.text }} &nbsp;
@@ -23,7 +23,8 @@
                     <CardView 
                         :card-number="element.dependant.card_number"
                         :card-type="element.dependant.card_type"
-                        :display="element.dependant.display">
+                        :display="element.dependant.display"
+                        :color="element.dependant.card_color">
                     </CardView>
                 </span>
             </span>
@@ -43,6 +44,7 @@ export default {
         cardNumber: Number,
         cardType: Array,
         display: Array,
+        color: String,
     },
 }
 </script>
@@ -55,14 +57,32 @@ export default {
     $color4 : #272838;
     $color5 : #F9F8F8;
 
-    .ge-card{
+    $color_logic : darkblue;
+    $color_condition :yellow;
+
+    .color_normal{
         background-color: $color1;
+    }
+
+    .color_condition{
+        background-color: $color1;
+    }
+    .color_logic{
+        background-color: $color1;
+    }
+
+    .color_internal{
+        background-color: $color4;
+    }
+
+    .ge-card{
         display: inline-block;
         color: $color5;
         padding: 5px 5px;
         border-radius: 5px 5px 5px 0px;
         position: relative;
-       height: 100%;
+        height: 100%;
+        margin-right: 5px;
     }
 
     .tt{
@@ -102,9 +122,9 @@ export default {
     margin-top: -10px;
     }
 
-    .lp{
-        margin-left: 3px;
-    }
+    // .lp{
+    //     margin-left: 3px;
+    // }
 
     .lp:before {
     right: 100%;
