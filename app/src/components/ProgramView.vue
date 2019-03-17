@@ -2,7 +2,8 @@
     
     <div>
         <div v-for="card in program" :key="card">
-
+    
+        <div>
             <CardView 
                 :card-number="card.card_number"
                 :card-type="card.card_type"
@@ -14,6 +15,7 @@
                 :card-type="card.external_dependant.card_type"
                 :display="card.external_dependant.display">
             </CardView>
+        </div>
 
             <div class="indented">
             <ProgramView

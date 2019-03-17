@@ -1,5 +1,4 @@
 <template>
-    <span>
         <div :class="['ge-card', 'has-text-weight-bold', 
         {tt:cardType[0]},
         {bt:cardType[1]},
@@ -20,19 +19,25 @@
                         {{ element.sticker_value }}
                     </span>
                 </div>
+                <span v-if="element.val_type === 'internal_dependant'">
+                    <CardView 
+                        :card-number="element.dependant.card_number"
+                        :card-type="element.dependant.card_type"
+                        :display="element.dependant.display">
+                    </CardView>
+                </span>
             </span>
 
         </div>
-    </span>
 </template>
 
 <script>
 export default {
     name: 'CardView',
     mounted() {
-        let recaptchaScript = document.createElement('script')
-        recaptchaScript.setAttribute('src', 'https://use.fontawesome.com/releases/v5.3.1/js/all.js')
-        document.head.appendChild(recaptchaScript)
+        let recaptchaScript = document.createElement('script');
+        recaptchaScript.setAttribute('src', 'https://use.fontawesome.com/releases/v5.3.1/js/all.js');
+        document.head.appendChild(recaptchaScript);
     },
     props: {
         cardNumber: Number,
@@ -54,10 +59,10 @@ export default {
         background-color: $color1;
         display: inline-block;
         color: $color5;
-        padding: 10px 10px;
+        padding: 5px 5px;
         border-radius: 5px 5px 5px 0px;
         position: relative;
-        min-height: 55px;
+       height: 100%;
     }
 
     .tt{
@@ -136,7 +141,7 @@ export default {
     background-color: $color3;
     color: $color4;
     padding: 5px;
-    margin-right: 5px;
+    margin-right: 7px;
     border-radius: 5px;
     }
 
