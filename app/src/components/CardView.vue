@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <span>
         <div :class="['ge-card', 'has-text-weight-bold', 
         {tt:cardType[0]},
         {bt:cardType[1]},
@@ -12,7 +12,7 @@
 
             <span v-for="element in display" :key="element">
                 <span v-if="element.val_type === 'text'">
-                    {{ element.text }}
+                    {{ element.text }} &nbsp;
                 </span>
                 <div class="sticker" v-else-if="element.val_type === 'sticker'">
                     {{ element.sticker_name }} &nbsp;<i class="fas fa-equals"></i>
@@ -23,12 +23,12 @@
             </span>
 
         </div>
-    </div>
+    </span>
 </template>
 
 <script>
 export default {
-    name: 'Card',
+    name: 'CardView',
     mounted() {
         let recaptchaScript = document.createElement('script')
         recaptchaScript.setAttribute('src', 'https://use.fontawesome.com/releases/v5.3.1/js/all.js')
@@ -57,6 +57,7 @@ export default {
         padding: 10px 10px;
         border-radius: 5px 5px 5px 0px;
         position: relative;
+        min-height: 55px;
     }
 
     .tt{
@@ -64,13 +65,6 @@ export default {
     }
     .bt{
     border-bottom: 5px outset #555;
-    }
-
-    .indented{
-    /* display: inline-block; */
-    padding-left: 10px;
-    border-left: 70px solid $color1;
-    /* border-bottom: 5px outset #555; */
     }
 
     .rp:after{
@@ -101,6 +95,10 @@ export default {
     border-right-color: white;
     border-width: 10px;
     margin-top: -10px;
+    }
+
+    .lp{
+        margin-left: 3px;
     }
 
     .lp:before {
@@ -138,7 +136,7 @@ export default {
     background-color: $color3;
     color: $color4;
     padding: 5px;
-    margin: 2px;
+    margin-right: 5px;
     border-radius: 5px;
     }
 
