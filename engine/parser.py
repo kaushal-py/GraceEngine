@@ -46,7 +46,7 @@ class Parser:
         elif tokens[0] in INSERT:
             command_type = "insert"
         else:
-            command_type = "expression"
+            command_type = "unknown"
             return command_type,tokens,None
 
         '''Remove Stopwords'''

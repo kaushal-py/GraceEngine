@@ -8,6 +8,7 @@ class Sticker():
             Variable
             Number
             Conditional operator
+            # TODO: add this
 
         Sticker has set of defined types(variable,value,etc.) from which 1 can be selected
         TODO: write this comment well also explain sticker_value

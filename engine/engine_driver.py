@@ -33,7 +33,7 @@ class Driver:
             code = t.traverseTree(self.root,command,len(command),0)
 
             if code == "variable_setter":
-                v = VariableSetter(d["sticker_value"])
+                v = VariableSetter(d["sticker_value"],0)
                 print(v.generate_code())
         else:
             print("Command:", command)
