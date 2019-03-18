@@ -70,6 +70,9 @@ class Parser:
                 with open("variable_bucket.csv","w+") as var_bucket:
                     var_bucket_writer = csv.writer(var_bucket, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                     var_bucket_writer.writerow([self.filtered_sentence[2]])
+                
+                var_index = self.filtered_sentence.index("variable")+1
+                current_variable = self.filtered_sentence[var_index]
 
             '''
                 Return the command and variable
