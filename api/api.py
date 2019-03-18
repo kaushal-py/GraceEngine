@@ -1,3 +1,4 @@
+import json
 from flask import Flask
 from flask_restful import Resource, Api
 
@@ -6,7 +7,10 @@ api = Api(app)
 
 class HelloWorld(Resource):
     def get(self):
-        return {'hello': 'world'}
+        with open('demos/demo.json', 'r') as fp:
+            data = json.load(fp)
+        # print(data)
+        return data
 
 api.add_resource(HelloWorld, '/')
 
