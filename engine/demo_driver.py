@@ -18,7 +18,7 @@ class Driver:
         #     self.root = Node("*")
         # else:
         #     self.root = self.get_tree(tree_name)
-        tree_name = 'trie_disk.json'
+        tree_name = 'engine/trie_disk.json'
         self.root = self.get_tree(tree_name)
         
 
