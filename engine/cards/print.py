@@ -2,12 +2,14 @@ from card import Card
 from sticker import Sticker
 
 class Print(Card):
-    def __init__(self, print_data:Sticker, card_number:int):
+    def __init__(self, print_data:tuple, card_number:int):
         card_id = "print"
         card_type = [True, True, False, False, False, False, 0]
         super(Print,self).__init__(card_id, card_type, card_number)
 
-        self.print_data = print_data
+        (sticker_type,sticker_value) = print_data
+        self.print_data = Sticker(sticker_type,sticker_value)
+        self.code = ""
 
     def generate_card(self):
         self.card_dict["card_id"] = self.card_id
@@ -28,14 +30,22 @@ class Print(Card):
         self.card_dict["children"] = []
 
         return self.card_dict
+    
+    def generate_code(self):
+        self.code = "print("
+        if self.print_data.sticker_type == "variable":
+            self.code += self.print_data.sticker_value
+        else:
+            self.code += "'" + self.print_data.sticker_value + "'"
+        self.code += ")"
+
+        return self.code
 
 if __name__ == "__main__":
-    test_data = Sticker("text","Hello World!")
-    test_card = Print(test_data, 0)
-    print(test_card.print_data.sticker_value)
-    print(test_card.generate_card())
+    test_card = Print(("text","Hello World!"), 0)
+    print("Card: \n", test_card.generate_card())
+    print("Code: \n", test_card.generate_code())
 
-    test_data = Sticker("variable","count")
-    test_card = Print(test_data, 0)
-    print(test_card.print_data.sticker_value)
-    print(test_card.generate_card())
+    test_card = Print(("variable","count"), 0)
+    print("Card: \n", test_card.generate_card())
+    print("Code: \n", test_card.generate_code())
