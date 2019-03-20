@@ -3,10 +3,10 @@
      <div class="columns is-centered">
      <div id="user-sentence" class="column is-four-fifths field has-addons">
       <div class="control is-expanded">
-        <input class="input is-primary is-rounded" type="text" placeholder="Enter your natural language sentence here">
+        <input v-model="nls" class="input is-primary is-rounded" type="text" placeholder="Enter your natural language sentence here">
       </div>
       <div class="control">
-        <a class="button is-primary is-rounded">
+        <a class="button is-primary is-rounded" @click="getProgram">
           Speak
         </a>
       </div>
@@ -53,7 +53,7 @@
             <span class="panel-icon">
               <i class="fas fa-book" aria-hidden="true"></i>
             </span>
-            marks
+            {{ nls }}
           </a>
           <div class="panel-block">
             <button class="button is-link is-outlined is-fullwidth">
@@ -65,7 +65,7 @@
       <div class="column">
         <nav class="panel has-text-left">
           <p class="panel-heading">Program</p>
-          <div class="panel-block">
+          <div id="program-block" class="panel-block">
           <ProgramView
             :program="demojson.program">
           </ProgramView>
@@ -81,8 +81,10 @@
 <script>
 import ProgramView from '@/components/ProgramView.vue';
 import json from '../assets/demo.json'
+import axios from 'axios';
 
 export default {
+  
   name: 'demo',
   components:{
     ProgramView,
@@ -91,9 +93,27 @@ export default {
   data: function(){
 
     return{
-      demojson: json
+      demojson: {},
+      nls: "",
     }
   },
+
+  methods:{
+    getProgram: function(){
+      axios.get('http://localhost:5000/', {
+        params:{
+          nls: this.nls
+        }
+      }).then(
+        response => (this.demojson = response.data)
+      )
+    }
+  }
 };
 </script>
 
+<style lang="scss" scoped>
+  // #program-block{
+  //   min-height: 300px;
+  // }
+</style>
