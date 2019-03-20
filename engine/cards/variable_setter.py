@@ -13,6 +13,7 @@ class VariableSetter(Card):
         self.sticker_variable = Sticker("Variable",variable_name)
         self.expression_card = Expression()
         self.code = ""
+        self.has_expression = False
 
     def generate_card(self):
         
@@ -36,15 +37,40 @@ class VariableSetter(Card):
         }
 
         self.card_dict["display"] = [set_text, sticker_text, to_text]
-        self.card_dict["external_dependant"] = self.expression_card.generate_card()
+        if self.has_expression:
+            self.card_dict["external_dependant"] = self.expression_card.generate_card()
+        else:
+            self.card_dict["external_dependant"] = {}
         self.card_dict["children"] = []
         
         return self.card_dict
     
-    def set_expression(self, expression:list, card_number:int):
-        self.expression_card = Expression(expression, card_number)
-        self.card_dict["external_dependant"] = self.expression_card.generate_card()
+
+    def get_external_dependant(self):
+        if self.has_expression:
+            return self.expression_card
+        else:
+            return None
     
+    def set_external_dependant(self, card):
+        self.expression_card = card
+        self.card_dict["external_dependant"] = self.expression_card.generate_card()
+        self.has_expression = True
+    
+
+    def get_internal_dependant(self):
+        return None
+    
+    '''
+    DEPRECATED : Set expression method
+    A generic method is made for external dependents
+    '''
+    # def set_expression(self, expression:list, card_number:int):
+    #     self.expression_card = Expression(expression, card_number)
+    #     self.card_dict["external_dependant"] = self.expression_card.generate_card()
+    #     self.has_expression = True
+    
+
     def generate_code(self):
         self.code = self.sticker_variable.sticker_value + " ="
         if self.expression_card.generate_code():
