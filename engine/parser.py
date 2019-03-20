@@ -67,7 +67,7 @@ class Parser:
                 '''
                     Put the variables in a bucket of variables
                 '''
-                with open("variable_bucket.csv","w+") as var_bucket:
+                with open("engine/variable_bucket.csv","w+") as var_bucket:
                     var_bucket_writer = csv.writer(var_bucket, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                     var_bucket_writer.writerow([self.filtered_sentence[2]])
                 

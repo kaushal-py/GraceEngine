@@ -1,6 +1,6 @@
 from trie import Trie
 from parser import Parser
-from ExpressionParser import ExpressionParser
+from expression_parser import ExpressionParser
 from anytree import Node
 from anytree.importer import JsonImporter
 from anytree.exporter import JsonExporter

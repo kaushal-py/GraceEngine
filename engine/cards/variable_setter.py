@@ -1,6 +1,6 @@
-from card import Card
-from sticker import Sticker
-from expression import Expression
+from cards.card import Card
+from cards.sticker import Sticker
+from cards.expression import Expression
 
 class VariableSetter(Card):
 
