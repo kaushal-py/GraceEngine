@@ -16,15 +16,19 @@ api = Api(app)
 
 d = Driver()
 
-class HelloWorld(Resource):
+class InsertCard(Resource):
     def get(self):
         args = request.args
-        print(args)
-        c = d.drive(args['nls'])
-        program = {"program" : [c.generate_card()]}
-        return program
+        d.update_state(args['nls'])
+        return d.get_program()
 
-api.add_resource(HelloWorld, '/')
+class GetCode(Resource):
+    def get(self):
+        return d.get_code()
+
+
+api.add_resource(InsertCard, '/put')
+api.add_resource(GetCode, '/code')
 
 if __name__ == '__main__':
     app.run(debug=True)

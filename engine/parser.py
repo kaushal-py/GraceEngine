@@ -67,9 +67,13 @@ class Parser:
                 '''
                     Put the variables in a bucket of variables
                 '''
-                with open("engine/variable_bucket.csv","w+") as var_bucket:
-                    var_bucket_writer = csv.writer(var_bucket, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-                    var_bucket_writer.writerow([self.filtered_sentence[2]])
+                ''' 
+                Deprecated : Use of csv to store the variables.
+                The variables are now stored in the program object.
+                '''
+                # with open("engine/variable_bucket.csv","w+") as var_bucket:
+                #     var_bucket_writer = csv.writer(var_bucket, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+                #     var_bucket_writer.writerow([self.filtered_sentence[2]])
                 
                 var_index = self.filtered_sentence.index("variable")+1
                 current_variable = self.filtered_sentence[var_index]
@@ -79,7 +83,7 @@ class Parser:
             '''
             # print(self.filtered_sentence)
             command = [w for w in self.filtered_sentence if not w in stop_words and w != current_variable]
-            return command_type,command,None
+            return command_type,command,{"variable_name":current_variable}
 
 
         elif command_type == 'insert':

@@ -59,7 +59,7 @@ class VariableSetter(Card):
     
 
     def get_internal_dependant(self):
-        return None
+        return []
     
     '''
     DEPRECATED : Set expression method

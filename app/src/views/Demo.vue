@@ -67,10 +67,19 @@
           <p class="panel-heading">Program</p>
           <div id="program-block" class="panel-block">
           <ProgramView
-            :program="demojson.program">
+            :program="cardjson.program">
           </ProgramView>
           </div>
         </nav>
+
+        <nav class="panel has-text-left">
+          <p class="panel-heading">Code</p>
+          <div id="program-block" class="panel-block">
+          {{ code }}
+          </div>
+        </nav>
+
+        
       </div>
     </div>
     </div>
@@ -93,19 +102,27 @@ export default {
   data: function(){
 
     return{
-      demojson: {},
+      cardjson: {},
       nls: "",
+      code: "",
     }
   },
 
   methods:{
     getProgram: function(){
-      axios.get('http://localhost:5000/', {
+      axios.get('http://localhost:5000/put', {
         params:{
           nls: this.nls
         }
       }).then(
-        response => (this.demojson = response.data)
+        response => (this.cardjson = response.data)
+      );
+      this.getCode();
+    },
+    getCode: function(){
+      axios.get('http://localhost:5000/code', {
+      }).then(
+        response => (this.code = response.data.code)
       )
     }
   }

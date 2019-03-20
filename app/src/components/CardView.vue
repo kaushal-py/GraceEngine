@@ -70,6 +70,9 @@ export default {
     .color_logic{
         background-color: $color1;
     }
+    .color_math{
+        background-color: $color1;
+    }
 
     .color_internal{
         background-color: $color4;

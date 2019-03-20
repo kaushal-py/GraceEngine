@@ -34,3 +34,13 @@ class Card():
         ''' This is a card number which will be displayed to the user '''
         self.card_number = card_number
         self.card_dict = {}
+    
+
+    def get_internal_dependants(self):
+        return []
+    
+    def get_external_dependant(self):
+        return None
+    
+    def get_children(self):
+        return []

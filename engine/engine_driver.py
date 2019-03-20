@@ -5,10 +5,15 @@ from anytree.importer import JsonImporter
 from anytree.exporter import JsonExporter
 
 # Loacal modules
+sys.path.insert(0, '../')
 from engine.trie import Trie
 from engine.parser import Parser
 from engine.expression_parser import ExpressionParser
+
+from engine.program_store import ProgramStore
+
 from engine.cards.variable_setter import VariableSetter
+from engine.cards.expression import Expression
 
 class Driver:
 
@@ -19,54 +24,61 @@ class Driver:
             or it is created newly
         '''
         self.root = self.get_tree(tree_name)
+
+        # initialise all parsers.
+        self.p = Parser()
+        self.t = Trie()
+        self.e = ExpressionParser()
+
+        # initialise program store
+        self.store = ProgramStore()
         
 
-    def drive(self, natural_sentence:str):
+    def update_state(self, natural_sentence:str):
 
         '''
             This function receives a natural sentence 
             and inserts it to the tree and store it to the json file
         '''
 
-        # initialise all parsers.
-        p = Parser()
-        t = Trie()
-        e = ExpressionParser()
-
+        
         # dictionary for storing stickers
         d = {}
 
         # parse the natural sentence
-        command_type,command,d = p.parse(natural_sentence)
+        command_type,command,d = self.p.parse(natural_sentence)
 
 
         if command_type != "unknown" and command_type != "create":
 
             # parse through the trie
-            code = t.traverseTree(self.root,command,len(command),0)
+            code = self.t.traverseTree(self.root,command,len(command),0)
 
-            print("Sticker Type, Variable: ",d)
             if code[0] is not None:
-                #TODO: Code to create card
+
                 if code[0] == "variable_setter":
-                    c = VariableSetter(d["sticker_value"], 0)
-                    return c
+
+                    c = VariableSetter(d["sticker_value"], self.store.current_card_number)
+                    self.store.insert_card(c)
 
             elif code[1] is not None:
                 print("Suggestions: ",code[1])
-            print("----------------------------------------------------------------")
 
         elif command_type == "create":
-            print("Variable has been created")
-            print("----------------------------------------------------------------")
+            self.store.variable_list.append(d["variable_name"])
 
         else:
-            print("Command Type: ",command_type)
-            print("Command:", command)
-            exp_tuples = e.parseExpression(command)
-            print("Expression List : ",exp_tuples)
-            print("----------------------------------------------------------------")
+            exp_tuples = self.e.parseExpression(command)
+            c = Expression(exp_tuples, self.store.current_card_number)
+            self.store.insert_external_dependant(c) 
+
     
+    def get_program(self):
+        return self.store.generate_program()
+    
+    def get_code(self):
+        return self.store.generate_code()
+            
 
     def get_tree(self, file_name):
 
@@ -80,8 +92,10 @@ class Driver:
 
 if __name__ == "__main__":
     d = Driver()
-    # d.drive("Create variable temperature")
-    d.drive("Set the variable temperature to")
+    d.update_state("Create variable temperature")
+    d.update_state("Set the variable temperature to")
     # d.drive("the number 20")
     # d.drive("Set the variable temperature to")
-    # d.drive("the expression temperature plus 10")
+    d.update_state("the variable temperature plus 10")
+
+    print(d.store.generate_program())

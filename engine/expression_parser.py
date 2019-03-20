@@ -40,15 +40,15 @@ class ExpressionParser:
         if "variable" in filtered_exp:
             var_index = filtered_exp.index("variable")+1
             # TODO: Check if the variable is present in the variable bucket
-            with open("variable_bucket.csv","r") as f:
-                rows = csv.reader(f)
-                flag = 0
-                for row in rows:
-                    if filtered_exp[var_index] == row[0]:
-                        flag = 1
-                if flag == 0:
-                    print("The variable has not yet been defined")
-                    # TODO: Ask the user to create a variable
+            # with open("variable_bucket.csv","r") as f:
+            #     rows = csv.reader(f)
+            #     flag = 0
+            #     for row in rows:
+            #         if filtered_exp[var_index] == row[0]:
+            #             flag = 1
+            #     if flag == 0:
+            #         print("The variable has not yet been defined")
+            #         # TODO: Ask the user to create a variable
             expression_tuples.append(("variable",filtered_exp[var_index]))
 
         for idx,w in enumerate(filtered_exp):
