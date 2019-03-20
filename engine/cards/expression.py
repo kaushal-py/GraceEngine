@@ -4,21 +4,16 @@ from cards.sticker import Sticker
 class Expression(Card):
 
     ''' This is will be the list of variables, numbers, operators '''
-    expression = []
-    def __init__(self, expression:str="", card_number:int=0):
-        expression = expression.split()
+    def __init__(self, expression:list=[], card_number:int=0):
+        self.expression = []
         for item in expression:
-            try:
-                num = int(item)
-                sticker_num = Sticker("number",num)
-                self.expression.append(sticker_num)
-            except:
-                sticker_operator = Sticker("operator",item)
-                self.expression.append(sticker_operator)
-
+            (sticker_type, sticker_value) = item
+            sticker =Sticker(sticker_type,sticker_value)
+            self.expression.append(sticker)
         card_id = "expression"
         card_type = [False, False, True, False, False, False, 0]
         super(Expression,self).__init__(card_id, card_type, card_number)
+        self.code = ""
     
     def generate_card(self):
         self.card_dict["card_id"] = self.card_id
@@ -37,10 +32,24 @@ class Expression(Card):
         self.card_dict["children"] = []
 
         return self.card_dict
+    
+    def generate_code(self):
+        self.code = ""
+        if self.expression == []:
+            return None
+        for item in self.expression:
+            self.code += " " + item.sticker_value
+        return self.code
 
 if __name__ == "__main__":
-    test_card = Expression("5 + 4",0)
-    for item in test_card.expression:
+    test_card_1 = Expression([("variable","count"),("operator", "+"),("number", "2")],0)
+    for item in test_card_1.expression:
         print(item.sticker_type, item.sticker_value,type(item))
-    print(test_card.generate_card())
+    print(test_card_1.generate_card())
+    print(test_card_1.generate_code())
 
+    test_card_2 = Expression([("variable","apple"),("operator", "-"),("number", "2")],0)
+    for item in test_card_2.expression:
+        print(item.sticker_type, item.sticker_value,type(item))
+    print(test_card_2.generate_card())
+    print(test_card_2.generate_code())

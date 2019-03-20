@@ -1,28 +1,19 @@
 from condition import Condition
 from expression import Expression
+from sticker import Sticker
 
 class RelationalCondition(Condition):
     
-    def __init__(self, relational_condition:str, card_number:int):
+    def __init__(self, left_expression:list, relatinoal_condition:tuple, right_expression:list, card_number:int, card_number_l:int, card_number_r:int):
         
-        #  "count >  3"
-        self.left_expression = Expression()
-        self.right_expression = Expression()
+        self.left_expression = Expression(left_expression,card_number_l)
+        self.right_expression = Expression(right_expression,card_number_r)
+        (sticker_type, sticker_value) = relatinoal_condition
+        condition = Sticker(sticker_type, sticker_value)
 
-        if self.verify_condition(relational_condition):
-            card_id = "relational_condition"
-            super(RelationalCondition, self).__init__(card_id, relational_condition, card_number)
-        else:
-            return None
-    
-    def verify_condition(self, relational_condition):
-        '''
-        Check if the condition specified is a defined condition
-        '''
-        for condition in ['==','>', '>=', '<', '<=']:
-            if condition == relational_condition:
-                return True
-        return False
+        card_id = "relational_condition"
+        super(RelationalCondition, self).__init__(card_id, condition, card_number)
+        self.code = ""
 
     def generate_card(self):
         self.card_dict["card_id"] = self.card_id
@@ -31,6 +22,7 @@ class RelationalCondition(Condition):
         self.card_dict["card_color"] = "color_logic"
         left_expression = {
             "val_type":"internal_dependant",
+            "dependant" : self.left_expression.generate_card()
         }
         sticker_text = {
             "val_type": "sticker",
@@ -39,44 +31,28 @@ class RelationalCondition(Condition):
         }
         right_expression = {
             "val_type":"internal_dependant",
+            "dependant" : self.right_expression.generate_card()
         }
         self.card_dict["display"] = [left_expression, sticker_text, right_expression]
-        self.card_dict["internal_dependant"] = [, self.right_expression.generate_card()]
         self.card_dict["external_dependant"] = None
         self.card_dict["children"] = []
         
         return self.card_dict
 
-    def set_left_expression(self, expression:str, card_number:int):
-        self.left_expression = Expression(expression, card_number)
-        internal_dependant = {
-            "val_type" : "internal_dependant",
-            "dependant" : self.left_expression.generate_card()
-        }
-        self.card_dict["display"][0] = internal_dependant
-        print(self.right_expression.expression[0].sticker_value)
-
-    def set_right_expression(self, expression:str, card_number:int):
-        self.right_expression = Expression(expression, card_number)
-        internal_dependant = {
-            "val_type" : "internal_dependant",
-            "dependant" : self.right_expression.generate_card()
-        }
-        self.card_dict["display"][2] = internal_dependant
+    def generate_code(self):
+        self.code = ""
+        if self.left_expression.generate_code():
+            left_expression_string = self.left_expression.generate_code()
+        else:
+            left_expression_string = " None"
+        if self.right_expression.generate_code():
+            right_expression_string = self.right_expression.generate_code()
+        else:
+            right_expression_string = " None"
+        self.code = left_expression_string + " " + self.condition.sticker_value + right_expression_string
+        return self.code
 
 if __name__ == "__main__":
-    test_card = RelationalCondition('==', 0)
-    test_card.generate_card()
-
-    test_card.set_left_expression("1", 1)
-    test_card.set_right_expression("+ 2", 2)
-    print(test_card.left_expression, test_card.right_expression)
-    for item in test_card.left_expression.expression:
-        print(item.sticker_value, end=' ')
-    print(test_card.condition.sticker_value, end=' ')
-    for item in test_card.right_expression.expression:
-        print(item.sticker_value, end=' ')
-    print()
+    test_card = RelationalCondition([("number", "3"),("operator", "+"),("number", "3")],("condition",">"), [("number", "5"),("operator", "-"),("number", "2")], 0, 1, 2)
     print(test_card.generate_card())
-
-    #TODO: some error idk what, how
+    print(test_card.generate_code())

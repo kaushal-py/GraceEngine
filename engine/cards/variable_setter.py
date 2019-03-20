@@ -12,6 +12,7 @@ class VariableSetter(Card):
         
         self.sticker_variable = Sticker("Variable",variable_name)
         self.expression_card = Expression()
+        self.code = ""
 
     def generate_card(self):
         
@@ -40,17 +41,23 @@ class VariableSetter(Card):
         
         return self.card_dict
     
-    def set_expression(self, expression:str, card_number):
+    def set_expression(self, expression:list, card_number:int):
         self.expression_card = Expression(expression, card_number)
         self.card_dict["external_dependant"] = self.expression_card.generate_card()
+    
+    def generate_code(self):
+        self.code = self.sticker_variable.sticker_value + " ="
+        if self.expression_card.generate_code():
+            self.code += self.expression_card.generate_code()
+        else:
+            self.code += " None"
+        return self.code
 
 
 if __name__ == "__main__":
     test_card = VariableSetter("count", 0)
-    print(test_card.generate_card())
-    test_card.set_expression("5 + 4", 1)
-    print(test_card.sticker_variable.sticker_value, end=' = ')
-    for item in test_card.expression_card.expression:
-        print(item.sticker_value, end = ' ')
-    print()
-    print(test_card.generate_card())
+    print("Card: \n", test_card.generate_card())
+    print("Code: \n", test_card.generate_code())
+    test_card.set_expression([("variable","count"),("operator", "+"),("number", "1")], 1)
+    print("Card: \n", test_card.generate_card())
+    print("Code: \n", test_card.generate_code())
