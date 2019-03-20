@@ -1,6 +1,6 @@
-from cards.card import Card
-from cards.sticker import Sticker
-from cards.expression import Expression
+from engine.cards.card import Card
+from engine.cards.sticker import Sticker
+from engine.cards.expression import Expression
 
 class VariableSetter(Card):
 
@@ -28,7 +28,7 @@ class VariableSetter(Card):
         sticker_text = {
             "val_type": "sticker",
             "sticker_name": "variable",
-            "sticker_value": self.sticker_variable.sticker_type
+            "sticker_value": self.sticker_variable.sticker_value
         }
         to_text = {
             "val_type": "text",
