@@ -1,15 +1,18 @@
-from trie import Trie
-from parser import Parser
-from expression_parser import ExpressionParser
-from cards.variable_setter import VariableSetter
+import sys
 
 from anytree import Node
 from anytree.importer import JsonImporter
 from anytree.exporter import JsonExporter
 
+# Loacal modules
+from engine.trie import Trie
+from engine.parser import Parser
+from engine.expression_parser import ExpressionParser
+from engine.cards.variable_setter import VariableSetter
+
 class Driver:
 
-    def __init__(self, tree_name="engine/trie_disk.json"):
+    def __init__(self, tree_name="../engine/trie_disk.json"):
 
         ''' 
             Tree is either already created and imported through json 

@@ -1,5 +1,5 @@
-from cards.card import Card
-from cards.sticker import Sticker
+from engine.cards.card import Card
+from engine.cards.sticker import Sticker
 
 class Expression(Card):
 
