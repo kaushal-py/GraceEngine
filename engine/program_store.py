@@ -24,6 +24,10 @@ class ProgramStore:
         current_card = self.get_card_by_number(self.current_card_number-1)
         current_card.set_external_dependant(card)
         self.current_card_number += 1
+    
+    def temp_external_dependant(self, card):
+        current_card = self.get_card_by_number(self.current_card_number-1)
+        current_card.set_external_dependant(card)
 
     def get_card_by_number(self, num):
 
@@ -60,5 +64,5 @@ class ProgramStore:
 
         for card in self.card_list:
             code_dict["code"] += card.generate_code()
-        
+ 
         return code_dict

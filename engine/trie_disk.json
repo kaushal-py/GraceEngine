@@ -7,9 +7,16 @@
       "name": "set",
       "children": [
         {
-          "isLeaf": true,
-          "code": "variable_setter",
-          "name": "variable"
+          "isLeaf": false,
+          "code": null,
+          "name": "variable",
+          "children": [
+            {
+              "isLeaf": true,
+              "code": "variable_setter",
+              "name": "to"
+            }
+          ]
         }
       ]
     },

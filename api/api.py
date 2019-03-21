@@ -26,9 +26,14 @@ class GetCode(Resource):
     def get(self):
         return d.get_code()
 
+class GetVariables(Resource):
+    def get(self):
+        return {"variables": d.store.variable_list}
+
 
 api.add_resource(InsertCard, '/put')
 api.add_resource(GetCode, '/code')
+api.add_resource(GetVariables, '/variables')
 
 if __name__ == '__main__':
     app.run(debug=True)

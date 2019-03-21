@@ -106,7 +106,7 @@ class Parser:
                     
                     '''Create the command list'''
                     for i,token in enumerate(self.filtered_sentence):
-                        if i < var_index:
+                        if i != var_index:
                             command.append(token)
                     
                     d = dict()

@@ -31,30 +31,15 @@
               </span>
             </p>
           </div>
-          <a class="panel-block is-active">
-            <span class="panel-icon">
-              <i class="fas fa-book" aria-hidden="true"></i>
-            </span>
-            count
-          </a>
-          <a class="panel-block">
-            <span class="panel-icon">
-              <i class="fas fa-book" aria-hidden="true"></i>
-            </span>
-            temperature
-          </a>
-          <a class="panel-block">
-            <span class="panel-icon">
-              <i class="fas fa-book" aria-hidden="true"></i>
-            </span>
-            apple
-          </a>
-          <a class="panel-block">
-            <span class="panel-icon">
-              <i class="fas fa-book" aria-hidden="true"></i>
-            </span>
-            {{ nls }}
-          </a>
+          <div v-for="variable in variables" :key="variable">
+            <a class="panel-block">
+              <span class="panel-icon">
+                <i class="fas fa-book" aria-hidden="true"></i>
+              </span>
+              {{variable}}
+            </a>
+          </div>
+          
           <div class="panel-block">
             <button class="button is-link is-outlined is-fullwidth">
               Create new Variable
@@ -74,8 +59,8 @@
 
         <nav class="panel has-text-left">
           <p class="panel-heading">Code</p>
-          <div id="program-block" class="panel-block">
-          {{ code }}
+          <div id="program-block" class="panel-block"
+            v-html="code">
           </div>
         </nav>
 
@@ -105,6 +90,18 @@ export default {
       cardjson: {},
       nls: "",
       code: "",
+      variables: []
+    }
+  },
+
+  watch: {
+    nls: function(){
+      if( this.nls[this.nls.length -1] == ' '){
+        this.getProgram();
+      }
+    },
+    code: function(){
+      this.nls = "";
     }
   },
 
@@ -118,11 +115,19 @@ export default {
         response => (this.cardjson = response.data)
       );
       this.getCode();
+      this.getVariables();
+      console.log("Get code called");
     },
     getCode: function(){
       axios.get('http://localhost:5000/code', {
       }).then(
         response => (this.code = response.data.code)
+      )
+    },
+    getVariables: function(){
+      axios.get('http://localhost:5000/variables', {
+      }).then(
+        respose => (this.variables = respose.data.variables)
       )
     }
   }

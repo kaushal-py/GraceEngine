@@ -57,10 +57,6 @@ class VariableSetter(Card):
         self.card_dict["external_dependant"] = self.expression_card.generate_card()
         self.has_expression = True
     
-
-    def get_internal_dependant(self):
-        return []
-    
     '''
     DEPRECATED : Set expression method
     A generic method is made for external dependents
@@ -74,9 +70,9 @@ class VariableSetter(Card):
     def generate_code(self):
         self.code = self.sticker_variable.sticker_value + " ="
         if self.expression_card.generate_code():
-            self.code += self.expression_card.generate_code()
+            self.code += self.expression_card.generate_code() + "<br>"
         else:
-            self.code += " None"
+            self.code += " None<br>"
         return self.code
 
 
