@@ -21,6 +21,7 @@ class ExpressionParser:
             "plus" : "+",
             "minus" : "-",
             "into" : "*",
+            "times" : "*",
             "divided" : "/",
             "less" : "<",
             "greater" : ">",
@@ -35,28 +36,43 @@ class ExpressionParser:
         stop_words.remove("not")
         stop_words.remove("to")
         filtered_exp = [w for w in expression if not w in stop_words]
-        print(filtered_exp)
+        # print(filtered_exp)
 
-        if "variable" in filtered_exp:
-            var_index = filtered_exp.index("variable")+1
-            # TODO: Check if the variable is present in the variable bucket
-            # with open("variable_bucket.csv","r") as f:
-            #     rows = csv.reader(f)
-            #     flag = 0
-            #     for row in rows:
-            #         if filtered_exp[var_index] == row[0]:
-            #             flag = 1
-            #     if flag == 0:
-            #         print("The variable has not yet been defined")
-            #         # TODO: Ask the user to create a variable
-            expression_tuples.append(("variable",filtered_exp[var_index]))
+        if filtered_exp[-1] == "grace":
 
-        for idx,w in enumerate(filtered_exp):
-            if w in operators:
-                expression_tuples.append(("operator",operators[w]))
+            for index in range(len(filtered_exp)):
+                
+                if filtered_exp[index] == "variable":
+                    index += 1
 
-        if "number" in filtered_exp:
-            num_index = filtered_exp.index("number")+1
-            expression_tuples.append(("number",filtered_exp[num_index]))
+                    # TODO: Check if the variable is present in the variable bucket
 
-        return expression_tuples
+
+                    ## DEPRECATED : Use of CSV for storing variables
+                    # with open("variable_bucket.csv","r") as f:
+                    #     rows = csv.reader(f)
+                    #     flag = 0
+                    #     for row in rows:
+                    #         if filtered_exp[var_index] == row[0]:
+                    #             flag = 1
+                    #     if flag == 0:
+                    #         print("The variable has not yet been defined")
+                    #         # TODO: Ask the user to create a variable
+                    if index  <= len(filtered_exp):
+                        expression_tuples.append(("variable",filtered_exp[index]))
+
+
+                if filtered_exp[index] in operators:
+                    expression_tuples.append(("operator",operators[filtered_exp[index]]))
+
+                if filtered_exp[index] == "number":
+                    index += 1
+                    if index  <= len(filtered_exp):
+                        expression_tuples.append(("number",filtered_exp[index]))
+
+            print(expression_tuples)
+            return (expression_tuples, True)
+    
+        else:
+            return (None, False)
+        
