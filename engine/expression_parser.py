@@ -18,14 +18,24 @@ class ExpressionParser:
         '''A dictionary to map operators'''
         # TODO: Create a extensive dictionary of operators
         operators = {
+            "+": "+",
             "plus" : "+",
             "minus" : "-",
             "into" : "*",
             "times" : "*",
             "divided" : "/",
+        }
+
+        conditional_operators = {
             "less" : "<",
             "greater" : ">",
             "equal" : "==",
+        }
+
+        logical_operators = {
+            "and": "and",
+            "or": "or",
+            "not": "not"
         }
 
         '''Remove Stopwords'''
@@ -35,10 +45,11 @@ class ExpressionParser:
         stop_words.remove("if")
         stop_words.remove("not")
         stop_words.remove("to")
+        stop_words.remove("into")
         filtered_exp = [w for w in expression if not w in stop_words]
         # print(filtered_exp)
 
-        if filtered_exp[-1] == "grace":
+        if filtered_exp[-1] == "done":
 
             for index in range(len(filtered_exp)):
                 
@@ -61,14 +72,20 @@ class ExpressionParser:
                     if index  <= len(filtered_exp):
                         expression_tuples.append(("variable",filtered_exp[index]))
 
-
                 if filtered_exp[index] in operators:
                     expression_tuples.append(("operator",operators[filtered_exp[index]]))
-
+                
+                if filtered_exp[index] in conditional_operators:
+                    expression_tuples.append(("conditional_operator",operators[filtered_exp[index]]))
+                
+                if filtered_exp[index] in logical_operators:
+                    expression_tuples.append(("logical_operator",operators[filtered_exp[index]]))
+                
                 if filtered_exp[index] == "number":
                     index += 1
                     if index  <= len(filtered_exp):
                         expression_tuples.append(("number",filtered_exp[index]))
+
 
             print(expression_tuples)
             return (expression_tuples, True)

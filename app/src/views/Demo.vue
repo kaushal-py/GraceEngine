@@ -14,6 +14,10 @@
    </div>
    </div>
 
+    <div>
+      <SpeechText :text.sync="nls" @speechend="speechEnd"></SpeechText>
+    </div>
+
     <br>
 
     <div class="container is-fluid">
@@ -74,6 +78,7 @@
 
 <script>
 import ProgramView from '@/components/ProgramView.vue';
+import SpeechText from '@/components/SpeechText.vue';
 import json from '../assets/demo.json'
 import axios from 'axios';
 
@@ -82,6 +87,7 @@ export default {
   name: 'demo',
   components:{
     ProgramView,
+    SpeechText,
   },
 
   data: function(){
@@ -90,7 +96,8 @@ export default {
       cardjson: {},
       nls: "",
       code: "",
-      variables: []
+      variables: [],
+      sentences: null,
     }
   },
 
@@ -129,13 +136,19 @@ export default {
       }).then(
         respose => (this.variables = respose.data.variables)
       )
+    },
+    speechEnd ({sentences, text}) {
+      console.log('text', text)
+      console.log('sentences', sentences)
+      this.sentences = sentences
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-  // #program-block{
-  //   min-height: 300px;
-  // }
+  #program-block{
+    // min-height: 300px;
+    overflow-x: scroll;
+  }
 </style>
