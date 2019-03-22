@@ -1,6 +1,10 @@
-from engine.cards.card import Card
-from engine.cards.sticker import Sticker
-from engine.cards.expression import Expression
+# from engine.cards.card import Card
+# from engine.cards.sticker import Sticker
+# from engine.cards.expression import Expression
+
+from card import Card
+from sticker import Sticker
+from expression import Expression
 
 class VariableSetter(Card):
 
@@ -11,9 +15,7 @@ class VariableSetter(Card):
 
         
         self.sticker_variable = Sticker("Variable",variable_name)
-        self.expression_card = Expression()
         self.code = ""
-        self.has_expression = False
 
     def generate_card(self):
         
@@ -37,40 +39,24 @@ class VariableSetter(Card):
         }
 
         self.card_dict["display"] = [set_text, sticker_text, to_text]
-        if self.has_expression:
-            self.card_dict["external_dependant"] = self.expression_card.generate_card()
+        if bool(self.external_dependant):
+            self.card_dict["external_dependant"] = self.external_dependant.generate_card()
         else:
             self.card_dict["external_dependant"] = {}
         self.card_dict["children"] = []
         
         return self.card_dict
     
-
-    def get_external_dependant(self):
-        if self.has_expression:
-            return self.expression_card
-        else:
-            return None
-    
-    def set_external_dependant(self, card):
-        self.expression_card = card
-        self.card_dict["external_dependant"] = self.expression_card.generate_card()
+    def set_external_dependant(self, expression_card):
+        self.external_dependant = expression_card
+        self.card_dict["external_dependant"] = self.external_dependant.generate_card()
         self.has_expression = True
-    
-    '''
-    DEPRECATED : Set expression method
-    A generic method is made for external dependents
-    '''
-    # def set_expression(self, expression:list, card_number:int):
-    #     self.expression_card = Expression(expression, card_number)
-    #     self.card_dict["external_dependant"] = self.expression_card.generate_card()
-    #     self.has_expression = True
     
 
     def generate_code(self):
         self.code = self.sticker_variable.sticker_value + " ="
-        if self.expression_card.generate_code():
-            self.code += self.expression_card.generate_code() + "<br>"
+        if bool(self.external_dependant):
+            self.code += self.external_dependant.generate_code() + "<br>"
         else:
             self.code += " None<br>"
         return self.code
@@ -80,6 +66,7 @@ if __name__ == "__main__":
     test_card = VariableSetter("count", 0)
     print("Card: \n", test_card.generate_card())
     print("Code: \n", test_card.generate_code())
-    test_card.set_expression([("variable","count"),("operator", "+"),("number", "1")], 1)
+    expression_card = Expression([("variable","count"),("operator", "+"),("number", "1")],1)
+    test_card.set_external_dependant(expression_card)
     print("Card: \n", test_card.generate_card())
     print("Code: \n", test_card.generate_code())

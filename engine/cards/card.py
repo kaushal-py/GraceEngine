@@ -34,13 +34,24 @@ class Card():
         ''' This is a card number which will be displayed to the user '''
         self.card_number = card_number
         self.card_dict = {}
-    
 
-    def get_internal_dependants(self):
-        return []
+        self.external_dependant = {}
+        self.internal_dependants = []
+        self.children = []
+        self.code = ""
+
+    def generate_code(self):
+        '''
+        For testing purposes
+        Uncomment it when done testing
+        '''
+        # raise NotImplementedError
+        pass
     
-    def get_external_dependant(self):
-        return None
-    
-    def get_children(self):
-        return []
+    def generate_card(self):
+        '''
+        For testing purposes
+        Uncomment it when done testing
+        '''
+        # raise NotImplementedError
+        pass
