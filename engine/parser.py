@@ -22,7 +22,10 @@ class Parser:
         # self.nlp = spacy.load('en_core_web_sm')
         # self.doc= None
         # print("Model loaded")
-        pass
+        try:
+            nltk.data.find('tokenizers/punkt')
+        except LookupError:
+            nltk.download('punkt')
 
     def parse(self,sentence):
         
