@@ -38,10 +38,10 @@ class Parser:
         # TODO: Create the logic according to various speaking styles
         '''List of types of operations'''
         CREATE = ["create"]
-        INSERT = ["modify","set","test","if"]
+        INSERT = ["modify","set","test","if","print"]
 
         '''List of keywords'''
-        KEYWORDS = ["variable","expression"]
+        KEYWORDS = ["variable","expression","text"]
 
         
         if tokens[0] in CREATE:
@@ -66,6 +66,7 @@ class Parser:
         command = []
 
         if command_type == 'create':
+            
             if self.filtered_sentence[1] == "variable":
                 '''
                     Put the variables in a bucket of variables
@@ -91,33 +92,53 @@ class Parser:
 
         elif command_type == 'insert':
             
-            '''Check if the query contains any keyword'''
-            if not any(w in self.filtered_sentence for w in KEYWORDS):
-                '''The given query has no keyword'''
-                return command_type, self.filtered_sentence, None
+            # TODO: Identify the position of 'variable' and find the variable for Multiple variables
+            # TODO: Use KEYWORDS instead of "variable"
+            if "variable" in self.filtered_sentence:
+                var_index = self.filtered_sentence.index("variable")+1
+                
+                if var_index >= len(self.filtered_sentence):
+                    return command_type, self.filtered_sentence, None
+                
+                current_variable = self.filtered_sentence[var_index]
+                
+                '''Create the command list'''
+                for i,token in enumerate(self.filtered_sentence):
+                    if i != var_index:
+                        command.append(token)
+                
+                d = dict()
+                d["sticker_type"] = "variable"
+                d["sticker_value"] = current_variable
+
+                return command_type,command,d
+
+            if "text" in self.filtered_sentence:
+                # TODO: Fix the stopwords issue: Stopwords should'nt be removed from the text
+                
+                '''Append commands to the command list'''
+                for i,token in enumerate(self.filtered_sentence):
+                    print_index = self.filtered_sentence.index("text")
+                    if i <= print_index:
+                        command.append(token)
+
+                '''Append text to the text list'''
+                text_string = ""
+                for i,token in enumerate(self.filtered_sentence):
+                    if i > print_index:
+                        text_string += (str(token)+str(" "))
+
+                '''Create the dictionary'''
+                d = dict()
+                d["sticker_type"] = "text"
+                d["sticker_value"] = text_string
+
+                return command_type,command,d
             
             else:
+                return command_type, self.filtered_sentence, None
 
-                # TODO: Identify the position of 'variable' and find the variable for Multiple variables
-                if "variable" in self.filtered_sentence:
-                    var_index = self.filtered_sentence.index("variable")+1
-                    
-                    if var_index >= len(self.filtered_sentence):
-                        return command_type, self.filtered_sentence, None
-                    
-                    current_variable = self.filtered_sentence[var_index]
-                    
-                    '''Create the command list'''
-                    for i,token in enumerate(self.filtered_sentence):
-                        if i != var_index:
-                            command.append(token)
-                    
-                    d = dict()
-                    d["sticker_type"] = "variable"
-                    d["sticker_value"] = current_variable
-                    # print(command_type,command,d)
-                    return command_type,command,d
-
+        
         elif command_type == 'delete':
             pass
 
