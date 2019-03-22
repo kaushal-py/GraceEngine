@@ -1,3 +1,5 @@
 "set variable to","variable_setter"
-"if","test_condition"
+"if","test_statement"
 "else","else"
+"print variable","print"
+"print text","print"
