@@ -8,6 +8,11 @@ from expression import Expression
 
 class VariableSetter(Card):
 
+    '''
+    For information on card and attributes and methods, 
+    refer parent class Card in card.py
+    '''
+
     def __init__(self, variable_name:str, card_number:int):
         card_id = "variable_setter"
         card_type = [True,True, False, False, False, True, 0]

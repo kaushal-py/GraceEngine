@@ -6,7 +6,14 @@ from sticker import Sticker
 
 class Expression(Card):
 
-    ''' This is will be the list of variables, numbers, operators '''
+    '''
+    For information on card and attributes and methods, 
+    refer parent class Card in card.py
+    '''
+
+    ''' 
+    expression_list is list of tuples
+    '''
     def __init__(self, expression:list=[], card_number:int=0):
         self.expression = []
         for item in expression:

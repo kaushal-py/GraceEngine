@@ -4,11 +4,25 @@ from expression import Expression
 
 class Condition(Card):
 
+    '''
+    For information on card and attributes and methods, 
+    refer parent class Card in card.py
+    '''
+
     def __init__(self, condition_list:list, card_number:int):
         card_id = "condition"
         card_type = [False, False, True, False, False, False, 2]
         self.condition_list = condition_list
         super(Condition, self).__init__(card_id, card_type, card_number)
+        self.condition_stickers = []
+        self.set_internal_dependants()
+
+    def set_internal_dependants(self):
+        for item in self.condition_list:
+            if isinstance(item, Sticker):
+                self.condition_stickers.append(item)
+            else:
+                self.internal_dependants.append(item)
 
     def generate_card(self):
         self.card_dict["card_id"] = self.card_id

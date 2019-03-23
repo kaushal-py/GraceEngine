@@ -2,6 +2,11 @@ from card import Card
 from sticker import Sticker
 
 class Display(Card):
+
+    '''
+    For information on card and attributes and methods, 
+    refer parent class Card in card.py
+    '''
     def __init__(self, print_data:tuple, card_number:int):
         card_id = "print"
         card_type = [True, True, False, False, False, False, 0]
