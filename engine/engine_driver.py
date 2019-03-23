@@ -14,6 +14,7 @@ from engine.program_store import ProgramStore
 
 from engine.cards.variable_setter import VariableSetter
 from engine.cards.expression import Expression
+from engine.cards.print import Print
 
 
 class Driver:
@@ -65,7 +66,11 @@ class Driver:
 
                     c = VariableSetter(d["sticker_value"], self.store.current_card_number)
                     self.store.insert_card(c)
+                
+                if code[0] == "print":
 
+                    c = Print((d["sticker_type"], d["sticker_value"]), self.store.current_card_number)
+                    self.store.insert_card(c)
 
             ### Terminal but not leaf ###
             # Undecidable whether to create card or not

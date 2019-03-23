@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 587 100" width="587" height="100">
+	<style>
+		tspan { white-space:pre }
+		.txt0 { font-size: 103px;fill: #ffffff;font-family: "Product Sans";font-weight: 700;text-anchor: middle } 
+	</style>
+	<text id="GraceEngine " style="transform: matrix(1,0,0,1,293,2)" >
+		<tspan x="0" y="103" class="txt0">GraceEngine</tspan>
+	</text>
+</svg>

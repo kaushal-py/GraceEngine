@@ -1,28 +1,59 @@
-<template><div>
-   <div class="container">
-     <div class="columns is-centered">
-     <div id="user-sentence" class="column is-four-fifths field has-addons">
-      <div class="control is-expanded">
-        <input v-model="nls" class="input is-primary is-rounded" type="text" placeholder="Enter your natural language sentence here">
-      </div>
-      <div class="control">
-        <a class="button is-primary is-rounded" @click="getProgram">
-          Speak
-        </a>
-      </div>
-    </div>
-   </div>
-   </div>
+<template><div class="outer-div">
 
-    <div>
-      <SpeechText :text.sync="nls" @speechend="speechEnd"></SpeechText>
-    </div>
+  <div class="tile">
+    <div class="tile is-vertical is-9">
+      <div id="topbar" class="tile">
+        <div id="logo-div" class="tile is-2">
+            <br>
+            <h1 class="subtitle is-3">GraceEngine</h1>
+        </div>
+        
+        <div class="tile is-vertical">      
+          
+          <div class="tile">
+            <SpeechText :text.sync="nls" @speechend="speechEnd"></SpeechText>
+          </div>      
 
-    <br>
+          <div class="tile is-parent">
+            <div class="tile is-child column is-paddingless is-marginless">
+              <div class="speech-text">
+                <div class="field has-addons">
+                  <p class="control">
+                    <a class="button is-static is-rounded is-medium">
+                      Grace$>
+                    </a>
+                  </p>
+                  <p class="control is-expanded">
+                    <input class="input is-rounded is-medium" type="text" placeholder="Your sentence will appear here.">
+                  </p>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tile">
+        hello world
+      </div>
+
+    </div>
+    <div class="tile is-3"> 
+      Grace    
+    </div>
+  </div>
+
+      <!-- <div class="tile">
+        <div class="tile is-vertical">
+          hello world
+        </div>
+      </div> -->
+    <br> <br>
 
     <div class="container is-fluid">
     <div class="columns">
-      <div class="column is-one-fifth">
+      <!-- <div class="column is-one-fifth">
         <nav class="panel">
           <p class="panel-heading">
             Variables
@@ -50,7 +81,7 @@
             </button>
           </div>
         </nav>
-      </div>
+      </div> -->
       <div class="column">
         <nav class="panel has-text-left">
           <p class="panel-heading">Program</p>
@@ -67,9 +98,9 @@
             v-html="code">
           </div>
         </nav>
-
-        
       </div>
+
+
     </div>
     </div>
    
@@ -89,6 +120,11 @@ export default {
     ProgramView,
     SpeechText,
   },
+
+  // mounted:function(){
+  //   this.getProgram();
+  //   this.getCode();
+  // },
 
   data: function(){
 
@@ -141,14 +177,33 @@ export default {
       console.log('text', text)
       console.log('sentences', sentences)
       this.sentences = sentences
+    },
+    clearPad: function(){
+      this.nls = ""
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-  #program-block{
-    // min-height: 300px;
-    overflow-x: scroll;
-  }
+@import "~bulma/sass/utilities/_all";
+$panel-heading-background-color: $primary;
+$panel-heading-color: white;
+#program-block{
+  // min-height: 300px;
+  overflow-x: auto;
+}
+
+#logo-div{
+  text-align: center;
+  background-color: $light;
+}
+
+#topbar{
+  border-bottom: 1px solid gray;
+}
+
+// Import Bulma and Buefy styles
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
 </style>

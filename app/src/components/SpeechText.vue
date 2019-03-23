@@ -1,8 +1,36 @@
 <template>
-    <v-card>
+<div class="tile">
+    <div class="tile is-11">
+
+       <div class="runtime-text">{{ runtimeTranscription }}</div>
+    </div>
+
+    <div class="tile is-1">
+        <!-- <button class="button"
+          @click.stop="toggle ? endSpeechRecognition() : startSpeechRecognition()"
+          :class="[{'is-danger': toggle},
+                  {'is-primary': !toggle}]"
+        > -->
+        <v-btn
+            fab
+            dark
+            small
+            @click.stop="toggle ? endSpeechRecognition() : startSpeechRecognition()"
+            icon
+            :color="!toggle ? 'grey' : (speaking ? 'red' : 'red darken-3')"
+            :class="{'animated infinite pulse': toggle}"
+          >
+          <!-- {{toggle? 'Listening..' : 'Speak' }} -->
+          <v-icon>{{toggle ? 'mic_off' : 'mic'}}</v-icon>
+
+        </v-btn>
+    </div>
+</div>
+    <!-- <v-card>
     <v-card-text>
       <v-layout row wrap justify-space-around>
         <v-flex xs8 sm9 text-xs-center>
+        
           <p v-if="error" class="grey--text">{{error}}</p>
           <p v-else class="mb-0">
             <span v-if="sentences.length > 0" v-for="sentence in sentences">{{sentence}}. </span>
@@ -22,7 +50,7 @@
         </v-flex>
       </v-layout>
     </v-card-text>
-  </v-card>
+  </v-card> -->
 </template>
 
 <script>
@@ -61,7 +89,7 @@ export default {
       this.toggle = false
       this.$emit('speechend', {
         sentences: this.sentences,
-        text: this.sentences.join('. ')
+        text: this.sentences.join(' ')
       })
     },
     startSpeechRecognition () {
@@ -109,3 +137,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.runtime-text{
+  //  margin-top: 40px;
+   display: inline-block;
+   min-width: 100%;
+}
+</style>
