@@ -1,11 +1,16 @@
 from card import Card
 from sticker import Sticker
 
-class Print(Card):
+class Display(Card):
+
+    '''
+    For information on card and attributes and methods, 
+    refer parent class Card in card.py
+    '''
     def __init__(self, print_data:tuple, card_number:int):
         card_id = "print"
         card_type = [True, True, False, False, False, False, 0]
-        super(Print,self).__init__(card_id, card_type, card_number)
+        super(Display,self).__init__(card_id, card_type, card_number)
 
         (sticker_type,sticker_value) = print_data
         self.print_data = Sticker(sticker_type,sticker_value)
@@ -42,10 +47,10 @@ class Print(Card):
         return self.code
 
 if __name__ == "__main__":
-    test_card = Print(("text","Hello World!"), 0)
+    test_card = Display(("text","Hello World!"), 0)
     print("Card: \n", test_card.generate_card())
     print("Code: \n", test_card.generate_code())
 
-    test_card = Print(("variable","count"), 0)
+    test_card = Display(("variable","count"), 0)
     print("Card: \n", test_card.generate_card())
     print("Code: \n", test_card.generate_code())

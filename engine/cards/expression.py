@@ -1,9 +1,19 @@
-from engine.cards.card import Card
-from engine.cards.sticker import Sticker
+# from engine.cards.card import Card
+# from engine.cards.sticker import Sticker
+
+from card import Card
+from sticker import Sticker
 
 class Expression(Card):
 
-    ''' This is will be the list of variables, numbers, operators '''
+    '''
+    For information on card and attributes and methods, 
+    refer parent class Card in card.py
+    '''
+
+    ''' 
+    expression_list is list of tuples
+    '''
     def __init__(self, expression:list=[], card_number:int=0):
         self.expression = []
         for item in expression:
@@ -45,11 +55,11 @@ if __name__ == "__main__":
     test_card_1 = Expression([("variable","count"),("operator", "+"),("number", "2")],0)
     for item in test_card_1.expression:
         print(item.sticker_type, item.sticker_value,type(item))
-    print(test_card_1.generate_card())
-    print(test_card_1.generate_code())
+    print("Card: \n",test_card_1.generate_card())
+    print("Code: \n",test_card_2.generate_code())
 
     test_card_2 = Expression([("variable","apple"),("operator", "-"),("number", "2")],0)
     for item in test_card_2.expression:
         print(item.sticker_type, item.sticker_value,type(item))
-    print(test_card_2.generate_card())
-    print(test_card_2.generate_code())
+    print("Card: \n",test_card_2.generate_card())
+    print("Code: \n",test_card_2.generate_code())

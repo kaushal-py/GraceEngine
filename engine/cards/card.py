@@ -29,18 +29,46 @@ class Card():
         
         ''' This is to identify the card '''
         self.card_id = card_id
+
+        ''' Each card has a type as mentioned above'''
         self.card_type = card_type
 
-        ''' This is a card number which will be displayed to the user '''
+        ''' This is a unique card number which will be displayed to the user to access the cards'''
         self.card_number = card_number
-        self.card_dict = {}
-    
 
-    def get_internal_dependants(self):
-        return []
+        ''' This is a dictionary of card object which is to be sent to the UI as json '''
+        self.card_dict = {}
+
+        ''' A card may or may not have external dependants '''
+        self.external_dependant = {}
+
+        ''' A card may or may not have internal dependants'''
+        self.internal_dependants = []
+
+        ''' A card may or may not have children '''
+        self.children = []
+
+        ''' Each card has a valid line(s) of code which is stored in this variable '''
+        self.code = ""
+
+        '''
+        More information on card and its attributes can be found in the documention at TODO : idhar documentation ka link ayega
+        '''
+
+    ''' 
+    Each card has a generate_code() method 
+    which generates the code for that card 
+    and stores it the code variable of that card 
+    '''
+    def generate_code(self):
+        # Every card type has to implement this method
+        raise NotImplementedError
     
-    def get_external_dependant(self):
-        return None
-    
-    def get_children(self):
-        return []
+    '''
+    Each card has a generate_card() method 
+    which generates the dictionary to be sent to UI for that card 
+    and stores it the card_dict variable of that card 
+    '''
+    def generate_card(self):
+        # Every card type has to implement this method
+        raise NotImplementedError

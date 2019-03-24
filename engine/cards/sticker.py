@@ -5,14 +5,20 @@ class Sticker():
         
         '''
         Sticker Types:
-            Variable
-            Number
-            Conditional operator
+            variable
+            number
+            conditional_operator
+            operator
             # TODO: add this
-
-        Sticker has set of defined types(variable,value,etc.) from which 1 can be selected
-        TODO: write this comment well also explain sticker_value
+        
+        Sticker has above set of defined types
         '''
-
         self.sticker_type = sticker_type
+
+        '''
+        Sticker value is the original value to be stored
+        eg.
+            if sticker_type is operator the sticker_value is the actual operator ('+' or '-' or '*' or '/')
+            if sticker_type is variable then sticker_value is "variable name" (NOTE: not variable value)
+        '''
         self.sticker_value = sticker_value
