@@ -72,3 +72,7 @@ class Card():
     def generate_card(self):
         # Every card type has to implement this method
         raise NotImplementedError
+    
+    def add_child(self, card):
+        # if this method is not found in inherited classes, then this is used as the default implementation
+        self.children.append(card)

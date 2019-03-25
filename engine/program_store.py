@@ -1,27 +1,31 @@
 '''
 A module that maintains the state of the program. 
 '''
+from engine.cards.card import Card
 
 class ProgramStore: 
 
     def __init__(self):
 
         self.variable_list = []
-        self.card_list = []
 
         self.current_card_number = 1
-    
+        self.root = Card("parent", [None], 0)
+        self.current_parent_card = self.root
 
     def insert_card(self, card):
         
         self.current_card_number += 1
-        self.card_list.append(card)
+        self.current_parent_card.add_child(card)
         
     def insert_card_externally(self):
         self.current_card_number += 1
 
+
     def insert_external_dependant(self, card, card_parent=None):
         
+        # This parent is different from parent child.
+        # Here parent means neighbour of external dependant class
         if card_parent:
             current_card = card_parent
         else:
@@ -33,10 +37,14 @@ class ProgramStore:
     def temp_external_dependant(self, card):
         current_card = self.get_card_by_number(self.current_card_number-1)
         current_card.set_external_dependant(card)
+    
+
+    def set_parent(self, card):
+        self.current_parent_card = card
 
     def get_card_by_number(self, num):
 
-        for card in self.card_list:
+        for card in self.root.children:
             
             if card.card_number == num:
                 return card
@@ -57,7 +65,7 @@ class ProgramStore:
         
         program_dict = {"program": []}
 
-        for card in self.card_list:
+        for card in self.root.children:
             program_dict["program"].append(card.generate_card())
         
         return program_dict
@@ -67,7 +75,7 @@ class ProgramStore:
 
         code_dict = {"code": ""}
 
-        for card in self.card_list:
+        for card in self.root.children:
             code_dict["code"] += card.generate_code()
  
         return code_dict

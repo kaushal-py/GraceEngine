@@ -77,6 +77,8 @@ class Driver:
                 if code[0] == "test_statement":
                     c = TestStatement(self.store.current_card_number)
                     self.store.insert_card(c)
+                    # change current parent
+                    self.store.set_parent(c)
 
             ### Terminal but not leaf ###
             # Undecidable whether to create card or not
