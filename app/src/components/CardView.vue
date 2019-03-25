@@ -24,7 +24,7 @@
                         :card-number="element.dependant.card_number"
                         :card-type="element.dependant.card_type"
                         :display="element.dependant.display"
-                        :color="element.dependant.card_color">
+                        color="color_internal">
                     </CardView>
                 </span>
             </span>
@@ -79,14 +79,13 @@ export default {
     }
 
     .ge-card{
-        // display: inline-block;
+        display: inline-block;
         color: $color5;
         padding: 5px 5px;
         border-radius: 5px 5px 5px 0px;
         position: relative;
         height: 100%;
         margin-right: 5px;
-        float: left;
     }
 
     .tt{

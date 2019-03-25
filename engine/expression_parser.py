@@ -14,6 +14,7 @@ class ExpressionParser:
         
         '''Create the list of tuples'''
         expression_tuples = []
+        expression_tuples.append([])
 
         '''A dictionary to map operators'''
         # TODO: Create a extensive dictionary of operators
@@ -29,7 +30,7 @@ class ExpressionParser:
         conditional_operators = {
             "less" : "<",
             "greater" : ">",
-            "equal" : "==",
+            "equals" : "==",
         }
 
         logical_operators = {
@@ -70,21 +71,23 @@ class ExpressionParser:
                     #         print("The variable has not yet been defined")
                     #         # TODO: Ask the user to create a variable
                     if index  <= len(filtered_exp):
-                        expression_tuples.append(("variable",filtered_exp[index]))
+                        expression_tuples[-1].append(("variable",filtered_exp[index]))
 
                 if filtered_exp[index] in operators:
-                    expression_tuples.append(("operator",operators[filtered_exp[index]]))
+                    expression_tuples[-1].append(("operator",operators[filtered_exp[index]]))
                 
                 if filtered_exp[index] in conditional_operators:
-                    expression_tuples.append(("conditional_operator",operators[filtered_exp[index]]))
+                    expression_tuples.append(("conditional_operator",conditional_operators[filtered_exp[index]]))
+                    expression_tuples.append([])
                 
                 if filtered_exp[index] in logical_operators:
-                    expression_tuples.append(("logical_operator",operators[filtered_exp[index]]))
+                    # TODO: Nothing done for logical expressions
+                    expression_tuples.append(("logical_operator",logical_operators[filtered_exp[index]]))
                 
                 if filtered_exp[index] == "number":
                     index += 1
                     if index  <= len(filtered_exp):
-                        expression_tuples.append(("number",filtered_exp[index]))
+                        expression_tuples[-1].append(("number",filtered_exp[index]))
 
 
             print(expression_tuples)

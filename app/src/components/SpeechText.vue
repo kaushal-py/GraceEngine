@@ -2,7 +2,7 @@
 <div class="tile">
     <div class="tile is-11">
 
-       <div class="runtime-text">{{ runtimeTranscription }}</div>
+       <p class="runtime-text is-size-4">{{ runtimeTranscription }}</p>
     </div>
 
     <div class="tile is-1">
@@ -78,7 +78,7 @@ export default {
       sentences: []
     }
   },
-  methods: {
+   methods: {
     checkCompatibility () {
       if (!recognition) {
         this.error = 'Speech Recognition is not available on this browser. Please use Chrome or Firefox'
@@ -140,8 +140,9 @@ export default {
 
 <style lang="scss" scoped>
 .runtime-text{
-  //  margin-top: 40px;
-   display: inline-block;
-   min-width: 100%;
+  // padding-top: 20px;
+  padding-left: 20px;
+  display: inline-block;
+  min-width: 100%;
 }
 </style>

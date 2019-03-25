@@ -22,7 +22,7 @@
     },
     {
       "isLeaf": true,
-      "code": "test_condition",
+      "code": "test_statement",
       "name": "if"
     },
     {
@@ -41,9 +41,16 @@
           "name": "variable"
         },
         {
-          "isLeaf": true,
-          "code": "print",
-          "name": "text"
+          "isLeaf": false,
+          "code": null,
+          "name": "text",
+          "children": [
+            {
+              "isLeaf": true,
+              "code": "print",
+              "name": "done"
+            }
+          ]
         }
       ]
     }

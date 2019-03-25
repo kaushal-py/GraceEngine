@@ -12,9 +12,12 @@ from engine.expression_parser import ExpressionParser
 
 from engine.program_store import ProgramStore
 
+from engine.cards.sticker import Sticker
 from engine.cards.variable_setter import VariableSetter
 from engine.cards.expression import Expression
-from engine.cards.print import Print
+from engine.cards.display import Display
+from engine.cards.test_statement import TestStatement
+from engine.cards.condition import Condition
 
 
 class Driver:
@@ -68,8 +71,11 @@ class Driver:
                     self.store.insert_card(c)
                 
                 if code[0] == "print":
-
-                    c = Print((d["sticker_type"], d["sticker_value"]), self.store.current_card_number)
+                    c = Display((d["sticker_type"], d["sticker_value"]), self.store.current_card_number)
+                    self.store.insert_card(c)
+                
+                if code[0] == "test_statement":
+                    c = TestStatement(self.store.current_card_number)
                     self.store.insert_card(c)
 
             ### Terminal but not leaf ###
@@ -92,10 +98,28 @@ class Driver:
         else:
             (exp_tuples, isComplete) = self.e.parseExpression(command)
             if isComplete:
-                c = Expression(exp_tuples, self.store.current_card_number)
-                self.store.insert_external_dependant(c)
+                
+                print(self.store.current_card_number)
+                parent_card = self.store.get_card_by_number(self.store.current_card_number-1)
+                print(parent_card.card_id)
 
-    
+                if len(exp_tuples) == 1:
+                    c = Expression(exp_tuples, self.store.current_card_number)
+                
+                elif len(exp_tuples) == 3:
+
+                    e1 = Expression(exp_tuples, self.store.current_card_number, 0)
+                    self.store.insert_card_externally()
+
+                    s = Sticker(exp_tuples[1][0], exp_tuples[1][1])
+
+                    e2 = Expression(exp_tuples, self.store.current_card_number, 2)
+                    self.store.insert_card_externally()
+
+                    c = Condition([e1, s, e2], self.store.current_card_number)
+
+                self.store.insert_external_dependant(c, parent_card)
+
 
     def get_program(self):
         return self.store.generate_program()

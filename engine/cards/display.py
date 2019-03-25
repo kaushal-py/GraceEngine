@@ -1,5 +1,8 @@
-from card import Card
-from sticker import Sticker
+from engine.cards.card import Card
+from engine.cards.sticker import Sticker
+
+# from card import Card
+# from sticker import Sticker
 
 class Display(Card):
 
@@ -31,7 +34,7 @@ class Display(Card):
             "sticker_value": self.print_data.sticker_value
         }
         self.card_dict["display"] = [print_text, sticker_text]
-        self.card_dict["external_dependant"] = None
+        self.card_dict["external_dependant"] = {}
         self.card_dict["children"] = []
 
         return self.card_dict
@@ -41,8 +44,8 @@ class Display(Card):
         if self.print_data.sticker_type == "variable":
             self.code += self.print_data.sticker_value
         else:
-            self.code += "'" + self.print_data.sticker_value + "'"
-        self.code += ")"
+            self.code += '"' + self.print_data.sticker_value + '"'
+        self.code += ")<br>"
 
         return self.code
 

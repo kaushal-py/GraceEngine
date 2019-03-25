@@ -1,8 +1,8 @@
-# from engine.cards.card import Card
-# from engine.cards.sticker import Sticker
+from engine.cards.card import Card
+from engine.cards.sticker import Sticker
 
-from card import Card
-from sticker import Sticker
+# from card import Card
+# from sticker import Sticker
 
 class Expression(Card):
 
@@ -13,10 +13,11 @@ class Expression(Card):
 
     ''' 
     expression_list is list of tuples
+    loc is position of the expression in the expression tuple
     '''
-    def __init__(self, expression:list=[], card_number:int=0):
+    def __init__(self, expression, card_number:int=0, loc:int=0):
         self.expression = []
-        for item in expression:
+        for item in expression[loc]:
             (sticker_type, sticker_value) = item
             sticker =Sticker(sticker_type,sticker_value)
             self.expression.append(sticker)

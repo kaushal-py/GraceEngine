@@ -1,8 +1,15 @@
-from card import Card
-from condition import Condition
-from expression import Expression
-from sticker import Sticker
-from display import Display
+from engine.cards.card import Card
+from engine.cards.condition import Condition
+from engine.cards.expression import Expression
+from engine.cards.sticker import Sticker
+from engine.cards.display import Display
+
+# from card import Card
+# from condition import Condition
+# from expression import Expression
+# from sticker import Sticker
+# from display import Display
+
 class TestStatement(Card):
 
     '''
@@ -57,8 +64,8 @@ if __name__ == "__main__":
     print("Card: \n",test_card.generate_card())
     print("Code: \n",test_card.generate_code())
 
-    test_card_ex1 = Expression([("variable","count"),("operator", "+"),("number", "2")],1)
-    test_card_ex2 = Expression([("variable","apple"),("operator", "-"),("number", "2")],2)
+    test_card_ex1 = Expression([[("variable","count"),("operator", "+"),("number", "2")]],1)
+    test_card_ex2 = Expression([[("variable","apple"),("operator", "-"),("number", "2")]],2)
     test_sticker = Sticker("conditional_operator","==")
     cond_list = [test_card_ex1,test_sticker,test_card_ex2]
     test_card_cond = Condition(cond_list,3)

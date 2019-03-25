@@ -10,14 +10,14 @@ from trie import Trie
 import csv
 
 t = Trie()
-# root = Node("*")
-with open("trie_disk.json","r") as f:
-    importer = JsonImporter()
-    csv_dict = [row for row in csv.DictReader(f)]
-    if len(csv_dict) == 0:
-        root = Node("*")
-    else:
-        root = t.get_tree('trie_disk.json')
+root = Node("*")
+# with open("trie_disk.json","r") as f:
+#     importer = JsonImporter()
+#     csv_dict = [row for row in csv.DictReader(f)]
+#     if len(csv_dict) == 0:
+#         root = Node("*")
+#     else:
+#         root = t.get_tree('trie_disk.json')
 
 print(RenderTree(root))
 

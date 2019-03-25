@@ -1,10 +1,10 @@
-# from engine.cards.card import Card
-# from engine.cards.sticker import Sticker
-# from engine.cards.expression import Expression
+from engine.cards.card import Card
+from engine.cards.sticker import Sticker
+from engine.cards.expression import Expression
 
-from card import Card
-from sticker import Sticker
-from expression import Expression
+# from card import Card
+# from sticker import Sticker
+# from expression import Expression
 
 class VariableSetter(Card):
 

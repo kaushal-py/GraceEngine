@@ -40,7 +40,7 @@ class Card():
         self.card_dict = {}
 
         ''' A card may or may not have external dependants '''
-        self.external_dependant = {}
+        self.external_dependant = None
 
         ''' A card may or may not have internal dependants'''
         self.internal_dependants = []
