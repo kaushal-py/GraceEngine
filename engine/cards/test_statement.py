@@ -19,7 +19,7 @@ class TestStatement(Card):
 
     def __init__(self, card_number:int):
         card_id = "test_statement"
-        card_type = [True, True, False, False, False, True, 0]
+        card_type = [True, False, False, False, False, True, 0]
         super(TestStatement,self).__init__(card_id,card_type,card_number)
     
     def generate_card(self):
