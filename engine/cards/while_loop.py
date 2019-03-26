@@ -1,8 +1,14 @@
-from card import Card
-from expression import Expression
-from display import Display
-from sticker import Sticker
-from condition import Condition
+from engine.cards.card import Card
+from engine.cards.expression import Expression
+from engine.cards.display import Display
+from engine.cards.sticker import Sticker
+from engine.cards.condition import Condition
+
+# from card import Card
+# from expression import Expression
+# from display import Display
+# from sticker import Sticker
+# from condition import Condition
 
 class WhileLoop(Card):
     
@@ -13,7 +19,7 @@ class WhileLoop(Card):
 
     def __init__(self, card_number:int):
         card_id = "while_loop"
-        card_type = [] # TODO : complete this
+        card_type = [True, False, False, False, False, True, 0]
 
         super(WhileLoop,self).__init__(card_id, card_type, card_number)
 

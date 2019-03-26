@@ -13,6 +13,10 @@ class ProgramStore:
         self.root = Card("parent", [None], 0)
         self.current_parent_card = self.root
 
+        #Parent stack, to go up levels
+        self.parent_stack = [self.root]
+
+
     def insert_card(self, card):
         
         self.current_card_number += 1

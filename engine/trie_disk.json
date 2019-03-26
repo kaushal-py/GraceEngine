@@ -41,16 +41,21 @@
           "name": "variable"
         },
         {
-          "isLeaf": false,
-          "code": null,
-          "name": "text",
-          "children": [
-            {
-              "isLeaf": true,
-              "code": "print",
-              "name": "done"
-            }
-          ]
+          "isLeaf": true,
+          "code": "print",
+          "name": "text"
+        }
+      ]
+    },
+    {
+      "isLeaf": false,
+      "code": null,
+      "name": "repeat",
+      "children": [
+        {
+          "isLeaf": true,
+          "code": "while_loop",
+          "name": "while"
         }
       ]
     }

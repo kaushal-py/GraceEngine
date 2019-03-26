@@ -18,6 +18,7 @@ from engine.cards.expression import Expression
 from engine.cards.display import Display
 from engine.cards.test_statement import TestStatement
 from engine.cards.condition import Condition
+from engine.cards.while_loop import WhileLoop
 
 
 class Driver:
@@ -37,7 +38,6 @@ class Driver:
 
         # initialise program store
         self.store = ProgramStore()
-        
 
 
     def update_state(self, natural_sentence:str):
@@ -79,6 +79,13 @@ class Driver:
                     self.store.insert_card(c)
                     # change current parent
                     self.store.set_parent(c)
+                
+                if code[0] == "while_loop":
+                    c = WhileLoop(self.store.current_card_number)
+                    self.store.insert_card(c)
+                    self.store.set_parent(c)
+
+
 
             ### Terminal but not leaf ###
             # Undecidable whether to create card or not

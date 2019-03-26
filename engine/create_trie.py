@@ -2,7 +2,6 @@
     This File is used to insert all the commands in trie_commands.csv into trie.json
 '''
 
-
 from anytree import Node, RenderTree, AsciiStyle
 from anytree.exporter import JsonExporter
 from anytree.importer import JsonImporter
@@ -11,6 +10,10 @@ import csv
 
 t = Trie()
 root = Node("*")
+
+## DEPRECATED: Updating the trie
+#Always rebuild the trie, instead of updating it.
+
 # with open("trie_disk.json","r") as f:
 #     importer = JsonImporter()
 #     csv_dict = [row for row in csv.DictReader(f)]

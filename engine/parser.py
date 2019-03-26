@@ -38,7 +38,7 @@ class Parser:
         # TODO: Create the logic according to various speaking styles
         '''List of types of operations'''
         CREATE = ["create"]
-        INSERT = ["modify","set","test","if","print"]
+        INSERT = ["modify","set","test","if","print","repeat"]
 
         '''List of keywords'''
         KEYWORDS = ["variable","expression","text"]
@@ -59,6 +59,7 @@ class Parser:
         stop_words.remove("if")
         stop_words.remove("not")
         stop_words.remove("to")
+        stop_words.remove("while")
         self.filtered_sentence = [w for w in tokens if not w in stop_words]
         # print(self.filtered_sentence)
         

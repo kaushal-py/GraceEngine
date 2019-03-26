@@ -78,6 +78,10 @@ export default {
         background-color: $color4;
     }
 
+    .color_loop{
+        background-color: $color1;
+    }
+
     .ge-card{
         display: inline-block;
         color: $color5;

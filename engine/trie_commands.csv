@@ -2,4 +2,5 @@
 "if","test_statement"
 "else","else"
 "print variable","print"
-"print text done","print"
+"print text","print"
+"repeat while","while_loop"
