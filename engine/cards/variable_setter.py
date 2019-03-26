@@ -61,9 +61,9 @@ class VariableSetter(Card):
     def generate_code(self):
         self.code = self.sticker_variable.sticker_value + " ="
         if bool(self.external_dependant):
-            self.code += self.external_dependant.generate_code() + "<br>"
+            self.code += self.external_dependant.generate_code() + "\n"
         else:
-            self.code += " None<br>"
+            self.code += " None\n"
         return self.code
 
 

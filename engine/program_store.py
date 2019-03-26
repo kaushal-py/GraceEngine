@@ -1,6 +1,9 @@
 '''
 A module that maintains the state of the program. 
 '''
+import sys
+from io import StringIO
+
 from engine.cards.card import Card
 
 class ProgramStore: 
@@ -83,3 +86,34 @@ class ProgramStore:
             code_dict["code"] += card.generate_code()
  
         return code_dict
+    
+
+    def generate_output(self):
+
+        code_string = self.generate_code()["code"]
+
+        # create file-like string to capture output
+        codeOut = StringIO()
+        codeErr = StringIO()
+
+        # capture output and errors
+        sys.stdout = codeOut
+        sys.stderr = codeErr
+
+        exec(code_string)
+
+        # restore stdout and stderr
+        sys.stdout = sys.__stdout__
+        sys.stderr = sys.__stderr__
+
+        s_error = codeErr.getvalue()
+        s_out = codeOut.getvalue()
+
+        output_string = s_out + '\n' + s_error
+
+        codeOut.close()
+        codeErr.close()
+
+        output_dict = {"output" : output_string}
+
+        return output_dict

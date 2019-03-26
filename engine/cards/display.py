@@ -45,7 +45,7 @@ class Display(Card):
             self.code += self.print_data.sticker_value
         else:
             self.code += '"' + self.print_data.sticker_value + '"'
-        self.code += ")<br>"
+        self.code += ")\n"
 
         return self.code
 

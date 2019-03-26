@@ -43,11 +43,11 @@ class TestStatement(Card):
 
     def generate_code(self):
         if bool(self.external_dependant):
-            self.code = "if" + self.external_dependant.generate_code() + ":<br>"
+            self.code = "if" + self.external_dependant.generate_code() + ":\n"
         else:
-            self.code = "if True:<br>"
+            self.code = "if True:\n"
         for child in self.children:
-            self.code += "&nbsp&nbsp" + child.generate_code()
+            self.code += "  " + child.generate_code()
         return self.code
     
     def set_external_dependant(self, condition:Condition):

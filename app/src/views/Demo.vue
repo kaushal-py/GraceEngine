@@ -48,8 +48,35 @@
               </nav>
 
               <nav class="panel has-text-left">
-                <p class="panel-heading">Code</p>
-                <div class="panel-block program-block" v-html="code"></div>
+                <div class="panel-heading">
+                  <div class="tile">
+                    <div class="tile">
+                      Code and Output               
+                    </div>
+                    <div class="tile">
+                      <div class="buttons is-right">
+                        <button @click="getOutput" class="button is-warning">
+                          Play &nbsp;<i class="fas fa-play"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div> 
+                </div>
+                <div class="panel-block program-block">
+                  <div class="tile">
+                    <div class="tile">
+                      <pre>
+{{ code }}
+                      </pre>
+                    </div>
+                    <div class="tile">
+                      <pre>
+{{ output }}
+                      </pre>
+                    </div>
+                  </div>
+                 
+                </div>
               </nav>
             </div>
           </div>
@@ -87,10 +114,13 @@ export default {
     SpeechText
   },
 
-  // mounted:function(){
-  //   this.getProgram();
-  //   this.getCode();
-  // },
+  mounted:function(){
+    let recaptchaScript = document.createElement('script');
+    recaptchaScript.setAttribute('src', 'https://use.fontawesome.com/releases/v5.3.1/js/all.js');
+    document.head.appendChild(recaptchaScript);
+    this.getCards();
+    this.getCode();
+  },
 
   data: function() {
     return {
@@ -98,14 +128,15 @@ export default {
       nls: "",
       code: "",
       variables: [],
-      sentences: null
+      sentences: null,
+      output: "",
     };
   },
 
   watch: {
     nls: function() {
       if (this.nls[this.nls.length - 1] == " ") {
-        this.getProgram();
+        this.insertCard();
       }
     },
     code: function() {
@@ -114,7 +145,7 @@ export default {
   },
 
   methods: {
-    getProgram: function() {
+    insertCard: function() {
       axios
         .get("http://localhost:5000/put", {
           params: {
@@ -126,10 +157,20 @@ export default {
       this.getVariables();
       console.log("Get code called");
     },
+    getCards: function() {
+      axios
+        .get("http://localhost:5000/get", {})
+        .then(response => (this.cardjson = response.data));
+    },
     getCode: function() {
       axios
         .get("http://localhost:5000/code", {})
         .then(response => (this.code = response.data.code));
+    },
+    getOutput: function() {
+      axios
+        .get("http://localhost:5000/output", {})
+        .then(response => (this.output = response.data.output));
     },
     getVariables: function() {
       axios

@@ -22,6 +22,10 @@ class InsertCard(Resource):
         d.update_state(args['nls'])
         return d.get_program()
 
+class GetCards(Resource):
+    def get(self):
+        return d.get_program()
+
 class GetCode(Resource):
     def get(self):
         return d.get_code()
@@ -30,10 +34,16 @@ class GetVariables(Resource):
     def get(self):
         return {"variables": d.store.variable_list}
 
+class GetOutput(Resource):
+    def get(self):
+        return d.store.generate_output()
+
 
 api.add_resource(InsertCard, '/put')
+api.add_resource(GetCards, '/get')
 api.add_resource(GetCode, '/code')
 api.add_resource(GetVariables, '/variables')
+api.add_resource(GetOutput, '/output')
 
 if __name__ == '__main__':
     app.run(debug=True)
