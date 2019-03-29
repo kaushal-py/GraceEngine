@@ -82,9 +82,25 @@
           </div>
         </div>
       </div>
+
       <div class="tile is-3">
         <div class="container">
+            <br><br>
           <div class="box grace-box">
+              <!-- Output the suggestions -->
+              <div v-if="suggestions.length>0" class="has-text-weight-semibold">
+                  Suggestions
+                  <hr>
+              </div>
+              <div v-for="suggestion in suggestions">
+                  <p>{{ suggestion }}</p>
+              </div>
+
+                <div v-if="suggestions.length==0">
+                    Hello There!<br> I am Grace Hopper and I am here to help you.
+                    I will be helping you with suggestions and any other issues you have.
+                    Start by saying "print".
+                </div>
             <img id="grace-hopper" src="../assets/hopper.png" alt="Grace Hopper">
           </div>
         </div>
@@ -131,6 +147,7 @@ export default {
       sentences: null,
       output: "",
       updated: false,
+      suggestions: []
     };
   },
 
@@ -161,6 +178,7 @@ export default {
       this.getCode();
       this.getVariables();
       this.getUpdates();
+      this.getSuggestions();
       console.log("Get code called");
     },
     getCards: function() {
@@ -187,6 +205,15 @@ export default {
       axios
         .get("http://localhost:5000/updates", {})
         .then(respose => (this.updated = respose.data.updated));
+    },
+    getSuggestions: function() {
+        axios
+        .get("http://localhost:5000/suggest", {
+            params: {
+            nls: this.nls
+          }
+        })
+        .then(respose => (this.suggestions = respose.data.suggestions));
     },
     speechEnd({ sentences, text }) {
       console.log("text", text);
