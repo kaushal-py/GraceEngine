@@ -55,9 +55,13 @@ class WhileLoop(Card):
         self.external_dependant = condition
         self.card_dict["external_dependant"] = self.external_dependant.generate_card()   
     
-    def add_child(self, child):
-        self.children.append(child)
-        self.card_dict["children"].append(child.generate_card())
+    def add_child(self, child, position):
+        if position is None:
+            self.children.append(child)
+            self.card_dict["children"].append(child.generate_card())
+        else:
+            self.children.insert(position, child)
+            self.card_dict["children"].insert(position, child.generate_card())
 
 if __name__ == "__main__":
     test_card = WhileLoop(0)

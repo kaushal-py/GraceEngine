@@ -90,6 +90,7 @@ export default {
         position: relative;
         height: 100%;
         margin-right: 5px;
+        white-space: normal;
     }
 
     .tt{

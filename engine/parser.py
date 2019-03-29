@@ -39,6 +39,7 @@ class Parser:
         '''List of types of operations'''
         CREATE = ["create"]
         INSERT = ["modify","set","test","if","print","repeat"]
+        NAVIGATE = ["end", "go"]
 
         '''List of keywords'''
         KEYWORDS = ["variable","expression","text"]
@@ -48,6 +49,8 @@ class Parser:
             command_type = "create"
         elif tokens[0] in INSERT:
             command_type = "insert"
+        elif tokens[0] in NAVIGATE:
+            command_type = "navigate"
         else:
             command_type = "unknown"
             return command_type,tokens,None
@@ -145,7 +148,25 @@ class Parser:
 
 
         elif command_type == 'navigate':
-            pass
+            
+            d = {}
+
+            if self.filtered_sentence[0] == "end":
+                command = "POP_PARENT"
+
+            
+            elif self.filtered_sentence[0] == "go":
+
+                for index in range(len(self.filtered_sentence)):
+                    if self.filtered_sentence[index] == "number":
+                        index+=1
+                        if index < len(self.filtered_sentence):
+                            command = "GOTO"
+                            num = int(self.filtered_sentence[index])
+                            d = {"card_number": num}
+                            break
+            
+            return command_type, command, d
 
 
         else:

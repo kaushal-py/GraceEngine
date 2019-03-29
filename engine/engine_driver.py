@@ -39,6 +39,8 @@ class Driver:
         # initialise program store
         self.store = ProgramStore()
 
+        self.updated = False
+
 
     def update_state(self, natural_sentence:str):
         '''
@@ -52,7 +54,7 @@ class Driver:
         command_type,command,d = self.p.parse(natural_sentence)
 
 
-        if command_type != "unknown" and command_type != "create":
+        if command_type == "insert":
 
             # parse through the trie
             code = self.t.traverseTree(self.root,command,len(command),0)
@@ -67,24 +69,29 @@ class Driver:
 
                 if code[0] == "variable_setter":
 
-                    c = VariableSetter(d["sticker_value"], self.store.current_card_number)
-                    self.store.insert_card(c)
+                    c = VariableSetter(d["sticker_value"], self.store.new_card_number)
+                    self.store.insert_card(c, self.store.current_position)
+                    self.store.current_position, _ = self.store.goto_card_by_number(c.card_number)
                 
                 if code[0] == "print":
-                    c = Display((d["sticker_type"], d["sticker_value"]), self.store.current_card_number)
-                    self.store.insert_card(c)
+                    c = Display((d["sticker_type"], d["sticker_value"]), self.store.new_card_number)
+                    self.store.insert_card(c, self.store.current_position)
+                    self.store.current_position,_ = self.store.goto_card_by_number(c.card_number)
                 
                 if code[0] == "test_statement":
-                    c = TestStatement(self.store.current_card_number)
-                    self.store.insert_card(c)
+                    c = TestStatement(self.store.new_card_number)
+                    # print(c.card_number)
+                    self.store.insert_card(c, self.store.current_position)
+                    self.store.current_position, _  = self.store.goto_card_by_number(c.card_number)
                     # change current parent
-                    self.store.set_parent(c)
+                    self.store.push_parent(c)
                 
                 if code[0] == "while_loop":
-                    c = WhileLoop(self.store.current_card_number)
-                    self.store.insert_card(c)
-                    self.store.set_parent(c)
-
+                    c = WhileLoop(self.store.new_card_number)
+                    self.store.insert_card(c, self.store.current_position)
+                    self.store.current_position,_ = self.store.goto_card_by_number(c.card_number)
+                    # change current parent
+                    self.store.push_parent(c)
 
 
             ### Terminal but not leaf ###
@@ -103,37 +110,47 @@ class Driver:
 
         elif command_type == "create":
             self.store.variable_list.append(d["variable_name"])
+        
 
+        elif command_type == "navigate":
+
+            if command == "POP_PARENT":
+                self.store.pop_parent()
+
+                self.updated = True
+            
+            elif command == "GOTO":
+                self.store.current_position,_ = self.store.goto_card_by_number(d["card_number"])
+                print("GOTO Executed")
+                self.updated = True
         else:
             (exp_tuples, isComplete) = self.e.parseExpression(command)
             if isComplete:
                 
-                print(self.store.current_card_number)
-                parent_card = self.store.get_card_by_number(self.store.current_card_number-1)
+                print(self.store.new_card_number)
+                parent_card = self.store.get_card_by_number(self.store.new_card_number-1)
                 print(parent_card.card_id)
 
                 if len(exp_tuples) == 1:
-                    c = Expression(exp_tuples, self.store.current_card_number)
+                    c = Expression(exp_tuples, self.store.new_card_number)
                 
                 elif len(exp_tuples) == 3:
 
-                    e1 = Expression(exp_tuples, self.store.current_card_number, 0)
+                    e1 = Expression(exp_tuples, self.store.new_card_number, 0)
                     self.store.insert_card_externally()
 
                     s = Sticker(exp_tuples[1][0], exp_tuples[1][1])
 
-                    e2 = Expression(exp_tuples, self.store.current_card_number, 2)
+                    e2 = Expression(exp_tuples, self.store.new_card_number, 2)
                     self.store.insert_card_externally()
 
-                    c = Condition([e1, s, e2], self.store.current_card_number)
+                    c = Condition([e1, s, e2], self.store.new_card_number)
 
                 self.store.insert_external_dependant(c, parent_card)
 
 
     def get_program(self):
         return self.store.generate_program()
-    
-
 
 
     def get_code(self):

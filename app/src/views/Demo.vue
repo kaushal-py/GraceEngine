@@ -130,6 +130,7 @@ export default {
       variables: [],
       sentences: null,
       output: "",
+      updated: false,
     };
   },
 
@@ -141,6 +142,10 @@ export default {
     },
     code: function() {
       this.nls = "";
+    },
+    updated: function(){
+      this.nls = "";
+      this.updated = false;
     }
   },
 
@@ -155,6 +160,7 @@ export default {
         .then(response => (this.cardjson = response.data));
       this.getCode();
       this.getVariables();
+      this.getUpdates();
       console.log("Get code called");
     },
     getCards: function() {
@@ -177,6 +183,11 @@ export default {
         .get("http://localhost:5000/variables", {})
         .then(respose => (this.variables = respose.data.variables));
     },
+    getUpdates: function() {
+      axios
+        .get("http://localhost:5000/updates", {})
+        .then(respose => (this.updated = respose.data.updated));
+    },
     speechEnd({ sentences, text }) {
       console.log("text", text);
       console.log("sentences", sentences);
@@ -195,6 +206,7 @@ $panel-heading-background-color: $primary;
 $panel-heading-color: white;
 .program-block {
   // min-height: 300px;
+  white-space: nowrap;
   overflow-x: auto;
 }
 

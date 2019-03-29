@@ -73,6 +73,9 @@ class Card():
         # Every card type has to implement this method
         raise NotImplementedError
     
-    def add_child(self, card):
+    def add_child(self, card, position):
         # if this method is not found in inherited classes, then this is used as the default implementation
-        self.children.append(card)
+        if position is None:
+            self.children.append(card)
+        else:
+            self.children.insert(position, card)

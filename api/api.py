@@ -16,7 +16,7 @@ api = Api(app)
 
 d = Driver()
 
-class InsertCard(Resource):
+class UpdateState(Resource):
     def get(self):
         args = request.args
         d.update_state(args['nls'])
@@ -30,6 +30,14 @@ class GetCode(Resource):
     def get(self):
         return d.get_code()
 
+class GetUpdates(Resource):
+    def get(self):
+        if d.updated:
+            d.updated = False
+            return {"updated": True}
+        else:
+            return {"updated": False}
+
 class GetVariables(Resource):
     def get(self):
         return {"variables": d.store.variable_list}
@@ -39,11 +47,12 @@ class GetOutput(Resource):
         return d.store.generate_output()
 
 
-api.add_resource(InsertCard, '/put')
+api.add_resource(UpdateState, '/put')
 api.add_resource(GetCards, '/get')
 api.add_resource(GetCode, '/code')
 api.add_resource(GetVariables, '/variables')
 api.add_resource(GetOutput, '/output')
+api.add_resource(GetUpdates, '/updates')
 
 if __name__ == '__main__':
     app.run(debug=True)

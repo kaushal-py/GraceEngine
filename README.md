@@ -52,9 +52,9 @@ To setup the development environment, follow these steps.
 
 3. To test the engine on a web server, run the following command after the dependencies are installed.
 
-`gunicorn --pythonpath app app:app --worker-class eventlet -w 1`
+`gunicorn --pythonpath api api:app -b localhost:5000`
 
-This will open a local server at [127.0.0.1:8000].
+This will open a local server at [127.0.0.1:5000].
 
 #### Footnotes
 
