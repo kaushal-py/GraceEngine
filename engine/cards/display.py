@@ -39,7 +39,7 @@ class Display(Card):
 
         return self.card_dict
     
-    def generate_code(self):
+    def generate_code(self, nesting_level = 0):
         self.code = "print("
         if self.print_data.sticker_type == "variable":
             self.code += self.print_data.sticker_value

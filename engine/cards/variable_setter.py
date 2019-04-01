@@ -58,7 +58,7 @@ class VariableSetter(Card):
         self.has_expression = True
     
 
-    def generate_code(self):
+    def generate_code(self, nesting_level = 0):
         self.code = self.sticker_variable.sticker_value + " ="
         if bool(self.external_dependant):
             self.code += self.external_dependant.generate_code() + "\n"

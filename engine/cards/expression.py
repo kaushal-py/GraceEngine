@@ -44,7 +44,7 @@ class Expression(Card):
 
         return self.card_dict
     
-    def generate_code(self):
+    def generate_code(self, nesting_level = 0):
         self.code = ""
         if self.expression == []:
             return None
@@ -53,13 +53,13 @@ class Expression(Card):
         return self.code
 
 if __name__ == "__main__":
-    test_card_1 = Expression([("variable","count"),("operator", "+"),("number", "2")],0)
+    test_card_1 = Expression([[("variable","count"),("operator", "+"),("number", "2")]],0,0)
     for item in test_card_1.expression:
         print(item.sticker_type, item.sticker_value,type(item))
     print("Card: \n",test_card_1.generate_card())
     print("Code: \n",test_card_2.generate_code())
 
-    test_card_2 = Expression([("variable","apple"),("operator", "-"),("number", "2")],0)
+    test_card_2 = Expression([[("variable","apple"),("operator", "-"),("number", "2")]],0,0)
     for item in test_card_2.expression:
         print(item.sticker_type, item.sticker_value,type(item))
     print("Card: \n",test_card_2.generate_card())

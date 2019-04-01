@@ -54,7 +54,7 @@ class Condition(Card):
 
         return self.card_dict
 
-    def generate_code(self):
+    def generate_code(self, nesting_level = 0):
         self.code = ""
         for item in self.condition_list:
             if isinstance(item, Sticker):
@@ -65,10 +65,13 @@ class Condition(Card):
         return self.code
 
 if __name__ == "__main__":
-    test_card_ex1 = Expression([("variable","count"),("operator", "+"),("number", "2")],1)
-    test_card_ex2 = Expression([("variable","apple"),("operator", "-"),("number", "2")],2)
-    test_sticker = Sticker("conditional_operator","==")
-    cond_list = [test_card_ex1,test_sticker,test_card_ex2]
+    test_card_ex1 = Expression([[("variable","count"),("operator", "+"),("number", "2")],[("conditional_operator","==")],[("variable","apple"),("operator", "-"),("number", "2")],[("logical_operator","and")],[("variable","count"),("operator", "+"),("number", "2")],[("conditional_operator","==")],[("variable","apple"),("operator", "-"),("number", "2")]],1,0)
+    test_card_ex2 = Expression([[("variable","count"),("operator", "+"),("number", "2")],[("conditional_operator","==")],[("variable","apple"),("operator", "-"),("number", "2")],[("logical_operator","and")],[("variable","count"),("operator", "+"),("number", "2")],[("conditional_operator","==")],[("variable","apple"),("operator", "-"),("number", "2")]],2,2)
+    test_sticker1 = Sticker("conditional_operator","==")
+    test_sticker2 = Sticker("conditional_operator","and")
+    cond_list = [test_card_ex1,test_sticker1,test_card_ex2, test_sticker2,test_card_ex1,test_sticker1,test_card_ex2]
     test_card = Condition(cond_list,3)
     print(test_card.generate_card())
     print(test_card.generate_code())
+
+    # [[("variable","count"),("operator", "+"),("number", "2")],[("conditional_operator","==")],[("variable","apple"),("operator", "-"),("number", "2")],[("logical_operator","and")],[("variable","count"),("operator", "+"),("number", "2")],[("conditional_operator","==")],[("variable","apple"),("operator", "-"),("number", "2")]]

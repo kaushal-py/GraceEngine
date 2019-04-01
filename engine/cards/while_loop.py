@@ -42,13 +42,15 @@ class WhileLoop(Card):
 
         return self.card_dict
     
-    def generate_code(self):
+    def generate_code(self, nesting_level = 0):
+        nesting_level += 1
         if bool(self.external_dependant):
             self.code = "while" + self.external_dependant.generate_code() + ":\n"
         else:
             self.code = "while True:\n"
         for child in self.children:
-            self.code += "  " + child.generate_code()
+            self.code += "    " * nesting_level 
+            self.code += child.generate_code(nesting_level)
         return self.code
 
     def set_external_dependant(self, condition):

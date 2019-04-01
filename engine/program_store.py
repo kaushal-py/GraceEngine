@@ -23,6 +23,7 @@ class ProgramStore:
 
     def insert_card(self, card, position=None):
         
+        print("Current position: ", self.current_position)
         self.new_card_number += 1
         self.current_parent_card.add_child(card, position)
         
@@ -57,10 +58,9 @@ class ProgramStore:
             self.parent_stack.pop()
             self.current_parent_card = self.parent_stack[-1]
 
-    def get_card_by_number(self, num):
-
-        for card in self.root.children:
-            
+    def get_card_by_number(self, num, card_root):
+        for card in card_root.children:
+            print("Get card debug",card.card_number, card.card_id)
             if card.card_number == num:
                 return card
             elif card.external_dependant is not None and card.external_dependant.card_number == num:
@@ -68,33 +68,30 @@ class ProgramStore:
             for dep_card in card.internal_dependants:
                 if dep_card.card_number == num:
                     return dep_card
-            
-            for dep_card in card.children:
-                if dep_card.card_number == num:
-                    return dep_card
-    
-
-    def goto_card_by_number(self, num):
-
-        self.parent_stack = [self.root]
-
-        for k, card in enumerate(self.root.children):
-            
-            if card.card_number == num:
-                return k+1, card
-            elif card.external_dependant is not None and card.external_dependant.card_number == num:
-                return k+1, card
-
-            for dep_card in card.internal_dependants:
-                if dep_card.card_number == num:
-                    return dep_card
-            
-            self.push_parent(card)
-            for i, dep_card in enumerate(card.children):
-                if dep_card.card_number == num:
-                    return i+1, dep_card
-            self.pop_parent()
+            if len(card.children) != 0:
+                return self.get_card_by_number(num,card)
         
+        return None
+    
+    def goto_card_by_number(self, num, card_root):
+
+        self.push_parent(card_root)
+
+        for k, card in enumerate(card_root.children):
+            
+            if card.card_number == num:
+                return k+1, card
+            elif card.external_dependant is not None and card.external_dependant.card_number == num:
+                self.push_parent(card)
+                return k+1, card
+
+            for dep_card in card.internal_dependants:
+                if dep_card.card_number == num:
+                    return dep_card
+            if len(card.children) != 0:
+                return self.goto_card_by_number(num, card)
+        
+        self.pop_parent()
         return None
     
 

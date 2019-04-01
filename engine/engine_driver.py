@@ -71,25 +71,25 @@ class Driver:
 
                     c = VariableSetter(d["sticker_value"], self.store.new_card_number)
                     self.store.insert_card(c, self.store.current_position)
-                    self.store.current_position, _ = self.store.goto_card_by_number(c.card_number)
+                    self.store.current_position, _ = self.store.goto_card_by_number(c.card_number,self.store.root)
                 
                 if code[0] == "print":
                     c = Display((d["sticker_type"], d["sticker_value"]), self.store.new_card_number)
                     self.store.insert_card(c, self.store.current_position)
-                    self.store.current_position,_ = self.store.goto_card_by_number(c.card_number)
+                    self.store.current_position,_ = self.store.goto_card_by_number(c.card_number,self.store.root)
                 
                 if code[0] == "test_statement":
                     c = TestStatement(self.store.new_card_number)
                     # print(c.card_number)
                     self.store.insert_card(c, self.store.current_position)
-                    self.store.current_position, _  = self.store.goto_card_by_number(c.card_number)
+                    self.store.current_position, _  = self.store.goto_card_by_number(c.card_number,self.store.root)
                     # change current parent
                     self.store.push_parent(c)
                 
                 if code[0] == "while_loop":
                     c = WhileLoop(self.store.new_card_number)
                     self.store.insert_card(c, self.store.current_position)
-                    self.store.current_position,_ = self.store.goto_card_by_number(c.card_number)
+                    self.store.current_position,_ = self.store.goto_card_by_number(c.card_number,self.store.root)
                     # change current parent
                     self.store.push_parent(c)
 
@@ -120,7 +120,7 @@ class Driver:
                 self.updated = True
             
             elif command == "GOTO":
-                self.store.current_position,_ = self.store.goto_card_by_number(d["card_number"])
+                self.store.current_position,_ = self.store.goto_card_by_number(d["card_number"],self.store.root)
                 print("GOTO Executed")
                 self.updated = True
         else:
@@ -128,7 +128,7 @@ class Driver:
             if isComplete:
                 
                 print(self.store.new_card_number)
-                parent_card = self.store.get_card_by_number(self.store.new_card_number-1)
+                parent_card = self.store.get_card_by_number(self.store.new_card_number-1,self.store.root)
                 print(parent_card.card_id)
 
                 if len(exp_tuples) == 1:
