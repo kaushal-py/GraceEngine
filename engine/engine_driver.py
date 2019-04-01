@@ -9,6 +9,7 @@ sys.path.insert(0, '../')
 from engine.trie import Trie
 from engine.parser import Parser
 from engine.expression_parser import ExpressionParser
+from engine.suggestions import Suggestions
 
 from engine.program_store import ProgramStore
 
@@ -35,6 +36,8 @@ class Driver:
         self.p = Parser()
         self.t = Trie()
         self.e = ExpressionParser()
+        self.s = Suggestions()
+
 
         # initialise program store
         self.store = ProgramStore()
@@ -155,7 +158,11 @@ class Driver:
 
     def get_code(self):
         return self.store.generate_code()
-            
+
+    
+    def get_suggestions(self, query:str):
+        sug = self.s.suggest(query)
+        return {"suggestions": sug}
             
 
     def get_tree(self, file_name):

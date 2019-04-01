@@ -46,6 +46,12 @@ class GetOutput(Resource):
     def get(self):
         return d.store.generate_output()
 
+class GetSuggestions(Resource):
+    def get(self):
+        args = request.args
+        return d.get_suggestions(args['nls'])
+        
+
 
 api.add_resource(UpdateState, '/put')
 api.add_resource(GetCards, '/get')
@@ -53,6 +59,7 @@ api.add_resource(GetCode, '/code')
 api.add_resource(GetVariables, '/variables')
 api.add_resource(GetOutput, '/output')
 api.add_resource(GetUpdates, '/updates')
+api.add_resource(GetSuggestions, '/suggest')
 
 if __name__ == '__main__':
     app.run(debug=True)
