@@ -1,9 +1,9 @@
 <template>
     
     <div>
-        <div v-for="card in program" :key="card">
+        <div v-for="card in program">
     
-        <div>
+        <div v-if="card != null">
             <CardView 
                 :card-number="card.card_number"
                 :card-type="card.card_type"
@@ -19,7 +19,7 @@
             </CardView>
         </div>
 
-            <div class="indented">
+            <div v-if="card.children != null" class="indented">
             <ProgramView
                 :program="card.children">
             </ProgramView>

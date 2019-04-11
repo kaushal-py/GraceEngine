@@ -88,7 +88,7 @@
             <br><br>
           <div class="box grace-box">
               <!-- Output the suggestions -->
-              <div v-if="suggestions.length>0" class="has-text-weight-semibold">
+              <div v-if="suggestions != null && suggestions.length>0" class="has-text-weight-semibold">
                   Suggestions
                   <hr>
               </div>
@@ -153,7 +153,7 @@ export default {
 
   watch: {
     nls: function() {
-      if (this.nls[this.nls.length - 1] == " ") {
+      if (this.nls != null && this.nls[this.nls.length - 1] == " ") {
         this.insertCard();
       }
     },
@@ -210,7 +210,7 @@ export default {
         axios
         .get("http://localhost:5000/suggest", {
             params: {
-            nls: this.nls
+              nlstatement: this.nls,
           }
         })
         .then(respose => (this.suggestions = respose.data.suggestions));

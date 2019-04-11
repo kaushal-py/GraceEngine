@@ -9,17 +9,18 @@
         color,
         ]">
             <span class="card-number">{{ cardNumber }}</span>
-            <span v-for="element in display" :key="element">
-                <span v-if="element.val_type === 'text'">
+            <span v-for="element in display">
+
+                <span v-if="element!=null && element.val_type === 'text'">
                     {{ element.text }} &nbsp;
                 </span>
-                <div class="sticker" v-else-if="element.val_type === 'sticker'">
+                <div class="sticker" v-else-if="element!=null && element.val_type === 'sticker'">
                     {{ element.sticker_name }} &nbsp;<i class="fas fa-equals"></i>
                     <span class="sticker-val">
                         {{ element.sticker_value }}
                     </span>
                 </div>
-                <span v-if="element.val_type === 'internal_dependant'">
+                <span v-if="element!=null && element.val_type === 'internal_dependant'">
                     <CardView 
                         :card-number="element.dependant.card_number"
                         :card-type="element.dependant.card_type"

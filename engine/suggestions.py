@@ -28,8 +28,7 @@ class Suggestions:
                 print("Card ID: ",code[0])
             elif code[1] is not None:
                 print("Suggestions: ",code[1])
-            print("----------------------------------------------------------------")
-            return code[1]
+                return code[1]
 
         elif command_type == "create":
             print("Variable has been created")
@@ -42,6 +41,8 @@ class Suggestions:
             # print("Expression List : ",exp_tuples)
             # print("----------------------------------------------------------------")
 
+        return ""
+    
 if __name__ == "__main__":
     s = Suggestions()
     s.suggest("set")

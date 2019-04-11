@@ -37,11 +37,12 @@ class Driver:
         self.t = Trie()
         self.e = ExpressionParser()
         self.s = Suggestions()
+        self.initialise_program_store()
 
 
+    def initialise_program_store(self):
         # initialise program store
         self.store = ProgramStore()
-
         self.updated = False
 
 
@@ -77,6 +78,7 @@ class Driver:
                     self.store.current_position, _ = self.store.goto_card_by_number(c.card_number,self.store.root)
                 
                 if code[0] == "print":
+                    print(d)
                     c = Display((d["sticker_type"], d["sticker_value"]), self.store.new_card_number)
                     self.store.insert_card(c, self.store.current_position)
                     self.store.current_position,_ = self.store.goto_card_by_number(c.card_number,self.store.root)
