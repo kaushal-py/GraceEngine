@@ -14,33 +14,32 @@ class ProgramStore:
 
         self.new_card_number = 1
         self.root = Card("parent", [None], 0)
-        self.current_parent_card = self.root
-        self.current_position = 0
+        self.current_position = -1
+        self.current_neighbour = None
 
         #Parent stack, to go up levels
         self.parent_stack = [self.root]
 
 
-    def insert_card(self, card, position=None):
+    def insert_card(self, card):
         
         print("Current position: ", self.current_position)
+        self.current_position += 1
         self.new_card_number += 1
-        self.current_parent_card.add_child(card, position)
+
+        # Add child to topmost element of parent stack
+        self.parent_stack[-1].add_child(card, self.current_position)
         
     def insert_card_externally(self):
         self.new_card_number += 1
 
 
-    def insert_external_dependant(self, card, card_parent=None):
+    def insert_external_dependant(self, card):
         
         # This parent is different from parent child.
         # Here parent means neighbour of external dependant class
-        if card_parent:
-            current_card = card_parent
-        else:
-            current_card = self.get_card_by_number(self.new_card_number-1)
         
-        current_card.set_external_dependant(card)
+        self.current_neighbour.set_external_dependant(card)
         self.new_card_number += 1
         
     
@@ -48,6 +47,11 @@ class ProgramStore:
         current_card = self.get_card_by_number(self.new_card_number-1)
         current_card.set_external_dependant(card)
     
+    # def get_current_card(self):
+    #     # current parent and current position can give current card
+    #     print(self.parent_stack[-1].card_id)
+    #     print(self.current_position)
+    #     return self.parent_stack[-1].children[self.current_position]
 
     def push_parent(self, card):
         self.current_parent_card = card
@@ -75,15 +79,18 @@ class ProgramStore:
     
     def goto_card_by_number(self, num, card_root):
 
+        if card_root == self.root:
+            self.parent_stack = []
+
         self.push_parent(card_root)
 
         for k, card in enumerate(card_root.children):
             
             if card.card_number == num:
-                return k+1, card
+                return k, card
             elif card.external_dependant is not None and card.external_dependant.card_number == num:
                 self.push_parent(card)
-                return k+1, card
+                return k, card
 
             for dep_card in card.internal_dependants:
                 if dep_card.card_number == num:
@@ -92,8 +99,15 @@ class ProgramStore:
                 return self.goto_card_by_number(num, card)
         
         self.pop_parent()
-        return None
+        return None, None
     
+
+    def print_stack(self):
+        print("+++Parent stack+++")
+        for card in self.parent_stack:
+            print(card.card_id)
+        print("++++++")
+
 
     def generate_program(self):
         

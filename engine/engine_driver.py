@@ -54,6 +54,8 @@ class Driver:
         # dictionary for storing stickers
         d = {}
 
+        # print(self.store.print_stack())
+
         # parse the natural sentence
         command_type,command,d = self.p.parse(natural_sentence)
 
@@ -74,29 +76,28 @@ class Driver:
                 if code[0] == "variable_setter":
 
                     c = VariableSetter(d["sticker_value"], self.store.new_card_number)
-                    self.store.insert_card(c, self.store.current_position)
-                    self.store.current_position, _ = self.store.goto_card_by_number(c.card_number,self.store.root)
+                    self.store.insert_card(c)
+                    self.store.current_neighbour = c
                 
                 if code[0] == "print":
                     print(d)
                     c = Display((d["sticker_type"], d["sticker_value"]), self.store.new_card_number)
-                    self.store.insert_card(c, self.store.current_position)
-                    self.store.current_position,_ = self.store.goto_card_by_number(c.card_number,self.store.root)
+                    self.store.insert_card(c)
                 
                 if code[0] == "test_statement":
                     c = TestStatement(self.store.new_card_number)
                     # print(c.card_number)
-                    self.store.insert_card(c, self.store.current_position)
-                    self.store.current_position, _  = self.store.goto_card_by_number(c.card_number,self.store.root)
+                    self.store.insert_card(c)
                     # change current parent
                     self.store.push_parent(c)
+                    self.store.current_neighbour = c
                 
                 if code[0] == "while_loop":
                     c = WhileLoop(self.store.new_card_number)
-                    self.store.insert_card(c, self.store.current_position)
-                    self.store.current_position,_ = self.store.goto_card_by_number(c.card_number,self.store.root)
+                    self.store.insert_card(c)
                     # change current parent
                     self.store.push_parent(c)
+                    self.store.current_neighbour = c
 
 
             ### Terminal but not leaf ###
@@ -132,9 +133,10 @@ class Driver:
             (exp_tuples, isComplete) = self.e.parseExpression(command)
             if isComplete:
                 
-                print(self.store.new_card_number)
-                parent_card = self.store.get_card_by_number(self.store.new_card_number-1,self.store.root)
-                print(parent_card.card_id)
+                # print(self.store.new_card_number)
+                # parent_card = self.store.get_card_by_number(self.store.new_card_number-1, self.root)
+                # _, parent_card = self.store.goto_card_by_number(self.store.new_card_number-1,self.store.root)
+                # print(parent_card.card_id)
 
                 if len(exp_tuples) == 1:
                     c = Expression(exp_tuples, self.store.new_card_number)
@@ -151,7 +153,7 @@ class Driver:
 
                     c = Condition([e1, s, e2], self.store.new_card_number)
 
-                self.store.insert_external_dependant(c, parent_card)
+                self.store.insert_external_dependant(c)
 
 
     def get_program(self):
@@ -176,6 +178,7 @@ class Driver:
         data = tree_file.read()
         tree_file.close()
         return importer.import_(data)
+
 
 
 if __name__ == "__main__":
