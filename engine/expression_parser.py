@@ -91,7 +91,7 @@ class ExpressionParser:
                         expression_tuples[-1].append(("number",filtered_exp[index]))
 
 
-            print(expression_tuples)
+            # print(expression_tuples)
             return (expression_tuples, True)
     
         else:
