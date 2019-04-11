@@ -33,14 +33,14 @@ class Suggestions:
 
         elif command_type == "create":
             print("Variable has been created")
-            print("----------------------------------------------------------------")
+            # print("----------------------------------------------------------------")
 
         else:
-            print("Command Type: ",command_type)
-            print("Command:", command)
+            # print("Command Type: ",command_type)
+            # print("Command:", command)
             exp_tuples = e.parseExpression(command)
-            print("Expression List : ",exp_tuples)
-            print("----------------------------------------------------------------")
+            # print("Expression List : ",exp_tuples)
+            # print("----------------------------------------------------------------")
 
 if __name__ == "__main__":
     s = Suggestions()
