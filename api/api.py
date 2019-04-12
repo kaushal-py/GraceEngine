@@ -50,8 +50,11 @@ class GetSuggestions(Resource):
     def get(self):
         args = request.args
         return d.get_suggestions(args['nls'])
-        
 
+class ClearProgram(Resource):
+    def get(self):
+        d.initialise_program_store()
+        return {"Cleared": True}
 
 api.add_resource(UpdateState, '/put')
 api.add_resource(GetCards, '/get')
@@ -60,6 +63,7 @@ api.add_resource(GetVariables, '/variables')
 api.add_resource(GetOutput, '/output')
 api.add_resource(GetUpdates, '/updates')
 api.add_resource(GetSuggestions, '/suggest')
+api.add_resource(ClearProgram, '/clear')
 
 if __name__ == '__main__':
     app.run(debug=True)

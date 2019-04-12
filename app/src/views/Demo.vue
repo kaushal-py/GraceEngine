@@ -41,7 +41,20 @@
           <div class="tile">
             <div class="container is-fluid is-marginless">
               <nav class="panel has-text-left">
-                <p class="panel-heading">Program</p>
+                <div class="panel-heading">
+                  <div class="tile">
+                    <div class="tile">
+                      Program              
+                    </div>
+                    <div class="tile">
+                      <div class="buttons is-right">
+                        <button @click="clearProgram" class="button is-danger">
+                          Clear &nbsp;<i class="fas fa-times"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div> 
+                </div>
                 <div class="panel-block program-block">
                   <ProgramView :program="cardjson.program"></ProgramView>
                 </div>
@@ -205,6 +218,13 @@ export default {
       axios
         .get("http://localhost:5000/updates", {})
         .then(respose => (this.updated = respose.data.updated));
+    },
+    clearProgram: function() {
+      axios
+        .get("http://localhost:5000/clear", {});
+      this.getCards();
+      this.getCode();
+      this.getOutput();
     },
     getSuggestions: function() {
         axios
