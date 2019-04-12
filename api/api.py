@@ -49,7 +49,7 @@ class GetOutput(Resource):
 class GetSuggestions(Resource):
     def get(self):
         args = request.args
-        return d.get_suggestions(args['nls'])
+        return d.get_suggestions(args['nlstatement'])
 
 class ClearProgram(Resource):
     def get(self):
