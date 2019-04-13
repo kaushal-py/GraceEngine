@@ -13,6 +13,7 @@ class ProgramStore:
         self.variable_list = []
 
         self.new_card_number = 1
+        self.current_card_number = 0
         self.root = Card("parent", [None], 0)
         self.current_position = -1
         self.current_neighbour = None
@@ -26,11 +27,13 @@ class ProgramStore:
         print("Current position: ", self.current_position)
         self.current_position += 1
         self.new_card_number += 1
+        self.current_card_number += 1
 
         # Add child to topmost element of parent stack
         self.parent_stack[-1].add_child(card, self.current_position)
         
     def insert_card_externally(self):
+        self.current_card_number += 1
         self.new_card_number += 1
 
 
@@ -41,6 +44,7 @@ class ProgramStore:
         
         self.current_neighbour.set_external_dependant(card)
         self.new_card_number += 1
+        self.current_card_number += 1
         
     
     def temp_external_dependant(self, card):
@@ -64,7 +68,6 @@ class ProgramStore:
 
     def get_card_by_number(self, num, card_root):
         for card in card_root.children:
-            print("Get card debug",card.card_number, card.card_id)
             if card.card_number == num:
                 return card
             elif card.external_dependant is not None and card.external_dependant.card_number == num:
@@ -87,14 +90,20 @@ class ProgramStore:
         for k, card in enumerate(card_root.children):
             
             if card.card_number == num:
+                self.current_card_number = card.card_number
+                self.current_neighbour = card
                 return k, card
+
             elif card.external_dependant is not None and card.external_dependant.card_number == num:
+                self.current_card_number = card.card_number
+                self.current_neighbour = card
                 self.push_parent(card)
                 return k, card
 
             for dep_card in card.internal_dependants:
                 if dep_card.card_number == num:
                     return dep_card
+
             if len(card.children) != 0:
                 return self.goto_card_by_number(num, card)
         
@@ -111,7 +120,11 @@ class ProgramStore:
 
     def generate_program(self):
         
-        program_dict = {"program": []}
+        program_dict = {
+            "program": [],
+            "inserted_card_number" : self.new_card_number - 1,
+            "current_card_number" : self.current_card_number,
+        }
 
         for card in self.root.children:
             program_dict["program"].append(card.generate_card())

@@ -51,6 +51,11 @@ class Driver:
         This function receives a natural sentence 
         and inserts it to the tree and store it to the json file
         '''
+
+        # Do nothing if statement is empty
+        if natural_sentence == "":
+            return
+
         # dictionary for storing stickers
         d = {}
 
@@ -58,6 +63,7 @@ class Driver:
 
         # parse the natural sentence
         command_type,command,d = self.p.parse(natural_sentence)
+
 
 
         if command_type == "insert":
@@ -122,13 +128,14 @@ class Driver:
 
             if command == "POP_PARENT":
                 self.store.pop_parent()
-
                 self.updated = True
             
             elif command == "GOTO":
                 self.store.current_position,_ = self.store.goto_card_by_number(d["card_number"],self.store.root)
                 print("GOTO Executed")
                 self.updated = True
+        
+        
         else:
             (exp_tuples, isComplete) = self.e.parseExpression(command)
             if isComplete:

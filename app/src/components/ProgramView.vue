@@ -1,32 +1,39 @@
 <template>
     
     <div>
-        <div v-for="card in program">
-    
+        <div v-for="card in program" v-bind:key="card.card_number">
         <div v-if="card != null">
             <CardView 
                 :card-number="card.card_number"
                 :card-type="card.card_type"
                 :display="card.display"
-                :color="card.card_color">
+                :color="card.card_color"
+                :inserted="inserted"
+                :current="current"
+                >
             </CardView>
 
             <CardView 
                 :card-number="card.external_dependant.card_number"
                 :card-type="card.external_dependant.card_type"
                 :display="card.external_dependant.display"
-                :color="card.external_dependant.card_color">
+                :color="card.external_dependant.card_color"
+                :inserted="inserted"
+                :current="current"
+                >
             </CardView>
         </div>
 
             <div v-if="card.children != null" class="indented">
             <ProgramView
-                :program="card.children">
+                :program="card.children"
+                :inserted="inserted"
+                :current="current">
             </ProgramView>
             </div>
-
         </div>
     </div>
+
 
 </template>
 
@@ -37,6 +44,8 @@ export default {
     name: 'ProgramView',
     props: {
         program: Array,
+        inserted: Number,
+        current: Number,
     },
     components:{
         CardView,

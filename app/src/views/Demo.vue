@@ -36,7 +36,7 @@
         </div>
 
         <div class="tile">
-          <div id="left-background" class="tile is-2 has-background-light"></div>
+          <div id="left-background" class="tile is-2 has-background-light is-hidden-mobile"></div>
 
           <div class="tile">
             <div class="container is-fluid is-marginless">
@@ -44,7 +44,7 @@
                 <div class="panel-heading">
                   <div class="tile">
                     <div class="tile">
-                      Program              
+                      Program        
                     </div>
                     <div class="tile">
                       <div class="buttons is-right">
@@ -56,7 +56,11 @@
                   </div> 
                 </div>
                 <div class="panel-block program-block">
-                  <ProgramView :program="cardjson.program"></ProgramView>
+                  <ProgramView 
+                    :program="cardjson.program"
+                    :inserted="cardjson.inserted_card_number"
+                    :current="cardjson.current_card_number">
+                  </ProgramView>
                 </div>
               </nav>
 
@@ -175,6 +179,7 @@ export default {
     },
     updated: function(){
       this.nls = "";
+      this.getCards();
       this.updated = false;
     }
   },

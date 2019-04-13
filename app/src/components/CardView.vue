@@ -1,5 +1,6 @@
 <template>
         <div :class="['ge-card', 'has-text-weight-bold', 
+        {ct:cardNumber==current},
         {tt:cardType[0]},
         {bt:cardType[1]},
         {lp:cardType[2]},
@@ -7,7 +8,9 @@
         {lh:cardType[4]},
         {rh:cardType[5]},
         color,
-        ]">
+        ]"
+        :id="cardNumber"
+        >
             <span class="card-number">{{ cardNumber }}</span>
             <span v-for="element in display">
 
@@ -40,23 +43,40 @@ export default {
         let recaptchaScript = document.createElement('script');
         recaptchaScript.setAttribute('src', 'https://use.fontawesome.com/releases/v5.3.1/js/all.js');
         document.head.appendChild(recaptchaScript);
+
+        if(this.cardNumber == this.inserted){
+            const element =  document.getElementById(this.cardNumber);
+            element.classList.add('animated', 'fadeInUp');
+        }
+    },
+
+    updated(){
+        if(this.cardNumber == this.inserted){
+            const element =  document.getElementById(this.cardNumber);
+            element.classList.add('animated', 'fadeInRight');
+        }
     },
     props: {
         cardNumber: Number,
         cardType: Array,
         display: Array,
         color: String,
+        inserted: Number,
+        current: Number,
     },
 }
 </script>
 
 <style lang="scss" scoped>
 
+@import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css");
+
     $color1 : #7E7F9A;
     $color2 : #EB9486;
     $color3 : #F3DE8A;
     $color4 : #272838;
     $color5 : #F9F8F8;
+    $colorcurrent: #3c41d0;
 
     $color_logic : darkblue;
     $color_condition :yellow;
@@ -97,6 +117,10 @@ export default {
     .tt{
     border-top: 5px outset #555;
     }
+    .ct{
+        background-color: $colorcurrent !important;
+    }
+    
     .bt{
     border-bottom: 5px outset #555;
     }

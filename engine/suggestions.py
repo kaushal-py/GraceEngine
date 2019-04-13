@@ -22,7 +22,7 @@ class Suggestions:
         
         d = {}
         command_type,command,d = p.parse(query)
-        if command_type != "unknown" and command_type != "create":
+        if command_type == "insert":
             code = t.traverseTree(self.root,command,len(command),0)
             if code[0] is not None:
                 print("Card ID: ",code[0])
@@ -30,14 +30,14 @@ class Suggestions:
                 # print("Suggestions: ",code[1])
                 return code[1]
 
-        elif command_type == "create":
-            print("Variable has been created")
-            # print("----------------------------------------------------------------")
+        # elif command_type == "create":
+        #     print("Variable has been created")
+        #     # print("----------------------------------------------------------------")
 
-        else:
-            # print("Command Type: ",command_type)
-            # print("Command:", command)
-            exp_tuples = e.parseExpression(command)
+        # else:
+        #     # print("Command Type: ",command_type)
+        #     # print("Command:", command)
+        #     exp_tuples = e.parseExpression(command)
             # print("Expression List : ",exp_tuples)
             # print("----------------------------------------------------------------")
 
