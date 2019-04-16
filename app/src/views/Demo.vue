@@ -148,11 +148,24 @@ export default {
   },
 
   mounted:function(){
+    console.log("create function called");
+    console.log("SESSION ID: " + this.$route.params.sessionid);
+    this.sessionId = this.$route.params.sessionid;
+
+    this.getCards();
+    this.getCode();
+
+    setInterval(() => {
+      this.getCards();
+      this.getCode();
+    }, 2000);
+
+  },
+
+  created: function(){
     let recaptchaScript = document.createElement('script');
     recaptchaScript.setAttribute('src', 'https://use.fontawesome.com/releases/v5.3.1/js/all.js');
     document.head.appendChild(recaptchaScript);
-    this.getCards();
-    this.getCode();
   },
 
   data: function() {
@@ -164,7 +177,8 @@ export default {
       sentences: null,
       output: "",
       updated: false,
-      suggestions: []
+      suggestions: [],
+      sessionId: 0,
     };
   },
 
@@ -185,11 +199,13 @@ export default {
   },
 
   methods: {
+
     insertCard: function() {
       axios
         .get("http://localhost:5000/put", {
           params: {
-            nls: this.nls
+            nls: this.nls,
+            sessionid: this.sessionId,
           }
         })
         .then(response => (this.cardjson = response.data));
@@ -201,32 +217,56 @@ export default {
     },
     getCards: function() {
       axios
-        .get("http://localhost:5000/get", {})
+        .get("http://localhost:5000/get", {
+          params: {
+            sessionid: this.sessionId
+          }
+        })
         .then(response => (this.cardjson = response.data));
     },
     getCode: function() {
       axios
-        .get("http://localhost:5000/code", {})
+        .get("http://localhost:5000/code", {
+          params: {
+            sessionid: this.sessionId
+          }
+        })
         .then(response => (this.code = response.data.code));
     },
     getOutput: function() {
       axios
-        .get("http://localhost:5000/output", {})
+        .get("http://localhost:5000/output", {
+          params: {
+            sessionid: this.sessionId
+          }
+        })
         .then(response => (this.output = response.data.output));
     },
     getVariables: function() {
       axios
-        .get("http://localhost:5000/variables", {})
+        .get("http://localhost:5000/variables", {
+          params: {
+            sessionid: this.sessionId
+          }
+        })
         .then(respose => (this.variables = respose.data.variables));
     },
     getUpdates: function() {
       axios
-        .get("http://localhost:5000/updates", {})
+        .get("http://localhost:5000/updates", {
+          params: {
+            sessionid: this.sessionId
+          }
+        })
         .then(respose => (this.updated = respose.data.updated));
     },
     clearProgram: function() {
       axios
-        .get("http://localhost:5000/clear", {});
+        .get("http://localhost:5000/clear", {
+          params: {
+            sessionid: this.sessionId
+          }
+        });
       this.getCards();
       this.getCode();
       this.getOutput();
@@ -236,6 +276,7 @@ export default {
         .get("http://localhost:5000/suggest", {
             params: {
               nlstatement: this.nls,
+              sessionid: this.sessionId,
           }
         })
         .then(respose => (this.suggestions = respose.data.suggestions));

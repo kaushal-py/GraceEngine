@@ -26,8 +26,8 @@ class ProgramStore:
         
         print("Current position: ", self.current_position)
         self.current_position += 1
+        self.current_card_number = self.new_card_number
         self.new_card_number += 1
-        self.current_card_number += 1
 
         # Add child to topmost element of parent stack
         self.parent_stack[-1].add_child(card, self.current_position)
@@ -43,8 +43,8 @@ class ProgramStore:
         # Here parent means neighbour of external dependant class
         
         self.current_neighbour.set_external_dependant(card)
+        self.current_card_number = self.new_card_number
         self.new_card_number += 1
-        self.current_card_number += 1
         
     
     def temp_external_dependant(self, card):
