@@ -48,9 +48,13 @@ class WhileLoop(Card):
             self.code = "while" + self.external_dependant.generate_code() + ":\n"
         else:
             self.code = "while True:\n"
-        for child in self.children:
-            self.code += "    " * nesting_level 
-            self.code += child.generate_code(nesting_level)
+        if not self.children:
+            self.code += "    " * nesting_level
+            self.code += "pass"
+        else:
+            for child in self.children:
+                self.code += "    " * nesting_level 
+                self.code += child.generate_code(nesting_level)
         return self.code
 
     def set_external_dependant(self, condition):
