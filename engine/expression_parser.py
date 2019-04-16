@@ -1,15 +1,21 @@
 import spacy
 import nltk
 from nltk.corpus import wordnet
-from nltk.corpus import stopwords
 import csv
 
 class ExpressionParser:
 
     def __init__(self):
         
-        pass
-
+        self.stop_words = ["i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", "your", "yours", "yourself", "yourselves", "he", "him", "his", "himself", "she", "her", "hers", "herself", "it", "its", "itself", "they", "them", "their", "theirs", "themselves", "what", "which", "who", "whom", "this", "that", "these", "those", "am", "is", "are", "was", "were", "be", "been", "being", "have", "has", "had", "having", "do", "does", "did", "doing", "a", "an", "the", "and", "but", "if", "or", "because", "as", "until", "while", "of", "at", "by", "for", "with", "about", "against", "between", "into", "through", "during", "before", "after", "above", "below", "to", "from", "up", "down", "in", "out", "on", "off", "over", "under", "again", "further", "then", "once", "here", "there", "when", "where", "why", "how", "all", "any", "both", "each", "few", "more", "most", "other", "some", "such", "no", "nor", "not", "only", "own", "same", "so", "than", "too", "very", "s", "t", "can", "will", "just", "don", "should", "now"]        
+        '''Remove Stopwords'''
+        # TODO: Find a proper list of stopwords
+        self.stop_words.remove("for")
+        self.stop_words.remove("if")
+        self.stop_words.remove("not")
+        self.stop_words.remove("to")
+        self.stop_words.remove("into")
+        
     def parseExpression(self,expression):
         
         '''Create the list of tuples'''
@@ -40,15 +46,7 @@ class ExpressionParser:
             "not": "not"
         }
 
-        '''Remove Stopwords'''
-        stop_words = set(stopwords.words('english'))
-        # TODO: Find a proper list of stopwords
-        stop_words.remove("for")
-        stop_words.remove("if")
-        stop_words.remove("not")
-        stop_words.remove("to")
-        stop_words.remove("into")
-        filtered_exp = [w for w in expression if not w in stop_words]
+        filtered_exp = [w for w in expression if not w in self.stop_words]
         # print(filtered_exp)
 
         if filtered_exp[-1] == "done":

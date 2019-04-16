@@ -10,7 +10,6 @@ This file will receive a natural sentense. It does the following
 import spacy
 import nltk
 from nltk.corpus import wordnet
-from nltk.corpus import stopwords
 import csv
 
 class Parser:
@@ -22,10 +21,14 @@ class Parser:
         # self.nlp = spacy.load('en_core_web_sm')
         # self.doc= None
         # print("Model loaded")
-        try:
-            nltk.data.find('tokenizers/punkt')
-        except LookupError:
-            nltk.download('punkt')
+        self.stop_words = ["i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", "your", "yours", "yourself", "yourselves", "he", "him", "his", "himself", "she", "her", "hers", "herself", "it", "its", "itself", "they", "them", "their", "theirs", "themselves", "what", "which", "who", "whom", "this", "that", "these", "those", "am", "is", "are", "was", "were", "be", "been", "being", "have", "has", "had", "having", "do", "does", "did", "doing", "a", "an", "the", "and", "but", "if", "or", "because", "as", "until", "while", "of", "at", "by", "for", "with", "about", "against", "between", "into", "through", "during", "before", "after", "above", "below", "to", "from", "up", "down", "in", "out", "on", "off", "over", "under", "again", "further", "then", "once", "here", "there", "when", "where", "why", "how", "all", "any", "both", "each", "few", "more", "most", "other", "some", "such", "no", "nor", "not", "only", "own", "same", "so", "than", "too", "very", "s", "t", "can", "will", "just", "don", "should", "now"]
+        '''Remove Stopwords'''
+        # TODO: Find a proper list of stopwords
+        self.stop_words.remove("for")
+        self.stop_words.remove("if")
+        self.stop_words.remove("not")
+        self.stop_words.remove("to")
+        self.stop_words.remove("while")
 
     def parse(self,sentence):
         
@@ -55,15 +58,7 @@ class Parser:
             command_type = "unknown"
             return command_type,tokens,None
 
-        '''Remove Stopwords'''
-        stop_words = set(stopwords.words('english'))
-        # TODO: Find a proper list of stopwords
-        stop_words.remove("for")
-        stop_words.remove("if")
-        stop_words.remove("not")
-        stop_words.remove("to")
-        stop_words.remove("while")
-        self.filtered_sentence = [w for w in tokens if not w in stop_words]
+        self.filtered_sentence = [w for w in tokens if not w in self.stop_words]
         # print(self.filtered_sentence)
         
         
@@ -90,7 +85,7 @@ class Parser:
                 Return the command and variable
             '''
             # print(self.filtered_sentence)
-            command = [w for w in self.filtered_sentence if not w in stop_words and w != current_variable]
+            command = [w for w in self.filtered_sentence if not w in self.stop_words and w != current_variable]
             return command_type,command,{"variable_name":current_variable}
 
 
