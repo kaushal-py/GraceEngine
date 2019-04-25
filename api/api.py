@@ -1,4 +1,5 @@
 import sys
+import time
 
 import json
 from flask import Flask
@@ -18,10 +19,14 @@ drivers = []
 
 class UpdateState(Resource):
     def get(self):
+        start = time.time()
         args = request.args
         d=drivers[int(request.args['sessionid'])-1]
         d.update_state(args['nls'])
-        return d.get_program()
+        end = time.time()
+        program_dict = d.get_program()
+        program_dict['time'] = round(end-start,5)
+        return program_dict
 
 class GetCards(Resource):
     def get(self):

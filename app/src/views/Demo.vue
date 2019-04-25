@@ -40,6 +40,9 @@
 
           <div class="tile">
             <div class="container is-fluid is-marginless">
+              <div class="tile">
+                Results updated in {{time}} seconds.     
+              </div>
               <nav class="panel has-text-left">
                 <div class="panel-heading">
                   <div class="tile">
@@ -179,6 +182,7 @@ export default {
       updated: false,
       suggestions: [],
       sessionId: 0,
+      time: 0.0,
     };
   },
 
@@ -208,7 +212,11 @@ export default {
             sessionid: this.sessionId,
           }
         })
-        .then(response => (this.cardjson = response.data));
+        .then(response => {
+          this.cardjson = response.data;
+          this.time = this.cardjson.time;
+      });
+      
       this.getCode();
       this.getVariables();
       this.getUpdates();

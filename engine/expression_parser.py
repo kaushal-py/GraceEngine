@@ -38,6 +38,8 @@ class ExpressionParser:
             "less" : "<",
             "greater" : ">",
             "equals" : "==",
+            "lequal": "<=",
+            "gequal": ">=",
         }
 
         logical_operators = {
