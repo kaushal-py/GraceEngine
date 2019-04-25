@@ -110,6 +110,15 @@ class ProgramStore:
         self.pop_parent()
         return None, None
     
+    # delete card
+    def delete_card_by_number(self, num):
+
+        current_position, card = self.goto_card_by_number(num, self.root)
+        del self.parent_stack[-1].children[current_position]
+        self.current_position = current_position - 1
+        self.current_card_number = self.parent_stack[-1].children[current_position].card_number
+        
+    
 
     def print_stack(self):
         print("+++Parent stack+++")

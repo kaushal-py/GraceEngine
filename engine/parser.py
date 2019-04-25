@@ -43,6 +43,7 @@ class Parser:
         CREATE = ["create"]
         INSERT = ["modify","set","test","if","print","repeat"]
         NAVIGATE = ["end", "go"]
+        DELETE = ["delete"]
 
         '''List of keywords'''
         KEYWORDS = ["variable","expression","text"]
@@ -54,6 +55,8 @@ class Parser:
             command_type = "insert"
         elif tokens[0] in NAVIGATE:
             command_type = "navigate"
+        elif tokens[0] in DELETE:
+            command_type = "delete"
         else:
             command_type = "unknown"
             return command_type,tokens,None
@@ -139,7 +142,19 @@ class Parser:
 
         
         elif command_type == 'delete':
-            pass
+            
+            d = {}
+
+            for index in range(len(self.filtered_sentence)):
+                if self.filtered_sentence[index] == "number":
+                    index+=1
+                    if index < len(self.filtered_sentence):
+                        command = "DELETE"
+                        num = int(self.filtered_sentence[index])
+                        d = {"card_number": num}
+                        break
+            
+            return command_type, command, d
 
 
         elif command_type == 'navigate':

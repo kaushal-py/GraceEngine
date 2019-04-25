@@ -117,7 +117,7 @@ class Driver:
             # Returns a suggestion
             elif code[1] is not None:
                 pass
-                print("Suggestions: ",code[1])
+                # print("Suggestions: ",code[1])
                 
 
         elif command_type == "create":
@@ -135,6 +135,11 @@ class Driver:
                 print("GOTO Executed")
                 self.updated = True
         
+        elif command_type == "delete":
+            print("DDDDD", d["card_number"])
+            self.store.delete_card_by_number(d["card_number"])
+            self.updated = True
+
         
         else:
             (exp_tuples, isComplete) = self.e.parseExpression(command)
