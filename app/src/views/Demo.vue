@@ -189,7 +189,7 @@ export default {
   watch: {
     nls: function() {
       // console.log(nls);
-      if(this.nls == "execute "){
+      if(this.nls == "execute " || this.nls == "Execute "){
         this.getOutput();
         this.nls = "";
       }
