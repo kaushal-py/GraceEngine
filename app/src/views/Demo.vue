@@ -188,7 +188,12 @@ export default {
 
   watch: {
     nls: function() {
-      if (this.nls != null && this.nls[this.nls.length - 1] == " ") {
+      // console.log(nls);
+      if(this.nls == "execute "){
+        this.getOutput();
+        this.nls = "";
+      }
+      else if (this.nls != null && this.nls[this.nls.length - 1] == " ") {
         this.insertCard();
       }
     },

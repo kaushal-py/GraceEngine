@@ -27,7 +27,7 @@ class Suggestions:
             if code[0] is not None:
                 print("Card ID: ",code[0])
             elif code[1] is not None:
-                # print("Suggestions: ",code[1])
+                print("Suggestions: ",code[1])
                 return code[1]
 
         # elif command_type == "create":

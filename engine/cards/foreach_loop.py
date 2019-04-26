@@ -55,7 +55,7 @@ class ForeachLoop(Card):
     
     def generate_code(self, nesting_level = 0):
         nesting_level += 1
-        self.code = "foreach item in " + self.array_sticker.sticker_value + ":\n"
+        self.code = "for item in " + self.array_sticker.sticker_value + ":\n"
         if not self.children:
             self.code += "    " * nesting_level
             self.code += "pass"

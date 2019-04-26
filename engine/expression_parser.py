@@ -51,9 +51,14 @@ class ExpressionParser:
         filtered_exp = [w for w in expression if not w in self.stop_words]
         # print(filtered_exp)
 
+        expression_type = "expression"
+
         if filtered_exp[-1] == "done":
 
             for index in range(len(filtered_exp)):
+
+                if filtered_exp[index] == ",":
+                    expression_type="array"
                 
                 if filtered_exp[index] == "variable":
                     index += 1
@@ -75,9 +80,11 @@ class ExpressionParser:
                         expression_tuples[-1].append(("variable",filtered_exp[index]))
 
                 if filtered_exp[index] in operators:
+                    expression_type = "expression"
                     expression_tuples[-1].append(("operator",operators[filtered_exp[index]]))
                 
                 if filtered_exp[index] in conditional_operators:
+                    expression_type = "condition"
                     expression_tuples.append(("condition",conditional_operators[filtered_exp[index]]))
                     expression_tuples.append([])
                 
@@ -92,7 +99,7 @@ class ExpressionParser:
 
 
             # print(expression_tuples)
-            return (expression_tuples, True)
+            return (expression_tuples, True, expression_type)
     
         else:
             return (None, False)

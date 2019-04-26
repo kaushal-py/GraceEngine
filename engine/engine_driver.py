@@ -20,6 +20,8 @@ from engine.cards.display import Display
 from engine.cards.test_statement import TestStatement
 from engine.cards.condition import Condition
 from engine.cards.while_loop import WhileLoop
+from engine.cards.array_setter import ArraySetter
+from engine.cards.array_numbers import ArrayNumbers
 
 
 class Driver:
@@ -85,6 +87,12 @@ class Driver:
                     self.store.insert_card(c)
                     self.store.current_neighbour = c
                 
+                if code[0] == "array_setter":
+
+                    c = ArraySetter(d["sticker_value"], self.store.new_card_number)
+                    self.store.insert_card(c)
+                    self.store.current_neighbour = c
+                
                 if code[0] == "print":
                     print(d)
                     c = Display((d["sticker_type"], d["sticker_value"]), self.store.new_card_number)
@@ -142,16 +150,21 @@ class Driver:
 
         
         else:
-            (exp_tuples, isComplete) = self.e.parseExpression(command)
+            (exp_tuples, isComplete, expression_type) = self.e.parseExpression(command)
             if isComplete:
                 
                 # print(self.store.new_card_number)
                 # parent_card = self.store.get_card_by_number(self.store.new_card_number-1, self.root)
                 # _, parent_card = self.store.goto_card_by_number(self.store.new_card_number-1,self.store.root)
                 # print(parent_card.card_id)
+                print(exp_tuples)
 
                 if len(exp_tuples) == 1:
-                    c = Expression(exp_tuples, self.store.new_card_number)
+
+                    if expression_type == "array":
+                        c= ArrayNumbers(exp_tuples[0], self.store.new_card_number)
+                    else:
+                        c = Expression(exp_tuples, self.store.new_card_number)
                 
                 elif len(exp_tuples) == 3:
 
@@ -164,7 +177,7 @@ class Driver:
                     self.store.insert_card_externally()
 
                     c = Condition([e1, s, e2], self.store.new_card_number)
-
+                   
                 self.store.insert_external_dependant(c)
 
 

@@ -1,11 +1,11 @@
 <template>
     <section class="hero is-info is-fullheight" id="parent-section">
         <div class="hero-head">
-            <nav class="navbar">
+            <nav class="navbar is-primary">
                 <div class="container">
                     <div class="navbar-brand">
-                        <a class="navbar-item" href="../">
-                            GraceEngine
+                        <a class="navbar-item has-text-dark" href="../">
+                            Grace Engine 2019.
                         </a>
                         <span class="navbar-burger burger" data-target="navbarMenu">
                             <span></span>
@@ -16,7 +16,7 @@
                     <div id="navbarMenu" class="navbar-menu">
                         <div class="navbar-end">
                             <span class="navbar-item">
-                                <a class="button is-white is-outlined" href="#">
+                                <a class="button is-primary" href="#">
                                     <span class="icon">
                                         <i class="fa fa-home"></i>
                                     </span>
@@ -25,7 +25,7 @@
                             </span>
                             
                             <span class="navbar-item">
-                                <a class="button is-white is-outlined" href="https://github.com/kb-studios/GraceEngine">
+                                <a class="button is-primary" href="https://github.com/kb-studios/GraceEngine">
                                     <span class="icon">
                                         <i class="fa fa-github"></i>
                                     </span>
@@ -41,15 +41,17 @@
             <div class="hero-body">
                 <div class="container has-text-centered">
                     <div class="column is-6 is-offset-3">
-                        <div class="level-item has-text-centered">
-                            <button class="button is-link is-inverted is-large" @click="createNewSession" >Start a new Session</button>
-                        </div><br><br>
-                        <h1 class="title">
-                            An online Programming Engine
-                        </h1>
-                        <h2 class="subtitle">
+                        
+                        <h2 class="has-text-dark is-size-1">
+                           Grace Engine
+                        </h2>
+                        <br>
+                        <h2 class="subtitle has-text-dark">
                             Grace Engine is an online tool to convert spoken natural language sentences to Python code segments.
                         </h2>
+                        <div class="level-item has-text-centered">
+                            <button class="button is-primary is-large" @click="createNewSession" >Start a new Session</button>
+                        </div><br><br>
                         <div class="level" id="button-group">
                             <!-- <div class="level-item has-text-centered">
                                 <button class="button is-link is-inverted is-large" @click="createNewSession" >Start a new Session</button>
@@ -64,7 +66,7 @@
                                 </div>
                                 <div class="control">
                                     <!-- <a class="button is-info is-inverted is-large" router-link :to="{ name: 'demo', params: { sessionid: sessionId }}"> -->
-                                    <router-link :to="{ name: 'demo', params: { sessionid: sessionId }}" class="button is-link is-inverted is-large">Join Session</router-link>
+                                    <router-link :to="{ name: 'demo', params: { sessionid: sessionId }}" class="button is-primary is-large">Join Session</router-link>
                                     <!-- </a> -->
                                 </div>
                                 </div>
@@ -77,11 +79,20 @@
 </section>
 </template>
 
-<style>
+<style lang="scss" scoped>
+@import "~bulma/sass/utilities/_all";
+$primary: #00d1b2;
+
 #parent-section
 {
-
+    background-image: url("../assets/back.jpg");
+    background-size: cover; 
 }
+
+// Import Bulma and Buefy styles
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
+
 </style>
 
 

@@ -14,7 +14,7 @@ import csv
 
 class Parser:
 
-    def __init__(self):
+    def __init__(self, commands_csv="engine/trie_commands.csv"):
         
         ### Spacy models not required
         # print("Loading model..")
@@ -30,6 +30,14 @@ class Parser:
         self.stop_words.remove("to")
         self.stop_words.remove("while")
 
+        ## INSERT COMMANDS ARE CREATED HERE
+        self.INSERT = []
+        with open(commands_csv,"r") as f:
+            rows = csv.reader(f)
+            for row in rows:
+                self.INSERT.append(row[0].split(' ')[0])
+        
+
     def parse(self,sentence):
         
         '''Convert to lower case'''
@@ -41,7 +49,6 @@ class Parser:
         # TODO: Create the logic according to various speaking styles
         '''List of types of operations'''
         CREATE = ["create"]
-        INSERT = ["modify","set","test","if","print","repeat"]
         NAVIGATE = ["end", "go"]
         DELETE = ["delete"]
 
@@ -51,7 +58,7 @@ class Parser:
         
         if tokens[0] in CREATE:
             command_type = "create"
-        elif tokens[0] in INSERT:
+        elif tokens[0] in self.INSERT:
             command_type = "insert"
         elif tokens[0] in NAVIGATE:
             command_type = "navigate"
@@ -96,8 +103,29 @@ class Parser:
             
             # TODO: Identify the position of 'variable' and find the variable for Multiple variables
             # TODO: Use KEYWORDS instead of "variable"
+
+
             if "variable" in self.filtered_sentence:
                 var_index = self.filtered_sentence.index("variable")+1
+                
+                if var_index >= len(self.filtered_sentence):
+                    return command_type, self.filtered_sentence, None
+                
+                current_variable = self.filtered_sentence[var_index]
+                
+                '''Create the command list'''
+                for i,token in enumerate(self.filtered_sentence):
+                    if i != var_index:
+                        command.append(token)
+                
+                d = dict()
+                d["sticker_type"] = "variable"
+                d["sticker_value"] = current_variable
+
+                return command_type,command,d
+
+            if "array" in self.filtered_sentence:
+                var_index = self.filtered_sentence.index("array")+1
                 
                 if var_index >= len(self.filtered_sentence):
                     return command_type, self.filtered_sentence, None
