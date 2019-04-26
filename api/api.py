@@ -87,4 +87,4 @@ api.add_resource(ClearProgram, '/clear')
 api.add_resource(GetSessionId, '/getsessionid')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host= '0.0.0.0')

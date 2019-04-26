@@ -183,6 +183,7 @@ export default {
       suggestions: [],
       sessionId: 0,
       time: 0.0,
+      api_url: "192.168.34.185:5000/",
     };
   },
 
@@ -211,7 +212,7 @@ export default {
 
     insertCard: function() {
       axios
-        .get("http://localhost:5000/put", {
+        .get(api_url+"put", {
           params: {
             nls: this.nls,
             sessionid: this.sessionId,
@@ -230,7 +231,7 @@ export default {
     },
     getCards: function() {
       axios
-        .get("http://localhost:5000/get", {
+        .get(api_url+"get", {
           params: {
             sessionid: this.sessionId
           }
@@ -239,7 +240,7 @@ export default {
     },
     getCode: function() {
       axios
-        .get("http://localhost:5000/code", {
+        .get(api_url+"code", {
           params: {
             sessionid: this.sessionId
           }
@@ -248,7 +249,7 @@ export default {
     },
     getOutput: function() {
       axios
-        .get("http://localhost:5000/output", {
+        .get(api_url+"output", {
           params: {
             sessionid: this.sessionId
           }
@@ -257,7 +258,7 @@ export default {
     },
     getVariables: function() {
       axios
-        .get("http://localhost:5000/variables", {
+        .get(api_url+"variables", {
           params: {
             sessionid: this.sessionId
           }
@@ -266,7 +267,7 @@ export default {
     },
     getUpdates: function() {
       axios
-        .get("http://localhost:5000/updates", {
+        .get(api_url+"updates", {
           params: {
             sessionid: this.sessionId
           }
@@ -275,7 +276,7 @@ export default {
     },
     clearProgram: function() {
       axios
-        .get("http://localhost:5000/clear", {
+        .get(api_url+"clear", {
           params: {
             sessionid: this.sessionId
           }
@@ -286,7 +287,7 @@ export default {
     },
     getSuggestions: function() {
         axios
-        .get("http://localhost:5000/suggest", {
+        .get(api_url+"suggest", {
             params: {
               nlstatement: this.nls,
               sessionid: this.sessionId,
