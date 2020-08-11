@@ -1,0 +1,149 @@
+{
+  "name": "*",
+  "children": [
+    {
+      "isLeaf": false,
+      "code": null,
+      "name": "set",
+      "children": [
+        {
+          "isLeaf": false,
+          "code": null,
+          "name": "variable",
+          "children": [
+            {
+              "isLeaf": true,
+              "code": "variable_setter",
+              "name": "to"
+            }
+          ]
+        },
+        {
+          "isLeaf": false,
+          "code": null,
+          "name": "array",
+          "children": [
+            {
+              "isLeaf": true,
+              "code": "array_setter",
+              "name": "to"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "isLeaf": false,
+      "code": null,
+      "name": "assign",
+      "children": [
+        {
+          "isLeaf": false,
+          "code": null,
+          "name": "to",
+          "children": [
+            {
+              "isLeaf": true,
+              "code": "variable setter",
+              "name": "variable"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "isLeaf": true,
+      "code": "test_statement",
+      "name": "if"
+    },
+    {
+      "isLeaf": true,
+      "code": "else",
+      "name": "else"
+    },
+    {
+      "isLeaf": false,
+      "code": null,
+      "name": "print",
+      "children": [
+        {
+          "isLeaf": true,
+          "code": "print",
+          "name": "variable"
+        },
+        {
+          "isLeaf": true,
+          "code": "print",
+          "name": "text"
+        }
+      ]
+    },
+    {
+      "isLeaf": false,
+      "code": null,
+      "name": "display",
+      "children": [
+        {
+          "isLeaf": true,
+          "code": "print",
+          "name": "variable"
+        },
+        {
+          "isLeaf": true,
+          "code": "print",
+          "name": "text"
+        }
+      ]
+    },
+    {
+      "isLeaf": false,
+      "code": null,
+      "name": "repeat",
+      "children": [
+        {
+          "isLeaf": true,
+          "code": "while_loop",
+          "name": "while"
+        }
+      ]
+    },
+    {
+      "isLeaf": true,
+      "code": "while_loop",
+      "name": "while"
+    },
+    {
+      "isLeaf": false,
+      "code": null,
+      "name": "for",
+      "children": [
+        {
+          "isLeaf": false,
+          "code": null,
+          "name": "each",
+          "children": [
+            {
+              "isLeaf": false,
+              "code": null,
+              "name": "item",
+              "children": [
+                {
+                  "isLeaf": false,
+                  "code": null,
+                  "name": "in",
+                  "children": [
+                    {
+                      "isLeaf": true,
+                      "code": "foreach_loop",
+                      "name": "variable"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

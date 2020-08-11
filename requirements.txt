@@ -1,3 +1,5 @@
+aniso8601==6.0.0
+anytree==2.6.0
 backcall==0.1.0
 bleach==2.1.4
 blessings==1.7
@@ -14,6 +16,8 @@ docopt==0.6.2
 entrypoints==0.2.3
 eventlet==0.24.1
 Flask==1.0.2
+Flask-Cors==3.0.7
+Flask-RESTful==0.3.7
 Flask-SocketIO==3.0.1
 future==0.16.0
 greenlet==0.4.15
@@ -58,6 +62,7 @@ Pygments==2.2.0
 python-dateutil==2.7.3
 python-engineio==2.2.0
 python-socketio==2.0.0
+pytz==2018.9
 pyzmq==17.1.2
 qtconsole==4.4.1
 regex==2017.4.5
