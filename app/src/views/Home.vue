@@ -118,7 +118,7 @@ export default {
     },
     getNewSessionId: function() {
       axios
-        .get("http://192.168.40.85:5000/getsessionid", {})
+        .get("http://127.0.0.1:5000/getsessionid", {})
         .then(response => {
           this.sessionId = response.data.sessionid;
           this.$router.push({

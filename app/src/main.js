@@ -6,8 +6,8 @@ import 'buefy/dist/buefy.css';
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
 
-Vue.use(Vuetify)
-Vue.use(Buefy)
+Vue.use(Vuetify);
+Vue.use(Buefy);
 
 Vue.config.productionTip = false;
 

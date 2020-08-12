@@ -183,7 +183,7 @@ export default {
       suggestions: [],
       sessionId: 0,
       time: 0.0,
-      api_url: "http://192.168.40.85:5000",
+      api_url: "http://127.0.0.1:5000",
     };
   },
 
