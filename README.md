@@ -48,11 +48,24 @@ To setup the development environment, follow these steps.
 
 `pip install -r requirements.txt`
 
-3. To test the engine on a web server, run the following command after the dependencies are installed.
+3. To run the API server, run the following command after the dependencies are installed.
 
 `gunicorn --pythonpath api api:app -b localhost:5000`
 
-This will open a local server at [127.0.0.1:5000].
+This will start a local API server at [127.0.0.1:5000] (Visiting this using a browser won't do anything).
+Keep this running and open a new terminal tab for running the frontend npm server.
+
+4. Go to the app directory and install dependencies.
+
+```
+cd app
+npm install
+```
+
+5. Run the frontend server
+`npm run serve`
+
+This step takes a while. The webapp can then be opened at http://localhost:8080. Have fun :)
 
 #### Footnotes
 
