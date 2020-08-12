@@ -36,7 +36,7 @@ A single statement that a user speaks can be as simple as a print command like â
 
 ## Insturctions for Collaborators
 
-> **Note:** This project is well tested on Ubuntu 18.04 OS. If you face compatibility issues on other OS, try fixing the error by yourself first, if not possible, make it as a issue.
+> **Note:** This project is well tested on Ubuntu 18.04 OS (now works on MacOS 10.15 too). If you face compatibility issues on other OS, try fixing the error by yourself first, if not possible, make it as a issue.
 
 To setup the development environment, follow these steps.
 
