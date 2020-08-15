@@ -1,12 +1,11 @@
 # GraceEngine - A Programming Engine
 
-![Grace Engine](Logo.png)
-
-[GraceEngine Live Demo](http://grace-nlp.herokuapp.com) | [Go to documentation homepage](https://kb-studios.github.io/programming-engine/)
+![Grace Engine Demo](grace_demo.gif)
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![GitHub license](https://img.shields.io/github/license/kb-studios/programming-engine.svg)](https://github.com/kb-studios/programming-engine/blob/master/LICENSE)
-[![GitHub issues-closed](https://img.shields.io/github/issues-closed/kb-studios/programming-engine.svg)](https://github.com/kb-studios/programming-engine/issues?q=is%3Aissue+is%3Aclosed)
+[![GitHub license](https://img.shields.io/github/license/kb-studios/GraceEngine.svg)](https://github.com/kb-studios/GraceEngine/blob/master/LICENSE)
+[![GitHub issues-closed](https://img.shields.io/github/issues-closed/kb-studios/GraceEngine.svg)](https://github.com/kb-studios/GraceEngine/issues?q=is%3Aissue+is%3Aclosed)
+![Languages](https://img.shields.io/github/languages/count/kb-studios/GraceEngine.svg?style=flat)
 
 > *I love computer languages. In fact, I’ve spent roughly half my life nurturing one particular very rich computer language: Mathematica. But do we really need computer languages to tell our computers what to do? Why can’t we just use natural human languages, like English, instead?*
 > -- Stephen Wolfram, creator of Mathematica.
@@ -37,7 +36,7 @@ A single statement that a user speaks can be as simple as a print command like �
 
 ## Insturctions for Collaborators
 
-> **Note:** This project is well tested on Ubuntu 18.04 OS. If you face compatibility issues on other OS, try fixing the error by yourself first, if not possible, make it as a issue.
+> **Note:** This project is well tested on Ubuntu 18.04 OS (now works on MacOS 10.15 too). If you face compatibility issues on other OS, try fixing the error by yourself first, if not possible, make it as a issue.
 
 To setup the development environment, follow these steps.
 
@@ -49,11 +48,24 @@ To setup the development environment, follow these steps.
 
 `pip install -r requirements.txt`
 
-3. To test the engine on a web server, run the following command after the dependencies are installed.
+3. To run the API server, run the following command after the dependencies are installed.
 
-`gunicorn --pythonpath app app:app --worker-class eventlet -w 1`
+`gunicorn --pythonpath api api:app -b localhost:5000`
 
-This will open a local server at [127.0.0.1:8000].
+This will start a local API server at [127.0.0.1:5000] (Visiting this using a browser won't do anything).
+Keep this running and open a new terminal tab for running the frontend npm server.
+
+4. Go to the app directory and install dependencies.
+
+```
+cd app
+npm install
+```
+
+5. Run the frontend server
+`npm run serve`
+
+This step takes a while. The webapp can then be opened at http://localhost:8080. Have fun :)
 
 #### Footnotes
 
